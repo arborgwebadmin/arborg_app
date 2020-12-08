@@ -3,6 +3,7 @@ import Head from 'next/head'
 import FormGroup from '../../components/form-group'
 import PageHead from '../../components/page-head'
 import React from 'react'
+import currencyFormatter from '../../components/currency-format'
 
 class Leikskolagjold extends React.Component{
 	constructor(props) {
@@ -58,11 +59,13 @@ class Leikskolagjold extends React.Component{
 			
 		} else {
 			//if longer than 8 hours, price = pph*8 -> rest = hours - 8
+			console.log(this.state.hours-8)
 			total = pph*8;
-			total += ppq*(this.hours-8)*4;
+			total += ppq*(this.state.hours-8)*4;
+			console.log(total)
 		}
 		if(this.state.kids > 1) {
-			total *= 1.5;
+			total *= 1,5;
 		}
 		total += foodCost*this.state.kids;
 		this.setState({
@@ -73,7 +76,7 @@ class Leikskolagjold extends React.Component{
 		event.preventDefault();
 	}
 
-  render() {
+  	render() {
 		return (
 			<div className={styles.container}>
 				<PageHead>Leikskólagjöld</PageHead>
@@ -97,10 +100,10 @@ class Leikskolagjold extends React.Component{
 							this.state.total > 0 &&
 							<div className="card mt-3">
   							<div className="card-body">
-									<h5 className="card-title">Heildarkostnaður: { this.state.total }</h5>
-									<h6 className="card-subtitle mb-2 text-muted">Að vera með {this.state.kids} {this.state.kids == 1? 'barn' : 'börn' } í {this.state.hours } klukkutíma á dag kostar {this.state.total} kr á mánuði.</h6>
+									<h5 className="card-title">Heildarkostnaður: { currencyFormatter(this.state.total) }</h5>
+									<h6 className="card-subtitle mb-2 text-muted">Að vera með {this.state.kids} {this.state.kids == 1? 'barn' : 'börn' } í { this.state.hours } klukkutíma á dag kostar {currencyFormatter(this.state.total)} kr á mánuði.</h6>
 									<p className="card-text"><strong>Sundurliðun:</strong></p>
-									<p className="card-text">Miðað við þínar forsendur má reikna með að leikskólagjöldin séu eftirfarandi: <br></br>Dvalargjald: { this.state.totalstay }<br></br>Fæðisgjald: { this.state.totalfood }<br></br><strong>Samtals: { this.state.total }</strong></p>
+									<p className="card-text">Miðað við þínar forsendur má reikna með að leikskólagjöldin séu eftirfarandi: <br></br>Dvalargjald: { currencyFormatter(this.state.totalstay) }<br></br>Fæðisgjald: { this.state.totalfood }<br></br><strong>Samtals: { this.state.total }</strong></p>
 									<h6 className="card-subtitle mb-2 text-muted">Fyrirvari: </h6>
 									<p className="card-text">Eingöngu er um áætlun að ræða miðað við þær forsendur sem slegnar eru inn.</p>
   							</div>
