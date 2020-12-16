@@ -21,8 +21,9 @@ export default function Home() {
           </a>
           <h1 className={styles.title}>Reiknivél Árborgar</h1>
         </div>
-        <div className="ar-links" className={styles.container}>
+        <div className="ar-links" className={styles.grid}>
           <LinkCard link="/calc/leikskolagjold" title="Leikskólagjöld" description="Reiknaðu leikskólagjöldin"></LinkCard>
+          <LinkCard link="/calc/fasteignagjold" title="Fasteignagjöld" description="Reiknaðu fasteignagjöldin"></LinkCard>
         </div>
 
       </main>

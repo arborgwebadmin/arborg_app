@@ -1,5 +1,4 @@
 import styles from '../../styles/Home.module.css'
-import Head from 'next/head'
 import FormGroup from '../../components/form-group'
 import PageHead from '../../components/page-head'
 import React from 'react'
@@ -91,6 +90,7 @@ class Leikskolagjold extends React.Component{
 							<div className="form-group form-check">
 								<input type="checkbox" className="form-check-input" id="is_primary" value={ this.state.primary } onChange={ this.handleChange }></input>
 								<label className="form-check-label" htmlFor="is_primary">Forgangsgjald?</label>
+								<small id="description" className="form-text text-muted" >Forgangsgjald er fyrir einstæðaforeldra og námsmenn</small>
 							</div>
 							
 							<input type="submit" value="Reikna" className="btn btn-primary"></input>
@@ -102,8 +102,7 @@ class Leikskolagjold extends React.Component{
   							<div className="card-body">
 									<h5 className="card-title">Heildarkostnaður: { currencyFormatter(this.state.total) }</h5>
 									<h6 className="card-subtitle mb-2 text-muted">Að vera með {this.state.kids} {this.state.kids == 1? 'barn' : 'börn' } í { this.state.hours } klukkutíma á dag kostar {currencyFormatter(this.state.total)} kr á mánuði.</h6>
-									<p className="card-text"><strong>Sundurliðun:</strong></p>
-									<p className="card-text">Miðað við þínar forsendur má reikna með að leikskólagjöldin séu eftirfarandi: <br></br>Dvalargjald: { currencyFormatter(this.state.totalstay) }<br></br>Fæðisgjald: { this.state.totalfood }<br></br><strong>Samtals: { this.state.total }</strong></p>
+									<p className="card-text"><b>Sundurliðun:</b><br></br>Miðað við þínar forsendur má reikna með að leikskólagjöldin séu eftirfarandi: <br></br>Dvalargjald: { currencyFormatter(this.state.totalstay) }<br></br>Fæðisgjald: { currencyFormatter(this.state.totalfood) }<br></br><strong>Samtals: { currencyFormatter(this.state.total) }</strong></p>
 									<h6 className="card-subtitle mb-2 text-muted">Fyrirvari: </h6>
 									<p className="card-text">Eingöngu er um áætlun að ræða miðað við þær forsendur sem slegnar eru inn.</p>
   							</div>

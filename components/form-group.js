@@ -1,5 +1,13 @@
 import React from 'react';
-
+/**
+ * 
+ * @param {String} id 			Id for input
+ * @param {String} label 		Visible label for input
+ * @param {String} type 		Input type (number, string)
+ * @param {String} description 	Description below input (default="")
+ * @param {*} value 			Value of the input
+ * @param {Function} change 	Function called on change 
+ */
 const FormGroup = ( { id, label, type ,description="", value, change} ) => {
 	return (
 		<div className="form-group">
