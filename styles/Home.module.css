@@ -8,12 +8,11 @@
 }
 
 .main {
-  padding: 5rem 0;
   flex: 1;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
+  padding-top: 2rem;
 }
 
 .footer {
@@ -125,4 +124,18 @@
     width: 100%;
     flex-direction: column;
   }
+}
+
+.secondaryLink{
+  text-align: right;
+  line-height: 3;
+  font-style: italic;
+}
+
+.visible {
+  visibility: visible;
+}
+
+.hidden {
+  visibility: hidden;
 }

@@ -2,15 +2,17 @@ import styles from '../../styles/Home.module.css'
 import FormGroup from '../../components/form-group'
 import PageHead from '../../components/page-head'
 import React from 'react'
-import currencyFormatter from '../../components/currency-format'
+import {currencyFormat} from '../../components/functions'
 
 class Leikskolagjold extends React.Component{
 	constructor(props) {
 		super(props);
 		this.state = {
-			kids: '',
-			hours: '',
-			primary: false,
+			field: {
+				kids: '',
+				hours: '',
+				primary: false,
+			},
 			total: 0,
 			totalfood: 0,
 			totalstay: 0,
@@ -27,52 +29,45 @@ class Leikskolagjold extends React.Component{
 	}
 
 	handleChange(event) {
-		if(event.target.id === "kids") {
-			this.setState({
-				kids: event.target.value,
-				total: 0,
-			});
-		}
-		else if (event.target.id === "hours") {
-			this.setState({
-				hours: event.target.value
-			});
-		}
-		else {
-			this.setState({
-				primary: !this.state.primary
-			})
-		}
+		let fields = this.state.field;
+		let value = event.target.type === "number" ? event.target.value : !this.state.field.primary;
+		fields[event.target.id] = value;
+		this.setState({
+			field: fields,
+			total: 0,
+		});
 	}
 
 	handleSubmit(event) {
+		event.preventDefault();
 		var total = 0;
 		var foodCost = this.breakfast_cost + this.refreshment_cost + this.launch_cost;
-		var pph = this.state.primary === true ? this.primary_hour_cost : this.per_hour_cost;
-		var ppq = this.state.primary === true ? this.primary_quarter_cost : this.per_quarter_cost;
-		if(this.state.hours <= 8) {
-			if (this.state.hours <=5 ) {
+		var pph = this.state.field.primary === true ? this.primary_hour_cost : this.per_hour_cost;
+		var ppq = this.state.field.primary === true ? this.primary_quarter_cost : this.per_quarter_cost;
+		console.log(this.state.field.primary);
+		var hours = this.state.field.hours;
+		var kids = this.state.field.kids;
+		if(hours <= 8) {
+			if (hours <=5 ) {
 				foodCost -= this.refreshment_cost;
 			}
-			total = pph*this.state.hours;
+			total = pph*hours;
 			
 		} else {
 			//if longer than 8 hours, price = pph*8 -> rest = hours - 8
-			console.log(this.state.hours-8)
+			
 			total = pph*8;
-			total += ppq*(this.state.hours-8)*4;
-			console.log(total)
+			total += ppq*(hours-8)*4;
 		}
-		if(this.state.kids > 1) {
+		if(kids > 1) {
 			total *= 1,5;
 		}
-		total += foodCost*this.state.kids;
+		total += foodCost*kids;
 		this.setState({
 			total: total,
 			totalfood: foodCost,
 			totalstay: total-foodCost,
 		});
-		event.preventDefault();
 	}
 
   	render() {
@@ -85,10 +80,10 @@ class Leikskolagjold extends React.Component{
 					</div>
 					<div className="container">
 						<form onSubmit={ this.handleSubmit }>
-							<FormGroup id="kids" label="Hversu mörg börn" type="number" description="Sláðu inn fjölda barna sem eru í leikskóla" value={ this.state.kids } change={ this.handleChange }></FormGroup>
-							<FormGroup id="hours" label="Hversu margir tímar á dag" type="number" value={ this.state.hours } change={ this.handleChange }></FormGroup>
+							<FormGroup id="kids" label="Fjöldi barna í leikskóla?" type="number" value={ this.state.kids } change={ this.handleChange } required={ true }></FormGroup>
+							<FormGroup id="hours" label="Lengd dvalar í klukkustundum á dag?" type="number" value={ this.state.hours } change={ this.handleChange } required={ true } step={0.25}></FormGroup>
 							<div className="form-group form-check">
-								<input type="checkbox" className="form-check-input" id="is_primary" value={ this.state.primary } onChange={ this.handleChange }></input>
+								<input type="checkbox" className="form-check-input" id="primary" value={ this.state.primary } onChange={ this.handleChange }></input>
 								<label className="form-check-label" htmlFor="is_primary">Forgangsgjald?</label>
 								<small id="description" className="form-text text-muted" >Forgangsgjald er fyrir einstæðaforeldra og námsmenn</small>
 							</div>
@@ -96,20 +91,21 @@ class Leikskolagjold extends React.Component{
 							<input type="submit" value="Reikna" className="btn btn-primary"></input>
 
 						</form>
-						{
-							this.state.total > 0 &&
-							<div className="card mt-3">
+							<div className={this.state.total==0? styles.hidden +" card mt-3" : styles.visible + " card mt-3"}>
   							<div className="card-body">
-									<h5 className="card-title">Heildarkostnaður: { currencyFormatter(this.state.total) }</h5>
-									<h6 className="card-subtitle mb-2 text-muted">Að vera með {this.state.kids} {this.state.kids == 1? 'barn' : 'börn' } í { this.state.hours } klukkutíma á dag kostar {currencyFormatter(this.state.total)} kr á mánuði.</h6>
-									<p className="card-text"><b>Sundurliðun:</b><br></br>Miðað við þínar forsendur má reikna með að leikskólagjöldin séu eftirfarandi: <br></br>Dvalargjald: { currencyFormatter(this.state.totalstay) }<br></br>Fæðisgjald: { currencyFormatter(this.state.totalfood) }<br></br><strong>Samtals: { currencyFormatter(this.state.total) }</strong></p>
+									<h5 className="card-title">Heildarkostnaður: { currencyFormat(this.state.total) }</h5>
+									<h6 className="card-subtitle mb-2 text-muted">Að vera með {this.state.kids} {this.state.kids == 1? 'barn' : 'börn' } í { this.state.hours } klukkutíma á dag kostar {currencyFormat(this.state.total)} kr á mánuði.</h6>
+									<p className="card-text">
+										<b>Sundurliðun:</b><br></br>
+										Miðað við þínar forsendur má reikna með að leikskólagjöldin séu eftirfarandi: <br></br>
+										Dvalargjald: { currencyFormat(this.state.totalstay) }<br></br>
+										Fæðisgjald: { currencyFormat(this.state.totalfood) }<br></br>
+										<strong>Samtals: { currencyFormat(this.state.total) }</strong>
+									</p>
 									<h6 className="card-subtitle mb-2 text-muted">Fyrirvari: </h6>
 									<p className="card-text">Eingöngu er um áætlun að ræða miðað við þær forsendur sem slegnar eru inn.</p>
   							</div>
 							</div>
-							
-						}
-				
 					</div>
 				</main>
 			</div>
