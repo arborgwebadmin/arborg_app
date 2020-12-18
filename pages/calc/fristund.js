@@ -2,7 +2,7 @@ import { isDynamicRoute } from 'next/dist/next-server/lib/router/utils';
 import React from 'react';
 import { currencyFormat } from '../../components/functions';
 import PageHead from '../../components/page-head';
-import styles from '../../styles/Home.modle.css';
+import styles from '../../styles/Home.module.css';
 
 
 const idsMap = {
