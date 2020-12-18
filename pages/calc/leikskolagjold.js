@@ -52,10 +52,8 @@ class Leikskolagjold extends React.Component{
 				foodCost -= this.refreshment_cost;
 			}
 			total = pph*hours;
-			
 		} else {
 			//if longer than 8 hours, price = pph*8 -> rest = hours - 8
-			
 			total = pph*8;
 			total += ppq*(hours-8)*4;
 		}
