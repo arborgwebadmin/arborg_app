@@ -10,6 +10,7 @@ const idsMap = {
 	LODAMAT: 'lodamat',
 	FASTEIGNAFLOKKUR: 'fasteignaflokkur',
 	SORPTUNNA: 'sorptunna',
+	EIGNALOD: 'eignalod',
 };
 
 const calcMap = {
@@ -35,6 +36,7 @@ class Fasteignagjold extends React.Component {
 				lodamat: '',
 				fasteignaflokkur: 'A',
 				sorptunna: '120',
+				eignalod: false,
  			},
 			total: 0,
 			tSorp: 0,
@@ -49,12 +51,13 @@ class Fasteignagjold extends React.Component {
 	
 	handleChange = (e) => {
 		let fields = this.state.field;
-		let value = e.target.type === "string" ? inputFormat(e.target) : e.target.value;
+		let value = e.target.type === "text" ? inputFormat(e.target) : e.target.id === idsMap.EIGNALOD? !fields[idsMap.EIGNALOD] : e.target.value;
 		fields[e.target.id] = value;
 		this.setState({
 			field: fields,
 			total: 0,
 		});
+		
 	}
 
 	handleSubmit = (e) => {
@@ -63,7 +66,7 @@ class Fasteignagjold extends React.Component {
 		let houseInt = formatedToInt(this.state.field.fasteignamat);
 		let lodInt = formatedToInt(this.state.field.lodamat);
 		let tFastsk = Math.round(houseInt * flokkur);
-		let tLodaleiga = Math.round(lodInt * calcMap.LODALEIGA_A);
+		let tLodaleiga = this.state.field.eignalod? 0 : Math.round(lodInt * calcMap.LODALEIGA_A);
 		let tVatnsgjald = Math.round(houseInt * calcMap.VATNSGJALD);
 		let tFráveitugjald = Math.round(houseInt * calcMap.FRAVEITUGJ);
 		let tSorp = this.state.field.sorptunna === '120'? calcMap.SORPGJ_A : calcMap.SORPGJ_B;
@@ -85,18 +88,26 @@ class Fasteignagjold extends React.Component {
   render() {
     return (
       <div className={ styles.container }>
-        <PageHead>Fasteignagjöld</PageHead>
+        <PageHead title="Reiknivél fasteignagjalda"></PageHead>
 				<div className={ styles.main }>
 					<div className="container">
 						<h1>Reiknivél fasteignagjalda</h1>
-						<a href="https://skra.is/leit-i-fasteignaskra/" target="_blank" rel="nofollow" className={ styles.secondaryLink }>Fletta upp fasteignamati eignar</a>
+						<a href="https://skra.is/leit-i-fasteignaskra/" target="_blank" rel="nofollow" className={ styles.secondaryLink }>Smelltu hér til að fletta upp fasteignamati eignar</a>
 					</div>
 					<div className="container">
 						<form onSubmit={ this.handleSubmit }>
 							<FormGroup id={ idsMap.FASTEIGNAMAT } label="Fasteignamat eignar" type="string" value={ this.state.field.fasteignamat } change={ this.handleChange } required={true}></FormGroup>
-							<FormGroup id={ idsMap.LODAMAT } label="Þar af lóðamat" type="string" value={ this.state.field.lodamat } change={ this.handleChange } required={true}></FormGroup>
 							<div className="form-group">
-								<label htmlFor={ idsMap.FASTEIGNAFLOKKUR }>Gerð húsnæðis: </label>
+								<label htmlFor={ idsMap.EIGNALOD }>Tegund lóðar: </label>
+								<CheckFormGroup id={idsMap.EIGNALOD} label="Leigulóð" type="radio" value={ false } change={this.handleChange} checked={this.state.field.eignalod === false} ></CheckFormGroup>
+								<CheckFormGroup id={idsMap.EIGNALOD} label="Eignalóð" type="radio" value={ true } change={this.handleChange} checked={this.state.field.eignalod === true} ></CheckFormGroup>
+							</div>
+							{
+								!this.state.field.eignalod &&
+								<FormGroup id={ idsMap.LODAMAT } label="Þar af lóðamat" type="string" value={ this.state.field.lodamat } change={ this.handleChange } required={!this.state.field.eignalod} disabled={this.state.field.eignalod}></FormGroup>
+							}
+							<div className="form-group">
+								<label htmlFor={ idsMap.FASTEIGNAFLOKKUR }>Tegund húsnæðis: </label>
 								<CheckFormGroup id={ idsMap.FASTEIGNAFLOKKUR}  label="Íbúðarhúsnæði" type="radio" value='A' change={this.handleChange} checked={ this.state.field.fasteignaflokkur === 'A' }></CheckFormGroup>
 								<CheckFormGroup id={ idsMap.FASTEIGNAFLOKKUR}  label="Opinber bygging" type="radio" value='B' change={this.handleChange} checked={ this.state.field.fasteignaflokkur === 'B' }></CheckFormGroup>
 								<CheckFormGroup id={ idsMap.FASTEIGNAFLOKKUR}  label="Atvinnuhúsnæði" type="radio" value='C' change={this.handleChange} checked={ this.state.field.fasteignaflokkur === 'C' }></CheckFormGroup>
@@ -116,7 +127,7 @@ class Fasteignagjold extends React.Component {
 										<b>Sundurliðun: </b><br></br>
 										Miðað við þínar forsendur má reikna með að fasteignagjöldin séu eftirfarandi: <br></br>
 										Fasteignaskattur: {currencyFormat(this.state.tFastsk)}<br></br>
-										Lóðaleiga: {currencyFormat(this.state.tLodaleiga)}<br></br>
+										{ this.state.tLodaleiga !== 0 && <span>Lóðaleiga: {currencyFormat(this.state.tLodaleiga)}<br></br></span>}
 										Fráveitugjald: {currencyFormat(this.state.tFráveitugjald)}<br></br>
 										Vatnsgjald: {currencyFormat(this.state.tVatnsgjald)}<br></br>
 										Sorp- og urðunargjald: {currencyFormat(this.state.tSorp)}<br></br>
