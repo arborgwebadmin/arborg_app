@@ -3,6 +3,7 @@ import FormGroup from '../../components/form-group'
 import PageHead from '../../components/page-head'
 import React from 'react'
 import {currencyFormat} from '../../components/functions'
+import Form from 'react-bootstrap/Form';
 
 
 const idsMap = {
@@ -11,11 +12,19 @@ const idsMap = {
 };
 
 const priceMap = {
-	STAY_5: 15667,
-	STAY_4: 12776,
-	STAY_3: 9862,
-	STAY_2: 6957,
-	STAY_1: 4043,
+	'5 dagar': [15667, 4523],
+	'4 dagar': [12776, 3622],
+	'3 dagar': [9862, 2711],
+	'2 dagar': [6957, 1823],
+	'1 dagur': [4043, 924],
+}
+
+const selectTag = {
+	LBL1: '1 dagur',
+	LBL2: '2 dagar',
+	LBL3: '3 dagar',
+	LBL4: '4 dagar',
+	LBL5: '5 dagar',
 }
 class Fristund extends React.Component {
 	constructor(props) {
@@ -23,7 +32,7 @@ class Fristund extends React.Component {
 		this.state = {
 			field: {
 				kids: '',
-				days: '',
+				days: selectTag.LBL1,
 			},
 			total: 0,
 			tfood: 0,
@@ -43,8 +52,16 @@ class Fristund extends React.Component {
 
 	handleSubmit = (e) => {
 		e.preventDefault();
-
-
+		let [ppm, food] = priceMap[this.state.field.days];
+		// if more than 1 kid than 50% of price for the 2nd
+		ppm = this.state.field.kids > 1 ? Math.round(ppm*1.5) : ppm;
+		food = food * this.state.field.kids;
+		this.setState({
+			total: food+ppm,
+			tfood: food,
+			tstay: ppm,
+		})
+		
 	}
 
   render() {
@@ -58,7 +75,16 @@ class Fristund extends React.Component {
 				<div className="container">
 					<form onSubmit={ this.handleSubmit }>
 						<FormGroup id={ idsMap.KIDS } label="Fjöldi barna í vistun" type="number" value={ this.state.field.kids } change={ this.handleChange } required={ true }></FormGroup>
-						<FormGroup id={ idsMap.DAYS } label="Fjöldi daga á viku" type="number" value={this.state.field.days } change={ this.handleChange } required={ true }></FormGroup>
+						<Form.Group controlId={ idsMap.DAYS }>
+							<Form.Label>Fjöldi daga á viku</Form.Label>
+							<Form.Control  as="select" onChange={this.handleChange} value={this.state.field.days}>
+								<option>{selectTag.LBL1}</option>
+								<option>{selectTag.LBL2}</option>
+								<option>{selectTag.LBL3}</option>
+								<option>{selectTag.LBL4}</option>
+								<option>{selectTag.LBL5}</option>
+							</Form.Control>
+						</Form.Group>
 						<input type="submit" value="Reikna" className="btn btn-primary"></input>
 					</form>
 					<div className={ this.state.total==0? styles.hidden + " card mt-3" : styles.visible + " card mt-3"}>

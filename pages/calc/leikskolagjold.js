@@ -58,13 +58,15 @@ class Leikskolagjold extends React.Component{
 			total += ppq*(hours-8)*4;
 		}
 		if(kids > 1) {
-			total *= 1,5;
+			total *= 1.5;
 		}
-		total += foodCost*kids;
+		let dvol = total;
+		foodCost = foodCost*kids;
+		total += foodCost;
 		this.setState({
 			total: total,
 			totalfood: foodCost,
-			totalstay: total-foodCost,
+			totalstay: dvol,
 		});
 	}
 
