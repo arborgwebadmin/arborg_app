@@ -12,7 +12,7 @@ const FormGroup = ( { id, label, type ,description="", value, change, required=f
 	return (
 		<div className="form-group">
 			<label htmlFor={ id }>{ label }</label>
-			<input type={ type } className="form-control" id={ id } value={ value } onChange={ change } required={required} step={step} disabled={disabled}></input>
+			<input type={ type } aria-label={ label } className="form-control" id={ id } value={ value } onChange={ change } required={required} step={step} disabled={disabled}></input>
 			{description !== "" && <small id="description" className="form-text text-muted" >{ description }</small>}
 		</div>
 	)

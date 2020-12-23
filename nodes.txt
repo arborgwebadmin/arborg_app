@@ -1,0 +1,12 @@
+Last but not least, add another npm script for watching your Jest tests. By using this command, you can have your tests running continuously in one command line tab, while you start your application in another command line tab. Every time you change source code while developing your application, your tests will run again with this watch script.
+
+{
+  ...
+  "scripts": {
+    "start": "webpack serve --config ./webpack.config.js --mode development",
+    "test": "jest --config ./jest.config.json",
+    "test:watch": "npm run test -- --watch"
+  },
+  ...
+}
+Now you can run your Jest tests in watch mode. Doing it this way, you would have one open terminal tab for your Jest tests in watch mode with npm run test:watch and one open terminal tab to start your React application with npm start. Every time you change a source file, your tests should run again because of the watch mode.

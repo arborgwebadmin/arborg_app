@@ -4,6 +4,8 @@ import PageHead from '../../components/page-head'
 import React from 'react'
 import {currencyFormat} from '../../components/functions'
 import Form from 'react-bootstrap/Form';
+import NrOfDaysPWeek from '../../components/nr-of-days-p-week'
+import { selectTag } from '../../constants'
 
 
 const idsMap = {
@@ -19,13 +21,6 @@ const priceMap = {
 	'1 dagur': [4043, 924],
 }
 
-const selectTag = {
-	LBL1: '1 dagur',
-	LBL2: '2 dagar',
-	LBL3: '3 dagar',
-	LBL4: '4 dagar',
-	LBL5: '5 dagar',
-}
 class Fristund extends React.Component {
 	constructor(props) {
 		super(props);
@@ -74,17 +69,8 @@ class Fristund extends React.Component {
 				</div>
 				<div className="container">
 					<form onSubmit={ this.handleSubmit }>
-						<FormGroup id={ idsMap.KIDS } label="Fjöldi barna í vistun" type="number" value={ this.state.field.kids } change={ this.handleChange } required={ true }></FormGroup>
-						<Form.Group controlId={ idsMap.DAYS }>
-							<Form.Label>Fjöldi daga á viku</Form.Label>
-							<Form.Control  as="select" onChange={this.handleChange} value={this.state.field.days}>
-								<option>{selectTag.LBL1}</option>
-								<option>{selectTag.LBL2}</option>
-								<option>{selectTag.LBL3}</option>
-								<option>{selectTag.LBL4}</option>
-								<option>{selectTag.LBL5}</option>
-							</Form.Control>
-						</Form.Group>
+						<FormGroup id={ idsMap.KIDS } label="Fjöldi barna í frístund" type="number" value={ this.state.field.kids } change={ this.handleChange } required={ true }></FormGroup>
+						<NrOfDaysPWeek id={idsMap.DAYS} change={ this.handleChange } value={ this.state.field.days }></NrOfDaysPWeek>
 						<input type="submit" value="Reikna" className="btn btn-primary"></input>
 					</form>
 					<div className={ this.state.total==0? styles.hidden + " card mt-3" : styles.visible + " card mt-3"}>
