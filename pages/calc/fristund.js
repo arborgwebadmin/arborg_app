@@ -14,11 +14,11 @@ const idsMap = {
 };
 
 const priceMap = {
-	'5 dagar': [15667, 4523],
-	'4 dagar': [12776, 3622],
-	'3 dagar': [9862, 2711],
-	'2 dagar': [6957, 1823],
-	'1 dagur': [4043, 924],
+	'5 dagar': [16090, 4645],
+	'4 dagar': [13121, 3720],
+	'3 dagar': [10128, 2784],
+	'2 dagar': [7145, 1872],
+	'1 dagur': [4152, 949],
 }
 
 class Fristund extends React.Component {

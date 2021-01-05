@@ -16,64 +16,40 @@ class Blandgjold extends React.Component {
 	  this.state = {
       field: {
 				vistun: [''],
-				dagforeldri: [],
-				leikskoli: [],
-				grunnskoli: [],
-				friDays: selectTag.LBL1,
       }
     }
 	}
 	
 	handleChange = (e) => {
-		console.log(e.target)
-		const [ftype, index, field] = e.target.id.split('-')
-		let fields = this.state.field;
-		field ? console.log('is field'): console.log('no field');
+		const [index, ftype, field] = e.target.id.split('-')
+		let fields = this.state.field.vistun;
 		if(field) {
-			let obj = {};
-			obj[field] = e.target.value;
-			fields[ftype][index] = obj;
+			console.log(e);
+			fields[index][ftype][field] = e.target.checked !== undefined? e.target.checked : e.target.value;
+		} else if(ftype) {
+			fields[index][ftype] = e.target.value;
 		} else {
-			fields[ftype][index] = e.target.value;
+			let obj = {};
+			obj[e.target.value] = {};
+			fields[index] = obj;
 		}
 		
 		this.setState({
-			field: fields,
+			field: {
+				vistun: fields,
+			}
 		});
-		console.log(this.state)
-	}
-
-	handleLoopChange = (e, index) => {
-		console.log(e.target.value);
-		console.log(index);
-		let fields = this.state.field;
-		switch (e.target.value) {
-			case 'Dagforeldri':
-				fields.dagforeldri = [...this.state.field.dagforeldri, '']
-				break;
-			case 'Leikskóli':
-				fields.leikskoli = [...this.state.field.leikskoli, '']
-				break;
-			case 'Grunnskóli':
-				fields.grunnskoli = [...this.state.field.grunnskoli, '']
-				break;
-			default:
-				break;
-		}
-		fields.vistun[index] = e.target.value;
-		this.setState({
-			field: fields,
-		})
-		console.log(this.state.field.vistun)
+		console.log(this.state.field)
 	}
 
 	addKid = (e) => {
-		this.setState({field: {vistun: [...this.state.field.vistun,'']}});
+		this.setState({field: {vistun: [...this.state.field.vistun,{}]}});
 	}
 
 	handleSubmit = (e) => {
 
 	}
+
 
   render() {
     return (
@@ -86,42 +62,36 @@ class Blandgjold extends React.Component {
 					<div className="container">
 						<Form onSubmit={this.handleSubmit}>
 							{
-								this.state.field.vistun.map((vistun, index) => {
+								this.state.field.vistun.map((barn, index) => {
 									return (
-										<Form.Group controlId={index} key={index}>
-											<Form.Label>Tegund vistunar/skóla {index+1}. barns</Form.Label>
-											<Form.Control as="select" onChange={(e) => this.handleLoopChange(e, index)} value={vistun}>
-												<option>Veldu tegund</option>
-												<option>Dagforeldri</option>
-												<option>Leikskóli</option>
-												<option>Grunnskóli</option>
-											</Form.Control>
-										</Form.Group>
-									)
-								})
-							}
-							{
-								this.state.field.leikskoli.map((barn, index) => {
-									return (
-										<div key={`leikskoli-${index}`}>
-											<FormGroup id={`leikskoli-${index}`} label="Lengd dvalar í klukkustundum á dag?" type="number" value={barn} change={this.handleChange} step={0.25}></FormGroup>
+										<div key={index}>
+											<Form.Group controlId={index} key={index}>
+												<Form.Label>Tegund vistunar/skóla {index+1}. barns</Form.Label>
+												<Form.Control as="select" onChange={this.handleChange}>
+													<option>Veldu tegund</option>
+													<option>Dagforeldri</option>
+													<option>Leikskóli</option>
+													<option>Grunnskóli</option>
+												</Form.Control>
+											</Form.Group>
+											{ this.state.field.vistun[index].Leikskóli !== undefined && 
+											<FormGroup id={`${index}-Leikskóli`} label="Lengd dvalar í klukkustundum á dag?" type="number" value={this.state.field.vistun[index].Leikskóli} change={this.handleChange} step={0.25}></FormGroup>
+											}
+											{ this.state.field.vistun[index].Grunnskóli !== undefined &&
+											<div key={`${index}-Grunnskóli`}>
+											<Form.Check type='checkbox' id={`${index}-Grunnskóli-hressing`} label='Morgunhressing' onChange={this.handleChange}/>
+											<Form.Check type='checkbox' id={`${index}-Grunnskóli-hadegi`} label='Hádegismatur' onChange={this.handleChange}/>
+											<Form.Check type='checkbox' id={`${index}-Grunnskóli-fristund`} label='Frístund' onChange={this.handleChange}/>
+											{ this.state.field.vistun[index].Grunnskóli.fristund == true &&
+											<NrOfDaysPWeek id={`${index}-Grunnskóli-fristundDagar`} change={this.handleChange} value={this.state.field.vistun[index].Grunnskóli.fristundDagar}></NrOfDaysPWeek>}
+											</div>}
+										
 										</div>
 									)
 								})
+								
 							}
-							{
-								this.state.field.grunnskoli.map((barn, index) => {
-									return (
-										<div key={`grunnskoli-${index}`}>
-											<Form.Check type='checkbox' id={`grunnskoli-${index}-hressing`} label='Morgunhressing' onChange={this.handleChange}/>
-											<Form.Check type='checkbox' id={`grunnskoli-${index}-hadegi`} label='Hádegismatur' onChange={this.handleChange}/>
-											<Form.Check type='checkbox' id={`grunnskoli-${index}-fristund`} label='Frístund' onChange={this.handleChange}/>
-											{ this.state.field.grunnskoli[index].fristund == true &&
-											<Form.Check type='checkbox' id={`grunnskoli-${index}-fristundDagar`} label='Fjöldi daga á viku' onChange={this.handleChange}/>}
-										</div>
-									)
-								})
-							}
+							
 							<label>Bæta við barni</label>
 							<Button variant="secondary" onClick={ this.addKid }>+</Button>
 							<Button variant="primary" type="submit">Reikna</Button>
