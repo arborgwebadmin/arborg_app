@@ -1,3 +1,6 @@
+npm run dev
+
+
 Last but not least, add another npm script for watching your Jest tests. By using this command, you can have your tests running continuously in one command line tab, while you start your application in another command line tab. Every time you change source code while developing your application, your tests will run again with this watch script.
 
 {

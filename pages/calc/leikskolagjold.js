@@ -80,10 +80,10 @@ class Leikskolagjold extends React.Component{
 					</div>
 					<div className="container">
 						<form onSubmit={ this.handleSubmit }>
-							<FormGroup id="kids" label="Fjöldi barna í leikskóla?" type="number" value={ this.state.kids } change={ this.handleChange } required={ true }></FormGroup>
-							<FormGroup id="hours" label="Lengd dvalar í klukkustundum á dag?" type="number" value={ this.state.hours } change={ this.handleChange } required={ true } step={0.25}></FormGroup>
+							<FormGroup id="kids" label="Fjöldi barna í leikskóla?" type="number" value={ this.state.field.kids } change={ this.handleChange } required={ true }></FormGroup>
+							<FormGroup id="hours" label="Lengd dvalar í klukkustundum á dag?" type="number" value={ this.state.field.hours } change={ this.handleChange } required={ true } step={0.25}></FormGroup>
 							<div className="form-group form-check">
-								<input type="checkbox" className="form-check-input" id="primary" value={ this.state.primary } onChange={ this.handleChange }></input>
+								<input type="checkbox" className="form-check-input" id="primary" value={ this.state.field.primary } onChange={ this.handleChange }></input>
 								<label className="form-check-label" htmlFor="is_primary">Forgangsgjald?</label>
 								<small id="description" className="form-text text-muted" >Forgangsgjald er fyrir einstæðaforeldra og námsmenn</small>
 							</div>
@@ -94,7 +94,7 @@ class Leikskolagjold extends React.Component{
 							<div className={this.state.total==0? styles.hidden +" card mt-3" : styles.visible + " card mt-3"}>
   							<div className="card-body">
 									<h5 className="card-title">Heildarkostnaður: { currencyFormat(this.state.total) }</h5>
-									<h6 className="card-subtitle mb-2 text-muted">Að vera með {this.state.kids} {this.state.kids == 1? 'barn' : 'börn' } í { this.state.hours } klukkutíma á dag kostar {currencyFormat(this.state.total)} kr á mánuði.</h6>
+									<h6 className="card-subtitle mb-2 text-muted">Að vera með {this.state.field.kids} {this.state.field.kids == 1? 'barn' : 'börn' } í { this.state.field.hours } klukkutíma á dag kostar {currencyFormat(this.state.total)} kr á mánuði.</h6>
 									<p className="card-text">
 										<b>Sundurliðun:</b><br></br>
 										Miðað við þínar forsendur má reikna með að leikskólagjöldin séu eftirfarandi: <br></br>

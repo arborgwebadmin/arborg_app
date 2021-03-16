@@ -1,0 +1,52 @@
+
+
+.poll {
+    font-size: 0.9rem;
+}
+.poll ul {
+    padding: 10px 0;
+    width: 300px;
+    margin: auto;
+}
+.poll ul li {
+    list-style: none;
+    border: 2px solid #012d98;
+    border-radius: 3px;
+    line-height: 1rem;
+    margin-bottom: 1rem;
+    width: 100%;
+}
+
+.poll ul li button {
+    border: none;
+    background: transparent;
+    outline: none;  
+    height: 100%;
+    width: 100%;
+    display: block;
+    padding: 15px;
+    color: #000;
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+.poll ul li span {
+    display: none;
+}
+.poll ul.results li button span {
+    display: inline-block;
+    margin-left: 8px;
+}
+.poll ul.results li {
+    position: relative;
+    border-color: #999;
+}
+
+
+.poll ul.results .displayVotes{
+    position: absolute;
+    height: 100%;
+    border: 2px solid #012d98;
+    width: calc(var(--votes)/var(--totalVotes)*100%);
+
+}
