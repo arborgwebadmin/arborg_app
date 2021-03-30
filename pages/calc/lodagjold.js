@@ -88,7 +88,7 @@ class Lodagjold extends React.Component {
                                     <CheckFormGroup id={ idsMap.TEGUND } label="Iðnaðarhúsnæði" type="radio" value={ idsMap.IDNADUR } change={ this.handleChange } checked={ this.state.field.type === idsMap.IDNADUR}></CheckFormGroup>
                                     <CheckFormGroup id={ idsMap.TEGUND } label="Hesthús" type="radio" value={ idsMap.HESTHUS } change={ this.handleChange } checked={ this.state.field.type === idsMap.HESTHUS}></CheckFormGroup>
                                 </div>
-                                <FormGroup id={ idsMap.SIZE } label="Byggingarmagn í fermetrum" type="number" value={ this.state.field.size } change={ this.handleChange } required={true}></FormGroup>
+                                <FormGroup id={ idsMap.SIZE } label="Byggingarmagn lóðar skv. heimilu nýtingarhlutfalli í fermetrum" type="number" value={ this.state.field.size } change={ this.handleChange } required={true}></FormGroup>
                                 <input type="submit" value="Reikna" className="btn btn-primary"></input>
                             </form>
                             <div className={this.state.total==0 ? styles.hidden + " card mt-3" : styles.visible + " card mt-3"}>
