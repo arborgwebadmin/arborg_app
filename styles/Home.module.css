@@ -146,3 +146,11 @@
 .hidden {
   visibility: hidden;
 }
+
+.text_left {
+  text-align: left;
+}
+
+.text_right {
+  text-align: right;
+}

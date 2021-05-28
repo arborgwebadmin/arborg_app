@@ -27,7 +27,7 @@ export default function Home() {
           <LinkCard link="/calc/fasteignagjold" title="Fasteignagjöld" description="Reiknaðu fasteignagjöldin"></LinkCard>
           <LinkCard link="/calc/fristund" title="Frístundaheimili" description="Reiknaðu gjöldin við frístundaheimili"></LinkCard>
           <LinkCard link="/calc/blandgjold" title="Mismunandi skólastig" description="Reiknaðu öll gjöldin varðandi vistun barna á mismunandi stigum"></LinkCard>
-          <LinkCard link="/polls/poll" title="Kosning" description="Ýmsar kosningar"></LinkCard>
+          <LinkCard link="/tonlistarbekkir/bekkir" title="Tónlistarbekkir" description="Lokaverkefni"></LinkCard>
         </div>
 
       </main>
