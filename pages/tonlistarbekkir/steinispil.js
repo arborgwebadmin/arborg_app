@@ -6,8 +6,8 @@ class SteiniSpil extends React.Component {
 		const text_is = [
 			'Þorsteinn Pálmi Guðmundsson, eða Steini Spil, eins og hann var kallaður hefur verið nefndur sveitaballakóngur Suðurlands. Hann fæddist þann 22. desember 1933 í Villingaholtshreppi í Árnessýslu og bjó mest alla ævi sína á Selfossi. Danstónlist átti hug hans allan strax frá unga aldri og eignaðist hann sína fyrstu harmonikku, sem hann keypti fyrir fermingarpeninginn sinn, 13 ára gamall.',
 			'Þegar hann var um tvítugt byrjaði hann í Hljómsveit Óskars Guðmundssonar en það var á þeim tíma vinsæl dansleikjahljómsveit á Suðurlandi. Steini spilaði á harmonikku sem var hans aðalhljóðfæri.',
-			'Árið 1963 stofnaði hann sína eigin hljómsveit, Hljómsveit Þorsteins Guðmundssonar og starfaði hún sem dansleikjasveit fram til ársins 1986 við miklar vinsældir. Einnig samdi Steini Spil fjölda laga sem hljómsveit hans flutti og gaf út á nokkrum plötum á sjöunda og áttunda áratugnum, lög eins og Á Kanarí, Grásleppu Gvendur og Snjómokstur. Hljómsveit hans var ómissandi hluti af dansleikjamenningu þess tíma og fór sveitin meðal annars í nokkur skipti út fyrir landsteinana til að spila fyrir dansþyrsta Íslendinga erlendis.',
-			'Þorsteinn var einn af stofnendum Harmonikkufélags Selfoss en félagið heiðraði minningu hans og gaf meðal annars út plötu árið 2013 sem nefnd var eftir lagi hans, Vangaveltur.'
+			'Árið 1963 stofnaði hann sína eigin hljómsveit, Hljómsveit Þorsteins Guðmundssonar og starfaði hún sem dansleikjasveit fram til ársins 1986 við miklar vinsældir. Einnig samdi Steini Spil fjölda laga sem hljómsveit hans flutti og gaf út á nokkrum plötum á sjöunda og áttunda áratugnum, lög eins og Á Kanarí, Grásleppu Gvendur og Snjómokstur.', 
+			'Hljómsveit hans var ómissandi hluti af dansleikjamenningu þess tíma og fór sveitin meðal annars í nokkur skipti út fyrir landsteinana til að spila fyrir dansþyrsta Íslendinga erlendis. Þorsteinn var einn af stofnendum Harmonikkufélags Selfoss en félagið heiðraði minningu hans og gaf meðal annars út plötu árið 2013 sem nefnd var eftir lagi hans, Vangaveltur.'
 		]
 
 		const text_en = [

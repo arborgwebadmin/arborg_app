@@ -44,21 +44,38 @@
 .map_box {
     overflow:hidden;
     position:relative;
+    height: 395px;
 }
 
 .map_box iframe{
     width:100%;
+    top: -55px;
+    position: relative;
 }
 
 .maps_box{
     overflow:hidden;
     position:relative;
+    height: 185px;
 }
 
 .maps_box iframe {
     width: 50%;
+    top: -55px;
+    position: relative;
 }
 
+.maps_header {
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+    margin-top: 1rem;
+}
+
+.map_header{
+    text-transform: uppercase;
+    font-weight: bold;
+}
 
 .main_image {
     margin: 20px;
