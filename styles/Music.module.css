@@ -50,8 +50,19 @@
     width:100%;
 }
 
+.maps_box{
+    overflow:hidden;
+    position:relative;
+}
+
+.maps_box iframe {
+    width: 50%;
+}
+
+
 .main_image {
     margin: 20px;
+    width: 100%;
 }
 
 .temp {
