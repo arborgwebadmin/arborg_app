@@ -63,6 +63,16 @@
     width: 50%;
     top: -55px;
     position: relative;
+    padding-bottom: 1rem;
+}
+
+.maps_box iframe:first-child {
+    padding-left: 1rem;
+    padding-right: 0.5rem;
+}
+.maps_box iframe:nth-child(2) {
+    padding-right: 1rem;
+    padding-left: 0.5rem;
 }
 
 .maps_header {

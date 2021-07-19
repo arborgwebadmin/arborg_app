@@ -41,8 +41,6 @@ class Bekkir extends React.Component {
 					<br></br>
 					<Link href="tonlistarbekkir/steinispil">Steini Spil</Link>
 					<br></br>
-					<Link href="tonlistarbekkir/vedurgud">Ingó</Link>
-					<br></br>
 				</div>
 			</div>
 		);
