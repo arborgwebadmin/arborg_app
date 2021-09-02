@@ -6,6 +6,7 @@ import Link from 'next/link'
 class Bekkir extends React.Component {
 
   render() {
+
     return (
       <div className={ styles.container }>
 				<div className={ styles.body }>
@@ -27,22 +28,20 @@ class Bekkir extends React.Component {
 						<p className={styles.text_footnote_en}>Graphic design of images: Þorgerður Helgadóttir, graphic designer.</p>
 					</div>
 				</div>
-				<div className={styles.temp}>
-					<h2>Temp hlekkir svo hægt sé að flakka á milli og skoða síðurnar</h2>
-					<Link href="tonlistarbekkir/benny-crespos-gang">Benny</Link>
-					<br></br>
-					<Link href="tonlistarbekkir/kiriyama-family">Kiriyama</Link>
-					<br></br>
-					<Link href="tonlistarbekkir/kristjana">Kristjana</Link>
-					<br></br>
-					<Link href="tonlistarbekkir/manar">Manar</Link>
-					<br></br>
-					<Link href="tonlistarbekkir/skitamorall">Skitamorall</Link>
-					<br></br>
-					<Link href="tonlistarbekkir/steinispil">Steini Spil</Link>
-					<br></br>
-				</div>
-			</div>
+				<p className={styles.map_header}>Selfoss</p>
+            <div className={styles.map_box}>
+                <iframe src="https://www.google.com/maps/d/embed?mid=1KMRDIleU_vBjMVfp6NYBRMZ00DBwaoBR&hl=en&ll=63.93752971960021%2C-21.00237765046096&z=15" width="600" height="450" loading="lazy" frameBorder="0" allowFullScreen></iframe>
+            </div>
+            <div className={styles.maps_header}>
+                <p className={styles.map_header}>Eyrarbakki</p>
+                <p className={styles.map_header}>Stokkseyri</p>
+            </div>
+            <div className={styles.maps_box}>
+                <iframe src="https://www.google.com/maps/d/embed?mid=1KMRDIleU_vBjMVfp6NYBRMZ00DBwaoBR&hl=eni&ll=63.86375810125256%2C-21.15314480978699&z=16" width="640" height="240" frameBorder="0" allowFullScreen></iframe>
+                <iframe src="https://www.google.com/maps/d/embed?mid=1KMRDIleU_vBjMVfp6NYBRMZ00DBwaoBR&hl=en&ll=63.836405490379875%2C-21.0661848888855&z=16" width="640" height="240" frameBorder="0" allowFullScreen></iframe>
+            </div>
+        </div>
+			
 		);
 	}
 
