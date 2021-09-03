@@ -18,7 +18,7 @@ const idsMap = {
 }
 
 const calcMap = {
-    PER_SQ_METER: 244.079,
+    PER_SQ_METER: 244079,
     EINBYLI: 0.15,
     PAR: 0.13,
     RAD: 0.13,
