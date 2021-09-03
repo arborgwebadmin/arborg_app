@@ -18,14 +18,15 @@ const idsMap = {
 }
 
 const calcMap = {
-    PER_SQ_METER: 238485,
+    PER_SQ_METER: 244.079,
     EINBYLI: 0.15,
     PAR: 0.13,
     RAD: 0.13,
     FJOLBYLI: 0.11,
     VERSLUN: 0.10,
     IDNADUR: 0.10,
-    HESTHUS: 0.10
+    HESTHUS: 0.10,
+    VISITOLU_TXT : '1. sept 2021'
 }
 
 class Lodagjold extends React.Component {
@@ -100,7 +101,10 @@ class Lodagjold extends React.Component {
                                         Af því reiknast {this.state.percentage}% álagning sem nemur {currencyFormat(this.state.tGatnagerd)} 
                                     </p>
                                     <h6 className="card-subtitle mb-2 text-muted">Fyrirvari: </h6>
-									<p className="card-text">Eingöngu er um áætlun að ræða miðað við þær forsendur sem slegnar eru inn.</p>
+									<p className="card-text">
+                                        Eingöngu er um áætlun að ræða miðað við þær forsendur sem slegnar eru inn.<br></br>
+                                        Fermetraverð miðast við vísitölu frá {calcMap.VISITOLU_TXT}.
+                                    </p>
                                 </div>
                             </div>
                         </div>
