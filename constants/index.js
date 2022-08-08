@@ -6,3 +6,5 @@ export const selectTag = {
 	LBL4: '4 dagar',
 	LBL5: '5 dagar',
 }
+
+export var months = ["janúar", "febrúar", "mars", "apríl", "maí", "júní", "júlí", "ágúst", "september", "október", "nóvember", "desember"]

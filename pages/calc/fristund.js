@@ -14,11 +14,11 @@ const idsMap = {
 };
 
 const priceMap = {
-	'5 dagar': [16090, 4645],
-	'4 dagar': [13121, 3720],
-	'3 dagar': [10128, 2784],
-	'2 dagar': [7145, 1872],
-	'1 dagur': [4152, 949],
+	'5 dagar': [16653, 4808],
+	'4 dagar': [13580, 3850],
+	'3 dagar': [10482, 2881],
+	'2 dagar': [7395, 1938],
+	'1 dagur': [4279, 982],
 }
 
 class Fristund extends React.Component {
@@ -58,8 +58,7 @@ class Fristund extends React.Component {
 		})
 		
 	}
-
-  render() {
+	render() {
 	  return(
 		<div className={ styles.container }>
 			<PageHead>Frístunda reiknivél</PageHead>
@@ -76,7 +75,7 @@ class Fristund extends React.Component {
 					<div className={ this.state.total==0? styles.hidden + " card mt-3" : styles.visible + " card mt-3"}>
 						<div className="card-body">
 							<h5 className="card-title">Heildarkostnaður: {currencyFormat(this.state.total)}</h5>
-							<h6 className="card-subtitile mb-2 text-muted">Að vera með {this.state.field.kids} {this.state.field.kids==1? 'barn': 'börn'} í {this.state.field.days} {this.state.field.days==1?'dag':'daga'} á viku kostar {currencyFormat(this.state.total)}</h6>
+							<h6 className="card-subtitile mb-2 text-muted">Að vera með {this.state.field.kids[0]} {this.state.field.kids[0]==1? 'barn': 'börn'} í {this.state.field.days[0]} {this.state.field.days[0]==1?'dag':'daga'} á viku kostar {currencyFormat(this.state.total)}</h6>
 							<p className="card-text">
 								<b>Sundurliðun:</b><br></br>
 								Miðað við þínar forsendur má reikna með að frístundagjöldin séu eftirfarandi:<br></br>

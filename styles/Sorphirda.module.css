@@ -1,0 +1,59 @@
+
+.grid-container{
+	/* Grid með þremur dálkum */
+    display: grid;
+    grid-template-columns: auto auto auto;
+}
+.grid-item {
+    display: inline-grid;
+}
+#dates_gray_div {
+	/* Fyrir grátunnu lista */
+    padding-left: 1em;
+    margin-top: 1em;
+    height: 20px;
+}
+#dates_blue_div {
+	/* Fyrir blátunnu lista */
+    margin-top: 1em;
+    padding-left: 1em;
+
+}
+#dates_graen_div {
+	/* Fyrir græntunnu lista */
+    margin-top: 1em;
+    padding-left: 1em;
+}
+.marginbot{
+    margin-bottom: 100px;
+}
+#graydatebox{
+	/* Birtir box sem inniheldur næstu losun á grátunnum */
+    background-color: gray !important;
+    width: 33%;
+    float: left;
+    height: 100px !important;
+    color: white !important;
+    text-align: center;
+    padding-top: 25px !important;
+}
+#bluedatebox{
+	/* Birtir box sem inniheldur næstu losun á blátunnum */
+    background-color: #2c549c !important;
+    width: 33%;
+    float: left;
+    height: 100px !important;
+    color: white !important;
+    text-align: center ;
+    padding-top: 25px !important;
+}
+#greendatebox{
+	/* Birtir box sem inniheldur næstu losun á græntunnum */
+    background-color: green !important;
+    width: 33%;
+    float: left;
+    height: 100px !important;
+    color: white !important;
+    text-align: center;
+    padding-top: 25px ;
+}

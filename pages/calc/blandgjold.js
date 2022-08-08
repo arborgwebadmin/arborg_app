@@ -92,8 +92,8 @@ class Blandgjold extends React.Component {
 								
 							}
 							
-							<label>Bæta við barni</label>
-							<Button variant="secondary" onClick={ this.addKid }>+</Button>
+							{/* <label>Bæta við barni</label> */}
+							<Button variant="secondary" onClick={ this.addKid }>Bæta við barni</Button>
 							<Button variant="primary" type="submit">Reikna</Button>
 						</Form>
 					</div>

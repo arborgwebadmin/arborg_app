@@ -19,13 +19,13 @@ class Leikskolagjold extends React.Component{
 		};
 		this.handleChange = this.handleChange.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
-		this.per_hour_cost = 3666;
-		this.per_quarter_cost = 1669;
-		this.primary_hour_cost = 2566;
-		this.primary_quarter_cost = 1168;
-		this.launch_cost = 6008;
-		this.breakfast_cost = 2121;
-		this.refreshment_cost = 2121;
+		this.per_hour_cost = 3794;
+		this.per_quarter_cost = 1727;
+		this.primary_hour_cost = 2656;
+		this.primary_quarter_cost = 1209;
+		this.launch_cost = 6218;
+		this.breakfast_cost = 2195;
+		this.refreshment_cost = 2195;
 	}
 
 	handleChange(event) {
@@ -87,7 +87,7 @@ class Leikskolagjold extends React.Component{
 								<label className="form-check-label" htmlFor="is_primary">Forgangsgjald?</label>
 								<small id="description" className="form-text text-muted" >Forgangsgjald er fyrir einstæðaforeldra og námsmenn</small>
 							</div>
-							
+				
 							<input type="submit" value="Reikna" className="btn btn-primary"></input>
 
 						</form>

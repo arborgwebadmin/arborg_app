@@ -1,8 +1,5 @@
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
-//import Layout from '/components/layout'
-import Link from 'next/link'
-import MyLayout from "../components/layout"
 import LinkCard from "../components/link-card"
 
 export default function Home() {
@@ -21,13 +18,14 @@ export default function Home() {
           </a>
           <h1 className={styles.title}>Reiknivél Árborgar</h1>
         </div>
-        <div className="ar-links" className={styles.grid}>
+        <div className={styles.grid + " ar-links"}>
           <LinkCard link="/calc/leikskolagjold" title="Leikskólagjöld" description="Reiknaðu leikskólagjöldin"></LinkCard>
           <LinkCard link="/calc/lodagjold" title="Gatnagerðargjöld" description="Reiknaðu áætluð gatnagerðargjöld"></LinkCard>
           <LinkCard link="/calc/fasteignagjold" title="Fasteignagjöld" description="Reiknaðu fasteignagjöldin"></LinkCard>
           <LinkCard link="/calc/fristund" title="Frístundaheimili" description="Reiknaðu gjöldin við frístundaheimili"></LinkCard>
           <LinkCard link="/calc/blandgjold" title="Mismunandi skólastig" description="Reiknaðu öll gjöldin varðandi vistun barna á mismunandi stigum"></LinkCard>
           <LinkCard link="/tonlistarbekkir" title="Tónlistarbekkir" description=""></LinkCard>
+          <LinkCard link="/sorphirda" title="Sorphirðudagatal" description=""></LinkCard>
         </div>
 
       </main>
