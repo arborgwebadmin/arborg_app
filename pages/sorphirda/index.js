@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import PageHead from '../../components/page-head';
 import styles from '../../styles/Home.module.css';
 import { Typeahead } from 'react-bootstrap-typeahead';
-import Data from './hverfi.json';
+import Data from '../../json/hverfi.json';
 import '../../styles/Sorphirda.module.css'
 import GetTrashDates from '../../components/trash-dates';
 import TrashNextEmpty from '../../components/trash-next-empty';

@@ -1,4 +1,4 @@
-import temp_JSON from "../pages/sorphirda/thrashdates";
+import temp_JSON from "../json/thrashdates";
 
 export default function GetTrashDates(addr){
     var address = addr
