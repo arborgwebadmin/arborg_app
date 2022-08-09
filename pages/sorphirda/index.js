@@ -46,7 +46,7 @@ export default function Sorphirda() {
                     setCounterBlue(countb)
                     setCounterGrey(countg)                 
                     setNextGrey(tempGray)
-                    setNextBlue(tempBlue)    
+                    setNextBlue(tempBlue)
                     setIsValid(true)
         }
     }, [trashDates])
@@ -57,18 +57,19 @@ export default function Sorphirda() {
             <div className={styles.main}>
             <div className='container'>
                 <h1>Sorphirðudagatal</h1>
+                
             </div>
             <div className={styles.main}>
                     <form className='grid-container' style={{width: '34rem'}} onSubmit={handleSubmit}>
                 <Row>
                     <Col>
-                        <p style={{paddingTop: '10px', fontWeight: 'bold'}}>Sláðu inn götuheiti:</p>
+                        <p style={{paddingTop: '10px', fontWeight: 'bold'}}>Sláðu inn götuheiti:</p> 
                     </Col>
                     <Col>
 
                         <div className='d-flex flex-row-reverse' style={{paddingBottom: '10px'}} >
                             <input type="submit" onClick={() => setAddress(['Dreifbýli'])} name="blocks" value="Dreifbýli" className="btn btn-primary"></input>
-                            <input type="submit" onClick={() => setAddress(['Blokkir'])}   name="blocks" value="Blokkir" className="btn btn-primary" style={{marginRight: '5px'}}></input>
+                            <input type="submit" onClick={() => setAddress(['Blokkir'])}   name="blocks" value="Fjölbýli" className="btn btn-primary" style={{marginRight: '5px'}}></input>
                         </div>
                     </Col>
                 </Row>
@@ -92,9 +93,14 @@ export default function Sorphirda() {
                         </div>}
                     </div>
                     <div style={{width: '35rem'}}>
-                        <p><strong>Fyrirvari: </strong>Líta skal á sorphirðudagatalið sem viðmiðunardagatal.  Veðurfar, veikindi og bilanir geta haft áhrif en almennt ætti ekki að skeika meiru en 1/2 til 1 degi á sorphirðu milli hverfa.</p><br/>
+                        <li style={{fontStyle: 'italic', paddingTop: '0'}}>Smella þarf á „Fjölbýli“ þegar tunnur eru 660l eða stærri sorptunnur. </li>
+                        <li style={{fontStyle: 'italic', paddingBottom: '10px'}}>Smella þarf á „Dreifbýli“ þegar viðkomandi býr í dreifbýli. </li>
+                        <p style={{fontStyle: 'italic'}}><strong>Fyrirvari: </strong>Líta skal á sorphirðudagatalið sem viðmiðunardagatal.  Veðurfar, veikindi og bilanir geta haft áhrif en almennt ætti ekki að skeika meiru en 1/2 til 1 degi á sorphirðu.</p><br/>
                     </div>
                 </form>
+                <img src="/grey-bin.png" alt="Blátunna" style={{height: '150px'}} />
+                <img src="/brown-bin.png" alt="Blátunna" style={{height: '150px'}} />
+                <img src="/blue-bin.png" alt="Blátunna" style={{height: '150px'}} />
             {isValid && 
                 <div id="grid-container">     
                     <div className="d-flex justify-content-around">
