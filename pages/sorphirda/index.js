@@ -10,7 +10,6 @@ import { Row, Col } from 'react-bootstrap';
 import TrashList from '../../components/trash-list';
 
 export default function Sorphirda() {
-    React.useLayoutEffect = React.useEffect 
     const [getAddress, setAddress] = useState([]);
     const [trashDates, setTrashDates] = useState([]);
     const [home, setHome] = useState('')
@@ -19,6 +18,8 @@ export default function Sorphirda() {
     const [nextGrey, setNextGrey] = useState([])
     const [counterBlue, setCounterBlue] = useState(0)
     const [counterGrey, setCounterGrey] = useState(0)
+    const [date, setDate] = useState([])
+    
     const handleSubmit = event => {
         if(getAddress.length !== 0){            
             setTrashDates(GetTrashDates(getAddress.toString()))
@@ -48,7 +49,7 @@ export default function Sorphirda() {
                     setNextGrey(tempGray)
                     setNextBlue(tempBlue)    
                     setIsValid(true)
-            }
+        }
     }, [trashDates])
 
     return(
@@ -59,18 +60,21 @@ export default function Sorphirda() {
                 <h1>Sorphirðudagatal</h1>
             </div>
             <div className={styles.main}>
-                <form className='container' onSubmit={handleSubmit}>
+                    <form className='grid-container' style={{width: '34rem'}} onSubmit={handleSubmit}>
                 <Row>
                     <Col>
                         <p style={{paddingTop: '10px', fontWeight: 'bold'}}>Sláðu inn götuheiti:</p>
                     </Col>
                     <Col>
-                        <div className='d-flex flex-row-reverse' style={{paddingBottom: '10px' }} >
+
+                        <div className='d-flex flex-row-reverse' style={{paddingBottom: '10px'}} >
                             <input type="submit" onClick={() => setAddress(['Dreifbýli'])} name="blocks" value="Dreifbýli" className="btn btn-primary"></input>
-                        <input type="submit" style={{marginRight: '5px'}} onClick={() => setAddress(['Blokkir'])} name="blocks" value="Blokkir" className="btn btn-primary"></input>
+                            <input type="submit" onClick={() => setAddress(['Blokkir'])}   name="blocks" value="Blokkir" className="btn btn-primary" style={{marginRight: '5px'}}></input>
                         </div>
                     </Col>
                 </Row>
+                    </form>
+                <form className='container' onSubmit={handleSubmit}>
                     <Typeahead
                         id="basic-typeahead-single"
                         onChange={setAddress}
@@ -80,7 +84,12 @@ export default function Sorphirda() {
                         />
                     <div className="d-flex" style={{paddingTop: '10px', paddingBottom: '10px'}}>
                         {<div style={{marginRight: "10px"}}>
-                            <input type="submit" name="street" value="Finna sorphirðudaga" className="btn btn-primary"></input>
+                            <input 
+                                type="submit" 
+                                name="street" 
+                                value="Finna sorphirðudaga" 
+                                className="btn btn-primary"
+                                />
                         </div>}
                     </div>
                     <div style={{width: '35rem'}}>
@@ -118,7 +127,7 @@ export default function Sorphirda() {
                     <div className="grid-container">
                         <div className='d-flex justify-content-center'>
                             <div className="grid-item" style={{padding: "30px"}}><h6>Grá og Brúntunnur</h6>
-                                <TrashList trashDates={trashDates[0]} counter={counterGrey} />
+                                <TrashList trashDates={trashDates[0]} counter={counterGrey} />      
                             </div>
                             <div className="grid-item" style={{padding: "30px"}}><h6>Blátunnur</h6>
                                 <TrashList trashDates={trashDates[1]} counter={counterBlue} />
