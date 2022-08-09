@@ -98,9 +98,6 @@ export default function Sorphirda() {
                         <p style={{fontStyle: 'italic'}}><strong>Fyrirvari: </strong>Líta skal á sorphirðudagatalið sem viðmiðunardagatal.  Veðurfar, veikindi og bilanir geta haft áhrif en almennt ætti ekki að skeika meiru en 1/2 til 1 degi á sorphirðu.</p><br/>
                     </div>
                 </form>
-                <img src="/grey-bin.png" alt="Blátunna" style={{height: '150px'}} />
-                <img src="/brown-bin.png" alt="Blátunna" style={{height: '150px'}} />
-                <img src="/blue-bin.png" alt="Blátunna" style={{height: '150px'}} />
             {isValid && 
                 <div id="grid-container">     
                     <div className="d-flex justify-content-around">
@@ -113,7 +110,7 @@ export default function Sorphirda() {
                                     <img src="/grey-bin.png" alt="Grátunna" style={{height: '150px'}} />
                                     <img src="/brown-bin.png" alt="Brúntunna" style={{height: '150px'}} />
                                 </div>
-                                <br/><h5 >Næsta losun:<br/></h5>
+                                <br/><h5 >Næsta grá og brúntunnu losun:<br/></h5>
                                 <h5>
                                     <TrashNextEmpty nextTrashDates={nextGrey} />
                                 </h5>
@@ -122,7 +119,7 @@ export default function Sorphirda() {
                                 <div> 
                                     <img src="/blue-bin.png" alt="Blátunna" style={{height: '150px'}} />
                                 </div>
-                                <br/><h5>Næsta losun:<br/></h5>
+                                <br/><h5>Næsta blátunnu losun:<br/></h5>
                                 <h5>
                                     <TrashNextEmpty nextTrashDates={nextBlue} />
                                 </h5>
