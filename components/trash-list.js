@@ -1,4 +1,3 @@
-import next from "next";
 import React, { useEffect, useState } from "react";
 import { months } from "../constants";
 const TrashList = ({trashDates, counter}) => {

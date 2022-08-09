@@ -18,7 +18,6 @@ export default function Sorphirda() {
     const [nextGrey, setNextGrey] = useState([])
     const [counterBlue, setCounterBlue] = useState(0)
     const [counterGrey, setCounterGrey] = useState(0)
-    const [date, setDate] = useState([])
     
     const handleSubmit = event => {
         if(getAddress.length !== 0){            
