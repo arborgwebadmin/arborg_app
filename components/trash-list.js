@@ -7,7 +7,7 @@ const TrashList = ({trashDates, counter}) => {
         let tempList = [trashDates[counter]]
         let tempGray = []
         //find adjentence dates
-        for (let i = counter; i < trashDates.length; i++){
+        for (let i = counter+1; i < trashDates.length; i++){
             if (trashDates[i].getTime() - (1000*60*60*24) === tempList[tempList.length-1].getTime() || (trashDates[i].getTime()-(1000*60*60*24*3)) === (tempList[tempList.length-1].getTime())){ 
                 tempList.push(new Date(trashDates[i]))
             }
@@ -21,6 +21,7 @@ const TrashList = ({trashDates, counter}) => {
         tempGray.shift()
         setDate(tempGray)
     }, [trashDates])
+    
   
     return (
         <>
