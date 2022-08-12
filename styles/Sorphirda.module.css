@@ -3,6 +3,7 @@
 	/* Grid með þremur dálkum */
     display: grid;
     grid-template-columns: auto auto auto;
+    background-color: #f8f9fb;
 }
 .grid-item {
     display: inline-grid;

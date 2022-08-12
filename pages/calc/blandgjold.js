@@ -53,52 +53,54 @@ class Blandgjold extends React.Component {
 
   render() {
     return (
-      <div className={ styles.container }>
-				<PageHead title="Reiknivél vistunargjalda"></PageHead>
-				<div className={ styles.main }>
-					<div className="container">
-						<h1>Reiknivél vistunargjalda</h1>
-					</div>
-					<div className="container">
-						<Form onSubmit={this.handleSubmit}>
-							{
-								this.state.field.vistun.map((barn, index) => {
-									return (
-										<div key={index}>
-											<Form.Group controlId={index} key={index}>
-												<Form.Label>Tegund vistunar/skóla {index+1}. barns</Form.Label>
-												<Form.Control as="select" onChange={this.handleChange}>
-													<option>Veldu tegund</option>
-													<option>Dagforeldri</option>
-													<option>Leikskóli</option>
-													<option>Grunnskóli</option>
-												</Form.Control>
-											</Form.Group>
-											{ this.state.field.vistun[index].Leikskóli !== undefined && 
-											<FormGroup id={`${index}-Leikskóli`} label="Lengd dvalar í klukkustundum á dag?" type="number" value={this.state.field.vistun[index].Leikskóli} change={this.handleChange} step={0.25}></FormGroup>
-											}
-											{ this.state.field.vistun[index].Grunnskóli !== undefined &&
-											<div key={`${index}-Grunnskóli`}>
-											<Form.Check type='checkbox' id={`${index}-Grunnskóli-hressing`} label='Morgunhressing' onChange={this.handleChange}/>
-											<Form.Check type='checkbox' id={`${index}-Grunnskóli-hadegi`} label='Hádegismatur' onChange={this.handleChange}/>
-											<Form.Check type='checkbox' id={`${index}-Grunnskóli-fristund`} label='Frístund' onChange={this.handleChange}/>
-											{ this.state.field.vistun[index].Grunnskóli.fristund == true &&
-											<NrOfDaysPWeek id={`${index}-Grunnskóli-fristundDagar`} change={this.handleChange} value={this.state.field.vistun[index].Grunnskóli.fristundDagar}></NrOfDaysPWeek>}
-											</div>}
+		<main>
+			<div className={ styles.container }>
+						<PageHead title="Reiknivél vistunargjalda"></PageHead>
+						<div className={ styles.main }>
+							<div className="container">
+								<h1>Reiknivél vistunargjalda</h1>
+							</div>
+							<div className="container">
+								<Form onSubmit={this.handleSubmit}>
+									{
+										this.state.field.vistun.map((barn, index) => {
+											return (
+												<div key={index}>
+													<Form.Group controlId={index} key={index}>
+														<Form.Label>Tegund vistunar/skóla {index+1}. barns</Form.Label>
+														<Form.Control as="select" onChange={this.handleChange}>
+															<option>Veldu tegund</option>
+															<option>Dagforeldri</option>
+															<option>Leikskóli</option>
+															<option>Grunnskóli</option>
+														</Form.Control>
+													</Form.Group>
+													{ this.state.field.vistun[index].Leikskóli !== undefined && 
+													<FormGroup id={`${index}-Leikskóli`} label="Lengd dvalar í klukkustundum á dag?" type="number" value={this.state.field.vistun[index].Leikskóli} change={this.handleChange} step={0.25}></FormGroup>
+												}
+													{ this.state.field.vistun[index].Grunnskóli !== undefined &&
+													<div key={`${index}-Grunnskóli`}>
+													<Form.Check type='checkbox' id={`${index}-Grunnskóli-hressing`} label='Morgunhressing' onChange={this.handleChange}/>
+													<Form.Check type='checkbox' id={`${index}-Grunnskóli-hadegi`} label='Hádegismatur' onChange={this.handleChange}/>
+													<Form.Check type='checkbox' id={`${index}-Grunnskóli-fristund`} label='Frístund' onChange={this.handleChange}/>
+													{ this.state.field.vistun[index].Grunnskóli.fristund == true &&
+													<NrOfDaysPWeek id={`${index}-Grunnskóli-fristundDagar`} change={this.handleChange} value={this.state.field.vistun[index].Grunnskóli.fristundDagar}></NrOfDaysPWeek>}
+													</div>}
+												
+												</div>
+											)
+										})
 										
-										</div>
-									)
-								})
-								
-							}
-							
-							{/* <label>Bæta við barni</label> */}
-							<Button variant="secondary" onClick={ this.addKid }>Bæta við barni</Button>
-							<Button variant="primary" type="submit">Reikna</Button>
-						</Form>
-					</div>
-				</div>
-      </div>
+									}
+									
+									{/* <label>Bæta við barni</label> */}
+									<Button variant="secondary" onClick={ this.addKid }>Bæta við barni</Button>
+									<Button variant="primary" type="submit">Reikna</Button>
+								</Form>
+							</div>
+						</div>
+			</div>
+		</main>
     )
   }
 }
