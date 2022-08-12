@@ -19,10 +19,13 @@ export default function Sorphirda() {
     const [counterGrey, setCounterGrey] = useState(0)
     
     const handleSubmit = event => {
+        event.preventDefault()
         if(getAddress.length !== 0){            
+            // get trash dates er ekki component
             setTrashDates(GetTrashDates(getAddress.toString()))
             setHome(getAddress)
-            event.preventDefault();
+            setIsValid(false)
+            
     }}
 
     useEffect(() => {
@@ -60,7 +63,7 @@ export default function Sorphirda() {
                     
                 </div>
                 <div className={styles.main}>
-                        <form className='grid-container' style={{width: '40em'}} onSubmit={handleSubmit}>
+                        <form className='grid-container' style={{width: '36em'}} onSubmit={handleSubmit}>
                     <Row>
                         <Col>
                             <p style={{paddingTop: '10px', fontWeight: 'bold'}}>Sláðu inn götuheiti:</p> 
@@ -92,7 +95,7 @@ export default function Sorphirda() {
                                     />
                             </div>}
                         </div>
-                        <div style={{width: '40rem'}}>
+                        <div style={{width: '36rem'}}>
                             <li style={{fontStyle: 'italic', paddingTop: '0'}}>Smella þarf á „Fjölbýli“ þegar tunnur eru 660l eða stærri sorptunnur. </li>
                             <li style={{fontStyle: 'italic', paddingBottom: '10px'}}>Smella þarf á „Dreifbýli“ þegar viðkomandi býr í dreifbýli. </li>
                             <p style={{fontStyle: 'italic'}}><strong>Fyrirvari: </strong>Líta skal á sorphirðudagatalið sem viðmiðunardagatal.  Veðurfar, veikindi og bilanir geta haft áhrif en almennt ætti ekki að skeika meiru en 1/2 til 1 degi á sorphirðu.</p><br/>
@@ -105,7 +108,7 @@ export default function Sorphirda() {
                         </div>
                         <div className="d-flex justify-content-around">
                             <div className="d-flex">
-                                <div className="card text-center" style={{ width: '20rem', border: 'none' , margin: "5px", marginTop: "15px", backgroundColor: '#f8f9fb'}}>
+                                <div className="card text-center" style={{ width: '18rem', border: 'none' , margin: "5px", marginTop: "15px", backgroundColor: '#f8f9fb'}}>
                                     <div> 
                                         <img src="/grey-bin.png" alt="Grátunna" style={{height: '150px'}} />
                                         <img src="/brown-bin.png" alt="Brúntunna" style={{height: '150px'}} />
@@ -115,7 +118,7 @@ export default function Sorphirda() {
                                         <TrashNextEmpty nextTrashDates={nextGrey} />
                                     </h5>
                                 </div>
-                                <div className="card text-center" style={{ width: '20rem', border: 'none', margin: "5px", marginTop: "15px", backgroundColor: '#f8f9fb'}}>
+                                <div className="card text-center" style={{ width: '18rem', border: 'none', margin: "5px", marginTop: "15px", backgroundColor: '#f8f9fb'}}>
                                     <div> 
                                         <img src="/blue-bin.png" alt="Blátunna" style={{height: '150px'}} />
                                     </div>
