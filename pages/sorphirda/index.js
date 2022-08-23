@@ -19,6 +19,7 @@ export default function Sorphirda() {
     const [counterGrey, setCounterGrey] = useState(0)
     
     const handleSubmit = event => {
+        //handles submit
         event.preventDefault()
         if(getAddress.length !== 0){            
             // get trash dates er ekki component
