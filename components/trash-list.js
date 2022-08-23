@@ -22,9 +22,6 @@ const TrashList = ({trashDates, counter}) => {
         setDate(tempGray)
     }, [trashDates])
     
-    
-
-  
     return (
         <>
         {/* Prints out correct format of dates */}
@@ -41,4 +38,5 @@ const TrashList = ({trashDates, counter}) => {
         </>
     )
         }
+        
 export default TrashList;

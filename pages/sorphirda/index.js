@@ -3,10 +3,11 @@ import PageHead from '../../components/page-head';
 import styles from '../../styles/Home.module.css';
 import { Typeahead } from 'react-bootstrap-typeahead';
 import Data from '../../json/hverfi.json';
-import GetTrashDates from '../../components/trash-dates';
+// import GetTrashDates from '../../components/trash-dates';
 import TrashNextEmpty from '../../components/trash-next-empty';
 import { Row, Col } from 'react-bootstrap';
 import TrashList from '../../components/trash-list';
+import temp_JSON from "../../json/thrashdates";
 
 export default function Sorphirda() {
     const [getAddress, setAddress] = useState([]);
@@ -17,13 +18,50 @@ export default function Sorphirda() {
     const [nextGrey, setNextGrey] = useState([])
     const [counterBlue, setCounterBlue] = useState(0)
     const [counterGrey, setCounterGrey] = useState(0)
-    
+
+    const getTrashDates = (addr) =>{
+        var address = addr
+        var current_date
+        var trashDates = []
+        var grey_dates = []
+        var blue_dates = []
+        current_date = new Date()
+        current_date.setDate(current_date.getDate() -1)
+        // Loop through the neighbourhoods
+        for(const neighbourhood in temp_JSON){
+            // Loop through streets
+            for(const street in temp_JSON[neighbourhood].streets){
+                // Check if address matches the street
+                if(address === temp_JSON[neighbourhood].streets[street]){
+                    // Loop through all dates for the address
+                    for(const date in temp_JSON[neighbourhood].gray_dates){
+                        // If date is in the future then list it
+                        if(temp_JSON[neighbourhood].gray_dates[date] > current_date){
+                            //Gray and Brown Dates 
+                            grey_dates.push(temp_JSON[neighbourhood].gray_dates[date])
+                        }
+                    }
+                    // Loop through all dates for the address
+                    for(const date in temp_JSON[neighbourhood].blue_dates){
+                        // If date is in the future then list it
+                        if(temp_JSON[neighbourhood].blue_dates[date] > current_date){                  
+                            blue_dates.push(temp_JSON[neighbourhood].blue_dates[date])			
+                        }
+                    }
+                    if(grey_dates && blue_dates){
+                        trashDates.push(grey_dates, blue_dates)     
+                        return trashDates
+                    }
+                    else return []
+                }
+            }
+        }
+    }
+
     const handleSubmit = event => {
-        //handles submit
         event.preventDefault()
         if(getAddress.length !== 0){            
-            // get trash dates er ekki component
-            setTrashDates(GetTrashDates(getAddress.toString()))
+            setTrashDates(getTrashDates(getAddress.toString()))
             setHome(getAddress)
             setIsValid(false)
             
