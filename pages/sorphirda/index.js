@@ -19,6 +19,7 @@ export default function Sorphirda() {
     const [counterGrey, setCounterGrey] = useState(0)
     
     const handleSubmit = event => {
+        //handles submit
         event.preventDefault()
         if(getAddress.length !== 0){            
             // get trash dates er ekki component
@@ -113,28 +114,28 @@ export default function Sorphirda() {
                                         <img src="/grey-bin.png" alt="Grátunna" style={{height: '150px'}} />
                                         <img src="/brown-bin.png" alt="Brúntunna" style={{height: '150px'}} />
                                     </div>
-                                    <br/><h5 >Næsta grá og brúntunnu losun:<br/></h5>
-                                    <h5>
+                                    <br/><p style={{fontSize: '1.2em'}}>Næsta grá- og brúntunnu losun:<br/></p>
+                                    <h2>
                                         <TrashNextEmpty nextTrashDates={nextGrey} />
-                                    </h5>
+                                    </h2>
                                 </div>
                                 <div className="card text-center" style={{ width: '18rem', border: 'none', margin: "5px", marginTop: "15px", backgroundColor: '#f8f9fb'}}>
                                     <div> 
                                         <img src="/blue-bin.png" alt="Blátunna" style={{height: '150px'}} />
                                     </div>
-                                    <br/><h5>Næsta blátunnu losun:<br/></h5>
-                                    <h5>
+                                    <br/><p style={{fontSize: '1.2em'}}>Næsta blátunnu losun:<br/></p>
+                                    <h2>
                                         <TrashNextEmpty nextTrashDates={nextBlue} />
-                                    </h5>
+                                    </h2>
                                 </div>
                             </div>
                         </div>
-                        <div className="grid-container">
+                        <div className="d-flex justify-content-space-between justify-content-center ">
                             <div className='d-flex justify-content-center'>
-                                <div className="grid-item" style={{padding: "30px"}}><h6>Grá og Brúntunnur</h6>
+                                <div className="grid-item" style={{width: '18rem', justifyContent: 'center', paddingLeft: '3.75rem', paddingTop: '2rem'}}><h6>Grá og Brúntunnur</h6>
                                     <TrashList trashDates={trashDates[0]} counter={counterGrey} />      
                                 </div>
-                                <div className="grid-item" style={{padding: "30px"}}><h6>Blátunnur</h6>
+                                <div className="grid-item" style={{width: '18rem', justifyContent: 'center', paddingLeft: '3.75rem', paddingTop: '2rem'}}><h6>Blátunnur</h6>
                                     <TrashList trashDates={trashDates[1]} counter={counterBlue} />
                                 </div>
                             </div>
