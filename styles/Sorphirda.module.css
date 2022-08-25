@@ -1,0 +1,42 @@
+
+@media screen and (min-width: 580px) {
+    .trashList{
+        width: 18rem;
+        justify-content: center;
+        padding-left: 3.75rem;
+        padding-top: 2rem;
+    }
+    .nextTrashEmpty {
+        font-size: 1.2em;
+        height: 60px;
+    }
+    .img{
+        height: 150px;
+    }
+    .h2Trash {
+        font-size: 2rem;
+    }
+}
+
+@media screen and (max-width: 579px) {
+    .trashList{
+        width: 8rem;
+        font-size: 12px;
+    }
+    .trashFontSize{
+        font-size: 12px;
+    }
+    .nextTrashEmpty {
+        font-size: 0.8rem;
+        height: 40px;
+    }
+    .h2Trash {
+        font-size: 1.2rem;
+    }
+    .img{
+        height: 100px;
+    }
+}
+
+
+
