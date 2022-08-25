@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import PageHead from '../../components/page-head';
 import styles from '../../styles/Home.module.css';
+import sorphirdaStyle from '../../styles/Sorphirda.module.css';
 import { Typeahead } from 'react-bootstrap-typeahead';
 import Data from '../../json/hverfi.json';
 // import GetTrashDates from '../../components/trash-dates';
@@ -94,7 +95,7 @@ export default function Sorphirda() {
 
     return(
         <main>   
-            <div className={styles.container}>
+            <div className={styles.container} style={{width: '38rem', margin: '0 auto'}}>
                 <PageHead>Sorphirðudagatal Árborg</PageHead>
                 <div className={styles.main}>
                 <div className='container'>
@@ -102,7 +103,7 @@ export default function Sorphirda() {
                     
                 </div>
                 <div className={styles.main}>
-                        <form className='grid-container' style={{width: '36em'}} onSubmit={handleSubmit}>
+                        <form className='grid-container' style={{width: '88%'}} onSubmit={handleSubmit}>
                     <Row>
                         <Col>
                             <p style={{paddingTop: '10px', fontWeight: 'bold'}}>Sláðu inn götuheiti:</p> 
@@ -134,10 +135,10 @@ export default function Sorphirda() {
                                     />
                             </div>}
                         </div>
-                        <div style={{width: '36rem'}}>
-                            <li style={{fontStyle: 'italic', paddingTop: '0'}}>Smella þarf á „Fjölbýli“ þegar tunnur eru 660l eða stærri sorptunnur. </li>
-                            <li style={{fontStyle: 'italic', paddingBottom: '10px'}}>Smella þarf á „Dreifbýli“ þegar viðkomandi býr í dreifbýli. </li>
-                            <p style={{fontStyle: 'italic'}}><strong>Fyrirvari: </strong>Líta skal á sorphirðudagatalið sem viðmiðunardagatal.  Veðurfar, veikindi og bilanir geta haft áhrif en almennt ætti ekki að skeika meiru en 1/2 til 1 degi á sorphirðu.</p><br/>
+                        <div style={{width: '100%'}}>
+                            <li className={sorphirdaStyle.trashFontSize} style={{fontStyle: 'italic', paddingTop: '0'}}>Smella þarf á „Fjölbýli“ þegar tunnur eru 660l eða stærri sorptunnur. </li>
+                            <li className={sorphirdaStyle.trashFontSize} style={{fontStyle: 'italic', paddingBottom: '10px'}}>Smella þarf á „Dreifbýli“ þegar viðkomandi býr í dreifbýli. </li>
+                            <p className={sorphirdaStyle.trashFontSize} style={{fontStyle: 'italic'}}><strong>Fyrirvari: </strong>Líta skal á sorphirðudagatalið sem viðmiðunardagatal.  Veðurfar, veikindi og bilanir geta haft áhrif en almennt ætti ekki að skeika meiru en 1/2 til 1 degi á sorphirðu.</p><br/>
                         </div>
                     </form>
                 {isValid && 
@@ -147,22 +148,22 @@ export default function Sorphirda() {
                         </div>
                         <div className="d-flex justify-content-around">
                             <div className="d-flex">
-                                <div className="card text-center" style={{ width: '18rem', border: 'none' , margin: "5px", marginTop: "15px", backgroundColor: '#f8f9fb'}}>
+                                <div className="card text-center" style={{ width: '50%', border: 'none' , margin: "5px", marginTop: "15px", backgroundColor: '#f8f9fb'}}>
                                     <div> 
-                                        <img src="/grey-bin.png" alt="Grátunna" style={{height: '150px'}} />
-                                        <img src="/brown-bin.png" alt="Brúntunna" style={{height: '150px'}} />
+                                        <img className={sorphirdaStyle.img} src="/grey-bin.png" alt="Grátunna"/>
+                                        <img className={sorphirdaStyle.img} src="/brown-bin.png" alt="Brúntunna"/>
                                     </div>
-                                    <br/><p style={{fontSize: '1.2em'}}>Næsta grá- og brúntunnu losun:<br/></p>
-                                    <h2>
+                                    <br/><p className={sorphirdaStyle.nextTrashEmpty}>Næsta grá- og brúntunnu losun:<br/></p>
+                                    <h2 className={sorphirdaStyle.h2Trash}>
                                         <TrashNextEmpty nextTrashDates={nextGrey} />
                                     </h2>
                                 </div>
-                                <div className="card text-center" style={{ width: '18rem', border: 'none', margin: "5px", marginTop: "15px", backgroundColor: '#f8f9fb'}}>
+                                <div className="card text-center" style={{ width: '50%', border: 'none', margin: "5px", marginTop: "15px", backgroundColor: '#f8f9fb'}}>
                                     <div> 
-                                        <img src="/blue-bin.png" alt="Blátunna" style={{height: '150px'}} />
+                                        <img className={sorphirdaStyle.img} src="/blue-bin.png" alt="Blátunna" />
                                     </div>
-                                    <br/><p style={{fontSize: '1.2em'}}>Næsta blátunnu losun:<br/></p>
-                                    <h2>
+                                    <br/><p className={sorphirdaStyle.nextTrashEmpty}>Næsta blátunnu losun:<br/></p>
+                                    <h2 className={sorphirdaStyle.h2Trash}>
                                         <TrashNextEmpty nextTrashDates={nextBlue} />
                                     </h2>
                                 </div>
@@ -170,10 +171,10 @@ export default function Sorphirda() {
                         </div>
                         <div className="d-flex justify-content-space-between justify-content-center ">
                             <div className='d-flex justify-content-center'>
-                                <div className="grid-item" style={{width: '18rem', justifyContent: 'center', paddingLeft: '3.75rem', paddingTop: '2rem'}}><h6>Grá og Brúntunnur</h6>
+                                <div className={sorphirdaStyle.trashList}><h6>Grá og Brúntunnur</h6>
                                     <TrashList trashDates={trashDates[0]} counter={counterGrey} />      
                                 </div>
-                                <div className="grid-item" style={{width: '18rem', justifyContent: 'center', paddingLeft: '3.75rem', paddingTop: '2rem'}}><h6>Blátunnur</h6>
+                                <div className={sorphirdaStyle.trashList}><h6>Blátunnur</h6>
                                     <TrashList trashDates={trashDates[1]} counter={counterBlue} />
                                 </div>
                             </div>
