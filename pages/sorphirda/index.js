@@ -168,10 +168,10 @@ export default function Sorphirda() {
                                 </div>
                                 <div className="d-flex justify-content-space-between justify-content-center ">
                                     <div className='d-flex justify-content-center'>
-                                        <div className={sorphirdaStyle.trashList}><h6>Grá og Brúntunnur</h6>
+                                        <div className={sorphirdaStyle.trashList}><h6 className={sorphirdaStyle.h6Style}>Grá- og Brúntunnur</h6>
                                             <TrashList trashDates={trashDates[0]} counter={counterGrey} />      
                                         </div>
-                                        <div className={sorphirdaStyle.trashList}><h6>Blátunnur</h6>
+                                        <div className={sorphirdaStyle.trashList}><h6 className={sorphirdaStyle.h6Style}>Blátunnur</h6>
                                             <TrashList trashDates={trashDates[1]} counter={counterBlue} />
                                         </div>
                                     </div>
