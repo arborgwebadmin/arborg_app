@@ -16,8 +16,9 @@
     .h2Trash {
         font-size: 2rem;
     }
-    .container {
-        width: 580px;
+    .containerWidth{
+        width: 38rem;
+    
     }
 }
 
@@ -39,6 +40,10 @@
     .img{
         height: 100px;
     }
+    .containerWidth{
+        width: 18rem;
+    }
+
     
 }
 
