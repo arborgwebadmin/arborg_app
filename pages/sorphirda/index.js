@@ -99,9 +99,7 @@ export default function Sorphirda() {
                 <PageHead>Sorphirðudagatal Árborg</PageHead>
                     <main className={styles.main}>
                         <div className={`container ${sorphirdaStyle.containerWidth}`} >
-                            
-                            <h1>Sorphirðudagatal</h1>
-                                <form className='grid-container' onSubmit={handleSubmit}>
+                            <form className='grid-container' onSubmit={handleSubmit}>
                             <Row>
                                 <Col>
                                     <p style={{paddingTop: '10px', fontWeight: 'bold'}}>Sláðu inn götuheiti:</p> 
