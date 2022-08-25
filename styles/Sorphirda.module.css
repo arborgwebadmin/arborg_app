@@ -26,6 +26,7 @@
     .trashList{
         width: 8rem;
         font-size: 12px;
+        height: 40px;
     }
     .trashFontSize{
         font-size: 12px;
@@ -42,6 +43,12 @@
     }
     .containerWidth{
         width: 18rem;
+    }
+    .h6Style{
+        height: 40px;
+        text-align: center;
+        display: flex;
+        align-items: center;
     }
 
     
