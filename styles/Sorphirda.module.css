@@ -16,6 +16,9 @@
     .h2Trash {
         font-size: 2rem;
     }
+    .container {
+        width: 580px;
+    }
 }
 
 @media screen and (max-width: 579px) {
@@ -36,7 +39,10 @@
     .img{
         height: 100px;
     }
+    
 }
+
+
 
 
 

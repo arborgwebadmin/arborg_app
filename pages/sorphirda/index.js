@@ -94,11 +94,11 @@ export default function Sorphirda() {
     }, [trashDates])
 
     return(
-        <main>   
-            <div className={styles.container} style={{width: '38rem', margin: '0 auto'}}>
+        <main className={styles.main}>   
+            <div className={sorphirdaStyle.container}>
                 <PageHead>Sorphirðudagatal Árborg</PageHead>
                 <div className={styles.main}>
-                <div className='container'>
+                <div className={sorphirdaStyle.container}>
                     <h1>Sorphirðudagatal</h1>
                     
                 </div>
