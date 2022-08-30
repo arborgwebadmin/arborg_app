@@ -18,13 +18,14 @@ var temp_JSON = {
             "Götuhús", "Björgvin", "Sunnutún", "Baldursheimur", "Tjarnalundur", "Setberg", "Tjarnarstígur", "Helgastaðir", "Tjörn", "Pálsbær", "Holtsvegur", "Nýborg", 
             "Lyngheiði - Stokkseyri", "Birkihlíð", "Bjarg", "Dvergasteinar", "Sólvellir - Stokkseyri", "Símonarhús", "Starkaðarhús Eldra", "Starkaðarhús", "Vinaminni", 
             "Blómsturvellir", "Roðgúll", "Varmidalur", "Lindarberg", "Birkilundur", "Akbraut", "Arnarberg", "Skipagerði", "Fagurgerði - Stokkseyri", "Fagrabrekka", 
-            "Móakot", "Ólafsvellir", "Merkigarður", "Heiðarstekkur", "Björkurstekkur", "Móstekkur", "Dranghólar", "Kerhólar", "Norðurhólar", "Hellishólar", "Vesturhólar", 
-            "Akurhólar", "Birkihólar", "Grafhólar", "Kjarrhólar", "Álfhólar", "Dverghólar", "Tröllhólar", "Berghólar", "Nauthólar", "Kálfahólar", "Folaldahólar", 
+            "Móakot", "Ólafsvellir", "Merkigarður", "Heiðarstekkur", "Björkustekkur", "Móstekkur", "Dranghólar", "Kerhólar", "Norðurhólar", "Hellishólar", "Vesturhólar", 
+            "Akurhólar", "Birkihólar", "Grafhólar", "Kjarrhólar", "Álfhólar", "Dverghólar", "Tröllhólar", "Berghólar", "Nauthólar", "Kálfhólar", "Folaldahólar", 
             "Hrafnhólar", "Tjaldhólar", "Hraunhella", "Móhella", "Fagrahella", "Gráhella", "Vallarland", "Vörðuland", "Móland", "Stekkjarland", "Snæland", "Seljaland", 
             "Smáraland", "Akraland", "Mýrarland", "Kelduland", "Grundarland", "Hulduland", "Fagraland", "Bjarmaland", "Álfaland", "Engjaland", "Tunguvegur", "Seljavegur", 
             "Sléttuvegur", "Mánavegur", "Þóristún", "Smáratún", "Ársalir", "Heiðarvegur", "Kirkjuvegur", "Sunnuvegur", "Hafnartún", "Tryggvatorg", "Sigtún", "Bankavegur", 
-            "Skólavellir", "Sólvellir", "Álfheimar", "Reynivellir", "Valholt", "Víðivellir", "Birkivellir", "Rauðholt", "Hjarðarholt", "Stekkholt", "Réttarholt", 
-            "Hrísholt", "Merkiland", "Grænamörk", "Þórsmörk", "Heiðmörk", "Laugarbakki", "Fagurgerði", "Grænuvellir", "Hörðuvellir", "Hraunbakki"],
+            "Skólavellir", "Sólvellir", "Álfheimar", "Reynivellir", "Vallholt", "Víðivellir", "Birkivellir", "Rauðholt", "Hjarðarholt", "Stekkholt", "Réttarholt", 
+            "Hrísholt", "Merkiland", "Grænumörk", "Þórsmörk", "Heiðmörk", "Laugarbakki", "Fagurgerði", "Grænuvellir", "Hörðuvellir", "Hraunbakki", "Austurvegur", 
+            "Strandgata", "Suðurbraut", "Brúaarstræti", "Engjavegur", "Tryggvagata", "Árvegur", "Austurhólar", "Hraunhólar", "Grænumörk", "Hlaðvellir"],
         gray_dates: [
             // List over dates for when the gray and brown trash bin will be emptied for this neighbourhood
             // Listi yfir allar dagsetningar þegar grátunnur og brúntúnnur eru tæmdar fyrir þetta hverfi
@@ -44,7 +45,7 @@ var temp_JSON = {
         // Blátt hverfi, Selfoss/Eyrabakki
         // Listi yfir allar götur í þessu hverfi
         streets: [
-        "Álalækur", "Eyrarlækur", "Laxalækur", "Bleykjulækur", "Hagalækur", "Urriðalækur", "Sílalækur", "Þúfulækur", "Starmói", "Kjarrmói", "Urðamói", "Tjarnamói", 
+        "Álalækur", "Eyrarlækur", "Laxalækur", "Bleikjulækur", "Hagalækur", "Urriðalækur", "Sílalækur", "Þúfulækur", "Starmói", "Kjarrmói", "Urðarmói", "Tjarnarmói", 
         "Lyngmói", "Fífumói", "Fossvegur", "Langamýri", "Kringlumýri", "Lækjarbakki", "Laxabakki", "Hellubakki", "Árbakki", "Fagramýri", "Austurmýri", "Sóltún", 
         "Fosstún", "Suðurengi", "Lágengi", "Miðengi", "Dælengi", "Starengi", "Háengi", "Lambhagi", "Laufhagi", "Reyrhagi", "Grashagi", "Fossheiði", "Nauthagi", "Úthagi", 
         "Heimahagi", "Lyngheiði", "Háheiði", "Gagnheiði", "Lágheiði", "Álftarimi", "Gauksrimi", "Lóurimi", "Spóarimi", "Þrastarimi", "Erlurimi", "Urðartjörn", "Aðaltjörn", 
@@ -52,7 +53,7 @@ var temp_JSON = {
         "Hrefnutangi", "Hafnarbrú", "Túngata", "Nesbrú - Eyrarbakki", "Búðarstígur", "Bárðarbrú", "Eyrargata", "Hjallavegur", "Háeyrarvegur", "Hjalladæl", "Álfsstétt", 
         "Þykkvaflöt", "Hulduhóll", "Merkisteinsvellir", "Steinskot", "Heiðdalshús", "Háeyrarvellir", "Mundakot", "Hvammur", "Kirkjuhvol", "Álfastétt", "Gamla Hraun", 
         "Traðarhús", "Ásaberg", "Garðabær - Eyrabakki", "Steinsbær", "Brenna", "Sæfell - Eyrarbakki", "Óseyri - Eyrarbakki", "Bakarísstígur", "Hreggviður", "Sólvangur", 
-        "Einarshöfn", "Grenigrund", "Birkigrund", "Furugrund"],
+        "Einarshöfn", "Grenigrund", "Birkigrund", "Furugrund", "Eyravegur", "Hrauntjörn"],
         gray_dates: [
             // List over dates for when the gray and brown trash bin will be emptied for this neighbourhood
             // Listi yfir allar dagsetningar þegar grátunnur og brúntúnnur eru tæmdar fyrir þetta hverfi
@@ -69,7 +70,7 @@ var temp_JSON = {
     hverfi_3: {
         //Búgarðabyggð/dreifbýli
         streets: [
-            "Dreifbýli", "Búgarðabyggð"],
+            "Dreifbýli", "Búgarðabyggð", "Vesturmúli", "Norðurbraut", "Norðurgata", "Norðurleið", "Suðurgata", "Suðurleið", "Sandvíkurhreppur"],
             gray_dates: [
                 // List over dates for when the gray and brown trash bin will be emptied for this neighbourhood
                 // Listi yfir allar dagsetningar þegar grátunnur og brúntúnnur eru tæmdar fyrir þetta hverfi
