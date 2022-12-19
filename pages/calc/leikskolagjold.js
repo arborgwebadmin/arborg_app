@@ -19,13 +19,13 @@ class Leikskolagjold extends React.Component{
 		};
 		this.handleChange = this.handleChange.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
-		this.per_hour_cost = 3794;
-		this.per_quarter_cost = 1727;
-		this.primary_hour_cost = 2656;
-		this.primary_quarter_cost = 1209;
-		this.launch_cost = 6218;
-		this.breakfast_cost = 2195;
-		this.refreshment_cost = 2195;
+		this.per_hour_cost = 4135;
+		this.per_quarter_cost = 1882;
+		this.primary_hour_cost = 2895;
+		this.primary_quarter_cost = 1318;
+		this.launch_cost = 6778;
+		this.breakfast_cost = 2393;
+		this.refreshment_cost = 2393;
 	}
 
 	handleChange(event) {
@@ -44,7 +44,6 @@ class Leikskolagjold extends React.Component{
 		var foodCost = this.breakfast_cost + this.refreshment_cost + this.launch_cost;
 		var pph = this.state.field.primary === true ? this.primary_hour_cost : this.per_hour_cost;
 		var ppq = this.state.field.primary === true ? this.primary_quarter_cost : this.per_quarter_cost;
-		console.log(this.state.field.primary);
 		var hours = this.state.field.hours;
 		var kids = this.state.field.kids;
 		if(hours <= 8) {
@@ -95,7 +94,7 @@ class Leikskolagjold extends React.Component{
 								<div className={this.state.total==0? styles.hidden +" card mt-3" : styles.visible + " card mt-3"}>
 								<div className="card-body">
 										<h5 className="card-title">Heildarkostnaður: { currencyFormat(this.state.total) }</h5>
-										<h6 className="card-subtitle mb-2 text-muted">Að vera með {this.state.field.kids} {this.state.field.kids == 1? 'barn' : 'börn' } í { this.state.field.hours } klukkutíma á dag kostar {currencyFormat(this.state.total)} kr á mánuði.</h6>
+										<h6 className="card-subtitle mb-2 text-muted">Að vera með {this.state.field.kids} {this.state.field.kids == 1? 'barn' : 'börn' } í { this.state.field.hours } klukkutíma á dag kostar {currencyFormat(this.state.total)} á mánuði.</h6>
 										<p className="card-text">
 											<b>Sundurliðun:</b><br></br>
 											Miðað við þínar forsendur má reikna með að leikskólagjöldin séu eftirfarandi: <br></br>
@@ -104,7 +103,7 @@ class Leikskolagjold extends React.Component{
 											<strong>Samtals: { currencyFormat(this.state.total) }</strong>
 										</p>
 										<h6 className="card-subtitle mb-2 text-muted">Fyrirvari: </h6>
-										<p className="card-text">Eingöngu er um áætlun að ræða miðað við þær forsendur sem slegnar eru inn.</p>
+										<p className="card-text">Eingöngu er um áætlun að ræða miðað við þær forsendur sem slegnar eru inn og gjaldskrá fyrir leikskóla Árborgar frá 1. janúar 2023.</p>
 								</div>
 								</div>
 						</div>
