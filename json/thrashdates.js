@@ -84,7 +84,7 @@ var temp_JSON = {
     hverfi_4: {
         //Blokkir
         streets: [
-            "Blokkir"],
+            "Blokkir", "Fjölbýli"],
             gray_dates: [
                 // List over dates for when the gray and brown trash bin will be emptied for this neighbourhood
                 new Date(2022,6,29), new Date(2022,7,1), new Date(2022,7,2),
