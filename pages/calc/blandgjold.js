@@ -24,7 +24,6 @@ class Blandgjold extends React.Component {
 		const [index, ftype, field] = e.target.id.split('-')
 		let fields = this.state.field.vistun;
 		if(field) {
-			console.log(e);
 			fields[index][ftype][field] = e.target.checked !== undefined? e.target.checked : e.target.value;
 		} else if(ftype) {
 			fields[index][ftype] = e.target.value;
@@ -39,7 +38,6 @@ class Blandgjold extends React.Component {
 				vistun: fields,
 			}
 		});
-		console.log(this.state.field)
 	}
 
 	addKid = (e) => {

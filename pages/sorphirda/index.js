@@ -71,25 +71,37 @@ export default function Sorphirda() {
     useEffect(() => {
         if(trashDates.length !== 0){
             let tempTrash = trashDates;
-            let tempGray = [trashDates[0][0]];
-            let tempBlue = [trashDates[1][0]];
-            let countg = 1
-            let countb = 1
-            tempTrash[0].map( dates => {  
-                if(dates.getTime()- (1000*60*60*24) === tempGray[tempGray.length-1].getTime() || dates.getTime()- (1000*60*60*24*3) === tempGray[tempGray.length-1].getTime() ){
-                    countg++
-                    tempGray.push(dates)
-                }})                 
-            tempTrash[1].map( dates => {  
-                if(dates.getTime()- (1000*60*60*24) === tempBlue[tempBlue.length-1].getTime() || dates.getTime()- (1000*60*60*24*3) === tempBlue[tempBlue.length-1].getTime() ){
-                    countb++
-                    tempBlue.push(dates)                                
-                }})   
-                    setCounterBlue(countb)
-                    setCounterGrey(countg)                 
-                    setNextGrey(tempGray)
-                    setNextBlue(tempBlue)
-                    setIsValid(true)
+            let tempGray = [];
+            let tempBlue = [];
+            let countg = 0;
+            let countb = 0;
+            if(tempTrash[0].length) {
+                // start by adding first date
+                tempGray = [trashDates[0][0]];
+                countg = 1
+                tempTrash[0].map( dates => {
+                    if(dates.getTime()- (1000*60*60*24) === tempGray[tempGray.length-1].getTime() || dates.getTime()- (1000*60*60*24*3) === tempGray[tempGray.length-1].getTime() ){
+                        countg++
+                        tempGray.push(dates)
+                    }
+                })
+
+            }
+            if(tempTrash[1].length){
+                tempBlue = [trashDates[1][0]];
+                countb = 1
+                tempTrash[1].map( dates => {  
+                    if(dates.getTime()- (1000*60*60*24) === tempBlue[tempBlue.length-1].getTime() || dates.getTime()- (1000*60*60*24*3) === tempBlue[tempBlue.length-1].getTime() ){
+                        countb++
+                        tempBlue.push(dates)
+                    }
+                })
+            }
+            setCounterBlue(countb)
+            setCounterGrey(countg)
+            setNextGrey(tempGray)
+            setNextBlue(tempBlue)
+            setIsValid(true)
         }
     }, [trashDates])
 
@@ -148,19 +160,30 @@ export default function Sorphirda() {
                                                 <img className={sorphirdaStyle.img} src="/grey-bin.png" alt="Grátunna"/>
                                                 <img className={sorphirdaStyle.img} src="/brown-bin.png" alt="Brúntunna"/>
                                             </div>
+
                                             <br/><p className={sorphirdaStyle.nextTrashEmpty}>Næsta grá- og brúntunnu losun:<br/></p>
-                                            <h2 className={sorphirdaStyle.h2Trash}>
-                                                <TrashNextEmpty nextTrashDates={nextGrey} />
-                                            </h2>
+                                            {
+                                                nextGrey.length ?
+                                                <h2 className={sorphirdaStyle.h2Trash}>
+                                                    <TrashNextEmpty nextTrashDates={nextGrey} />
+                                                </h2>
+                                                : 
+                                                <h2>Engin skráð losun</h2>
+
+                                            }
                                         </div>
                                         <div className="card text-center" style={{ width: '50%', border: 'none', margin: "5px", marginTop: "15px", backgroundColor: '#f8f9fb'}}>
                                             <div> 
                                                 <img className={sorphirdaStyle.img} src="/blue-bin.png" alt="Blátunna" />
                                             </div>
                                             <br/><p className={sorphirdaStyle.nextTrashEmpty}>Næsta blátunnu losun:<br/></p>
-                                            <h2 className={sorphirdaStyle.h2Trash}>
-                                                <TrashNextEmpty nextTrashDates={nextBlue} />
-                                            </h2>
+                                            { nextBlue.length ?
+                                                <h2 className={sorphirdaStyle.h2Trash}>
+                                                    <TrashNextEmpty nextTrashDates={nextBlue} />
+                                                </h2>
+                                                :
+                                                <h2>Engin skráð losun</h2>
+                                            }
                                         </div>
                                     </div>
                                 </div>
