@@ -25,7 +25,7 @@ var temp_JSON = {
             "Sléttuvegur", "Mánavegur", "Þóristún", "Smáratún", "Ársalir", "Heiðarvegur", "Kirkjuvegur", "Sunnuvegur", "Hafnartún", "Tryggvatorg", "Sigtún", "Bankavegur", 
             "Skólavellir", "Sólvellir", "Álfheimar", "Reynivellir", "Vallholt", "Víðivellir", "Birkivellir", "Rauðholt", "Hjarðarholt", "Stekkholt", "Réttarholt", 
             "Hrísholt", "Merkiland", "Grænumörk", "Þórsmörk", "Heiðmörk", "Laugarbakki", "Fagurgerði", "Grænuvellir", "Hörðuvellir", "Hraunbakki", "Austurvegur", 
-            "Strandgata", "Suðurbraut", "Brúaarstræti", "Engjavegur", "Tryggvagata", "Árvegur", "Austurhólar", "Hraunhólar", "Grænumörk", "Hlaðvellir"],
+            "Strandgata", "Suðurbraut", "Brúaarstræti", "Engjavegur", "Tryggvagata", "Árvegur", "Austurhólar", "Hraunhólar", "Grænumörk", "Hlaðvellir", "Melhólar"],
         gray_dates: [
             // List over dates for when the gray and brown trash bin will be emptied for this neighbourhood
             // Listi yfir allar dagsetningar þegar grátunnur og brúntúnnur eru tæmdar fyrir þetta hverfi
