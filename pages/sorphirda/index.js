@@ -119,7 +119,7 @@ export default function Sorphirda() {
                                 <Col>
                                     <div className='d-flex flex-row-reverse' style={{paddingBottom: '10px'}} >
                                         <input type="submit" onClick={() => setAddress(['Dreifbýli'])} name="blocks" value="Dreifbýli" className="btn btn-primary"></input>
-                                        <input type="submit" onClick={() => setAddress(['Blokkir'])}   name="blocks" value="Fjölbýli" className="btn btn-primary" style={{marginRight: '5px'}}></input>
+                                        <input type="submit" onClick={() => setAddress(['Fjölbýli'])}   name="blocks" value="Fjölbýli" className="btn btn-primary" style={{marginRight: '5px'}}></input>
                                     </div>
                                 </Col>
                             </Row>
