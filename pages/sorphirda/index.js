@@ -3,12 +3,15 @@ import PageHead from '../../components/page-head';
 import styles from '../../styles/Home.module.css';
 import sorphirdaStyle from '../../styles/Sorphirda.module.css';
 import { Typeahead } from 'react-bootstrap-typeahead';
-import Data from '../../json/hverfi.json';
+// import Data from '../../json/hverfi.json';
 // import GetTrashDates from '../../components/trash-dates';
 import TrashNextEmpty from '../../components/trash-next-empty';
 import { Row, Col } from 'react-bootstrap';
 import TrashList from '../../components/trash-list';
 import temp_JSON from "../../json/thrashdates";
+
+// for the suggested streets to fill in the search field.
+var streets = temp_JSON.hverfi_1.streets.concat(temp_JSON.hverfi_2.streets, temp_JSON.hverfi_3.streets, temp_JSON.hverfi_4.streets);
 
 export default function Sorphirda() {
     const [getAddress, setAddress] = useState([]);
@@ -128,7 +131,7 @@ export default function Sorphirda() {
                                 <Typeahead
                                     id="basic-typeahead-single"
                                     onChange={setAddress}
-                                    options={Data.Hverfi.sort()}
+                                    options={streets.sort()}
                                     selected={getAddress}
                                     minLength={2}
                                     />

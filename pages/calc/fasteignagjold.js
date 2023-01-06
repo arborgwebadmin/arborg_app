@@ -19,11 +19,11 @@ const calcMap = {
 	FASTSK_C: 0.0160,
 	LODALEIGA_A: 0.01,
 	LODALEIGA_B: 0.03,
-	VATNSGJALD: 0.001720,
+	VATNSGJALD: 0.001500,
 	VIDBOTARGJ: 17.8,
-	FRAVEITUGJ: 0.002510,
-	SORPGJ_A: 52000,
-	SORPGJ_B: 65000,
+	FRAVEITUGJ: 0.001,
+	SORPGJ_A: 56700,
+	SORPGJ_B: 70990,
 	SORPAFSLATTUR: 0.5,
 };
 
@@ -71,7 +71,7 @@ class Fasteignagjold extends React.Component {
 		let tFráveitugjald = Math.round(houseInt * calcMap.FRAVEITUGJ);
 		let tSorp = this.state.field.sorptunna === '120'? calcMap.SORPGJ_A : calcMap.SORPGJ_B;
 		let total = tFastsk + tLodaleiga + tVatnsgjald + tFráveitugjald + tSorp;
-		let month = Math.ceil(total/10);
+		let month = Math.ceil(total/11);
 		this.setState({
 			total: total,
 			tSorp: tSorp,
@@ -92,8 +92,8 @@ class Fasteignagjold extends React.Component {
 				<PageHead title="Reiknivél fasteignagjalda"></PageHead>
 						<div className={ styles.main }>
 							<div className="container">
-								<h1>Reiknivél fasteignagjalda</h1>
-								<a href="https://skra.is/leit-i-fasteignaskra/" target="_blank" rel="nofollow" className={ styles.secondaryLink }>Smelltu hér til að fletta upp fasteignamati eignar</a>
+								<h1>Reiknivél fasteignagjalda 2023</h1>
+								<a href="https://fasteignaskra.is/leit-i-fasteignaskra/" target="_blank" rel="nofollow" className={ styles.secondaryLink }>Smelltu hér til að fletta upp fasteignamati eignar</a>
 							</div>
 							<div className="container">
 								<form onSubmit={ this.handleSubmit }>
@@ -123,7 +123,7 @@ class Fasteignagjold extends React.Component {
 									<div className={this.state.total==0? styles.hidden +" card mt-3" : styles.visible + " card mt-3"}>
 										<div className="card-body">
 											<h5 className="card-title">Heildarkostnaður: {currencyFormat(this.state.total)}</h5>
-											<h6 className="card-subtitile mb-2 text-muted">Mánaðarleg greiðsla frá febrúar-nóvember: {currencyFormat(this.state.month)}</h6>
+											<h6 className="card-subtitile mb-2 text-muted">Mánaðarleg greiðsla frá febrúar-desember: {currencyFormat(this.state.month)}</h6>
 											<p className="card-text">
 												<b>Sundurliðun: </b><br></br>
 												Miðað við þínar forsendur má reikna með að fasteignagjöldin séu eftirfarandi: <br></br>
