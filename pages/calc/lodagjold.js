@@ -26,7 +26,7 @@ const calcMap = {
     VERSLUN: 0.10,
     IDNADUR: 0.10,
     HESTHUS: 0.10,
-    VISITOLU_TXT : '1. mars 2023'
+    VISITOLU_TXT : '1. april 2023'
 }
 
 class Lodagjold extends React.Component {
