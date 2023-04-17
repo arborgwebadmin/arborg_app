@@ -18,7 +18,7 @@ const idsMap = {
 }
 
 const calcMap = {
-    PER_SQ_METER: 244079,
+    PER_SQ_METER: 285566,
     EINBYLI: 0.15,
     PAR: 0.13,
     RAD: 0.13,
@@ -26,7 +26,7 @@ const calcMap = {
     VERSLUN: 0.10,
     IDNADUR: 0.10,
     HESTHUS: 0.10,
-    VISITOLU_TXT : '1. sept 2021'
+    VISITOLU_TXT : '1. mars 2023'
 }
 
 class Lodagjold extends React.Component {
