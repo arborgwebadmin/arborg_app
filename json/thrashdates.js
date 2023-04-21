@@ -30,7 +30,7 @@ var temp_JSON = {
         gray_dates: [
             // List over dates for when the gray and brown trash bin will be emptied for this neighbourhood
             // Listi yfir allar dagsetningar þegar grátunnur og brúntúnnur eru tæmdar fyrir þetta hverfi
-            new Date(2023,3,26),new Date(2023,3,27),new Date(2023,3,28), new Date(2023,4,24),
+            new Date(2023,2,28),new Date(2023,2,29),new Date(2023,3,26),new Date(2023,3,27),new Date(2023,3,28), new Date(2023,4,24),
             new Date(2023,4,25),new Date(2023,4,26),new Date(2023,5,21),new Date(2023,5,22),new Date(2023,5,23),new Date(2023,6,19),new Date(2023,6,20),
             new Date(2023,6,12),new Date(2023,7,16),new Date(2023,7,17),new Date(2023,7,18),new Date(2023,8,13),new Date(2023,8,14),new Date(2023,8,15),
             new Date(2023,9,11),new Date(2023,9,12),new Date(2023,9,13),new Date(2023,10,8),new Date(2023,10,9),new Date(2023,10,10),new Date(2023,11,6),
@@ -40,7 +40,7 @@ var temp_JSON = {
         blue_dates: [
             // List over dates for when the blue trash bin will be emptied for this neighbourhood
             // Listi yfir allar dagsetningar þegar blátunnur eru tæmdar fyrir þetta hverfi
-            new Date(2023,3,13),new Date(2023,3,14),new Date(2023,3,17),new Date(2023,4,11),new Date(2023,4,12),new Date(2023,4,15),
+            new Date(2023,2,15),new Date(2023,2,16),new Date(2023,3,13),new Date(2023,3,14),new Date(2023,3,17),new Date(2023,4,11),new Date(2023,4,12),new Date(2023,4,15),
             new Date(2023,5,7),new Date(2023,5,8),new Date(2023,5,9),new Date(2023,6,5),new Date(2023,6,6),new Date(2023,6,7),new Date(2023,7,2),
             new Date(2023,7,3),new Date(2023,7,4),new Date(2023,7,30),new Date(2023,7,31),new Date(2023,8,1),new Date(2023,8,27),new Date(2023,8,28),
             new Date(2023,8,29),new Date(2023,9,25),new Date(2023,9,26),new Date(2023,9,27),new Date(2023,10,22),new Date(2023,10,23),new Date(2023,10,24),
@@ -65,7 +65,7 @@ var temp_JSON = {
             // Listi yfir allar dagsetningar þegar grátunnur og brúntúnnur eru tæmdar fyrir þetta hverfi
 
 
-            new Date(2023,3,21),new Date(2023,3,25),
+            new Date(2023,2,22),new Date(2023,2,23),new Date(2023,2,24),new Date(2023,3,21),new Date(2023,3,25),
             new Date(2023,4,17),new Date(2023,4,18),new Date(2023,4,19),new Date(2023,5,14),new Date(2023,5,15),new Date(2023,5,16),
             new Date(2023,6,12),new Date(2023,6,13),new Date(2023,6,14),new Date(2023,7,9),new Date(2023,7,10),new Date(2023,7,11),
             new Date(2023,8,6),new Date(2023,8,7),new Date(2023,8,8),new Date(2023,9,4),new Date(2023,9,5),new Date(2023,9,6),
@@ -75,7 +75,7 @@ var temp_JSON = {
         blue_dates: [
             // List over dates for when the blue trash bin will be emptied for this neighbourhood
             // Listi yfir allar dagsetningar þegar blátunnur eru tæmdar fyrir þetta hverfi
-            new Date(2023,3,4),new Date(2023,3,5),new Date(2023,3,6),new Date(2023,4,4),new Date(2023,4,5),new Date(2023,4,8),
+            new Date(2023,2,13),new Date(2023,2,14),new Date(2023,3,4),new Date(2023,3,5),new Date(2023,3,6),new Date(2023,4,4),new Date(2023,4,5),new Date(2023,4,8),
             new Date(2023,4,31),new Date(2023,5,1),new Date(2023,5,2),new Date(2023,5,28),new Date(2023,5,29),new Date(2023,5,30),new Date(2023,6,26),
             new Date(2023,6,27),new Date(2023,6,28),new Date(2023,7,23),new Date(2023,7,24),new Date(2023,7,25),new Date(2023,8,20),new Date(2023,8,21),
             new Date(2023,8,22),new Date(2023,9,18),new Date(2023,9,19),new Date(2023,9,20),new Date(2023,10,15),new Date(2023,10,16),new Date(2023,10,17),
@@ -89,14 +89,14 @@ var temp_JSON = {
             gray_dates: [
                 // List over dates for when the gray and brown trash bin will be emptied for this neighbourhood
                 // Listi yfir allar dagsetningar þegar grátunnur og brúntúnnur eru tæmdar fyrir þetta hverfi
-                new Date(2023,3,24),new Date(2023,4,22),
+                new Date(2023,2,27),new Date(2023,3,24),new Date(2023,4,22),
                 new Date(2023,5,19),new Date(2023,6,17),new Date(2023,7,14),new Date(2023,8,12),new Date(2023,9,9),new Date(2023,10,6),
                 new Date(2023,11,4)
             ],
             blue_dates: [
                 // List over dates for when the blue trash bin will be emptied for this neighbourhood
                 // Listi yfir allar dagsetningar þegar blátunnur eru tæmdar fyrir þetta hverfi
-                new Date(2023,3,12),new Date(2023,4,29),new Date(2023,5,5),
+                new Date(2023,2,17),new Date(2023,3,12),new Date(2023,4,29),new Date(2023,5,5),
                 new Date(2023,6,3),new Date(2023,7,1),new Date(2023,7,28),new Date(2023,8,25),new Date(2023,9,23),new Date(2023,10,20),new Date(2023,11,18),
             ],
     },
