@@ -5,10 +5,10 @@ import sorphirdaStyle from '../../styles/Sorphirda.module.css';
 import { Typeahead } from 'react-bootstrap-typeahead';
 // import Data from '../../json/hverfi.json';
 // import GetTrashDates from '../../components/trash-dates';
-import TrashNextEmpty from '../../components/trash-next-empty';
 import { Row, Col } from 'react-bootstrap';
 import TrashList from '../../components/trash-list';
 import temp_JSON from "../../json/thrashdates";
+import { formatDateRange } from '../../helpers/formatDateRange';
 
 // for the suggested streets to fill in the search field.
 var streets = temp_JSON.hverfi_1.streets.concat(temp_JSON.hverfi_2.streets, temp_JSON.hverfi_3.streets, temp_JSON.hverfi_4.streets);
@@ -22,15 +22,21 @@ export default function Sorphirda() {
     const [nextGrey, setNextGrey] = useState([])
     const [counterBlue, setCounterBlue] = useState(0)
     const [counterGrey, setCounterGrey] = useState(0)
+    const [prevBlue, setPrevBlue] = useState([])
+    const [prevGray, setPrevGray] = useState([])
 
     const getTrashDates = (addr) =>{
         var address = addr
-        var current_date
+        var current_date, prev_date
         var trashDates = []
         var grey_dates = []
         var blue_dates = []
+        var prev_gray_dates=[]
+        var prev_blue_dates = []
         current_date = new Date()
         current_date.setDate(current_date.getDate() -1)
+        prev_date=new Date()
+        prev_date.setDate(prev_date.getDate() - 28)
         // Loop through the neighbourhoods
         for(const neighbourhood in temp_JSON){
             // Loop through streets
@@ -44,6 +50,9 @@ export default function Sorphirda() {
                             //Gray and Brown Dates 
                             grey_dates.push(temp_JSON[neighbourhood].gray_dates[date])
                         }
+                        else if( temp_JSON[neighbourhood].gray_dates[date] > prev_date) {
+                            prev_gray_dates.push(temp_JSON[neighbourhood].gray_dates[date])
+                        }
                     }
                     // Loop through all dates for the address
                     for(const date in temp_JSON[neighbourhood].blue_dates){
@@ -51,9 +60,13 @@ export default function Sorphirda() {
                         if(temp_JSON[neighbourhood].blue_dates[date] > current_date){                  
                             blue_dates.push(temp_JSON[neighbourhood].blue_dates[date])			
                         }
+                        else if( temp_JSON[neighbourhood].blue_dates[date] > prev_date)
+                        {
+                            prev_blue_dates.push(temp_JSON[neighbourhood].blue_dates[date])
+                        }
                     }
                     if(grey_dates && blue_dates){
-                        trashDates.push(grey_dates, blue_dates)     
+                        trashDates.push(grey_dates, blue_dates, prev_gray_dates, prev_blue_dates)     
                         return trashDates
                     }
                     else return []
@@ -76,8 +89,10 @@ export default function Sorphirda() {
             let tempTrash = trashDates;
             let tempGray = [];
             let tempBlue = [];
+            let tempPrevGray, tempPrevBlue = []
             let countg = 0;
             let countb = 0;
+            console.log(trashDates)
             if(tempTrash[0].length) {
                 // start by adding first date
                 tempGray = [trashDates[0][0]];
@@ -100,10 +115,29 @@ export default function Sorphirda() {
                     }
                 })
             }
+            if(tempTrash[2].length){
+                tempPrevGray = [trashDates[2][0]];
+                tempTrash[2].map( dates => {  
+                    if(dates.getTime()- (1000*60*60*24) === tempPrevGray[tempPrevGray.length-1].getTime() || dates.getTime()- (1000*60*60*24*3) === tempPrevGray[tempPrevGray.length-1].getTime() ){
+                        tempPrevGray.push(dates)
+                        console.log("pushing date");
+                    }
+                })
+            }
+            if(tempTrash[3].length){
+                tempPrevBlue = [trashDates[3][0]];
+                tempTrash[3].map( dates => {  
+                    if(dates.getTime()- (1000*60*60*24) === tempPrevBlue[tempPrevBlue.length-1].getTime() || dates.getTime()- (1000*60*60*24*3) === tempPrevBlue[tempPrevBlue.length-1].getTime() ){
+                        tempPrevBlue.push(dates)
+                    }
+                })
+            }
             setCounterBlue(countb)
             setCounterGrey(countg)
             setNextGrey(tempGray)
             setNextBlue(tempBlue)
+            setPrevBlue(tempPrevBlue)
+            setPrevGray(tempPrevGray)
             setIsValid(true)
         }
     }, [trashDates])
@@ -165,28 +199,42 @@ export default function Sorphirda() {
                                             </div>
 
                                             <br/><p className={sorphirdaStyle.nextTrashEmpty}>Næsta grá- og brúntunnu losun:<br/></p>
+                                            <div>
                                             {
                                                 nextGrey.length ?
+
                                                 <h2 className={sorphirdaStyle.h2Trash}>
-                                                    <TrashNextEmpty nextTrashDates={nextGrey} />
+                                                    {formatDateRange(nextGrey)}
                                                 </h2>
+                                                
                                                 : 
                                                 <h2>Engin skráð losun</h2>
-
+                                                
                                             }
+                                            <small>
+
+                                            Seinasta losun var: {formatDateRange(prevGray)}
+                                            </small>
+                                                </div>
                                         </div>
                                         <div className="card text-center" style={{ width: '50%', border: 'none', margin: "5px", marginTop: "15px", backgroundColor: '#f8f9fb'}}>
                                             <div> 
+                                                <img className={sorphirdaStyle.img} src="purple-bin.png" alt="Fjólublátunna" />
                                                 <img className={sorphirdaStyle.img} src="/blue-bin.png" alt="Blátunna" />
                                             </div>
-                                            <br/><p className={sorphirdaStyle.nextTrashEmpty}>Næsta blátunnu losun:<br/></p>
+                                            <br/><p className={sorphirdaStyle.nextTrashEmpty}>Næsta fjólublá- og blátunnu losun:<br/></p>
+                                            <div>
                                             { nextBlue.length ?
                                                 <h2 className={sorphirdaStyle.h2Trash}>
-                                                    <TrashNextEmpty nextTrashDates={nextBlue} />
+                                                    {formatDateRange(nextBlue)}
                                                 </h2>
                                                 :
                                                 <h2>Engin skráð losun</h2>
                                             }
+                                            <small>
+                                                Seinasta losun var: {formatDateRange(prevBlue)}
+                                                </small>
+                                                </div>
                                         </div>
                                     </div>
                                 </div>
@@ -195,7 +243,7 @@ export default function Sorphirda() {
                                         <div className={sorphirdaStyle.trashList}><h6 className={sorphirdaStyle.h6Style}>Grá- og Brúntunnur</h6>
                                             <TrashList trashDates={trashDates[0]} counter={counterGrey} />      
                                         </div>
-                                        <div className={sorphirdaStyle.trashList}><h6 className={sorphirdaStyle.h6Style}>Blátunnur</h6>
+                                        <div className={sorphirdaStyle.trashList}><h6 className={sorphirdaStyle.h6Style}>Fjólublá- og Blátunnur</h6>
                                             <TrashList trashDates={trashDates[1]} counter={counterBlue} />
                                         </div>
                                     </div>

@@ -12,6 +12,7 @@
     }
     .img{
         height: 150px;
+        padding: 0 5px;
     }
     .h2Trash {
         font-size: 2rem;
