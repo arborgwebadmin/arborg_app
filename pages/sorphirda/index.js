@@ -36,7 +36,7 @@ export default function Sorphirda() {
         current_date = new Date()
         current_date.setDate(current_date.getDate() -1)
         prev_date=new Date()
-        prev_date.setDate(prev_date.getDate() - 28)
+        prev_date.setDate(prev_date.getDate() - 50)
         // Loop through the neighbourhoods
         for(const neighbourhood in temp_JSON){
             // Loop through streets
