@@ -103,7 +103,7 @@ class Leikskolagjold extends React.Component{
 											<strong>Samtals: { currencyFormat(this.state.total) }</strong>
 										</p>
 										<h6 className="card-subtitle mb-2 text-muted">Fyrirvari: </h6>
-										<p className="card-text">Eingöngu er um áætlun að ræða miðað við þær forsendur sem slegnar eru inn og gjaldskrá fyrir leikskóla Árborgar frá 1. janúar 2023.</p>
+										<p className="card-text">Eingöngu er um áætlun að ræða miðað við þær forsendur sem slegnar eru inn og gjaldskrá fyrir leikskóla Árborgar frá 1. janúar 2024.</p>
 								</div>
 								</div>
 						</div>
