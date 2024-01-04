@@ -14,11 +14,11 @@ const idsMap = {
 };
 
 const priceMap = {
-	'5 dagar': [18152, 5241],
-	'4 dagar': [14802, 4197],
-	'3 dagar': [11425, 3140],
-	'2 dagar': [8061, 2112],
-	'1 dagur': [4684, 1070],
+	'5 dagar': [19550, 5645],
+	'4 dagar': [15942, 4520],
+	'3 dagar': [12305, 3382],
+	'2 dagar': [8682, 2275],
+	'1 dagur': [5045, 1152],
 }
 
 class Fristund extends React.Component {
@@ -85,7 +85,7 @@ class Fristund extends React.Component {
 									<b>Samtals: {currencyFormat(this.state.total)}</b>
 								</p>
 								<h6 className="card-subtitle mb-2 text-muted">Fyrirvari: </h6>
-								<p className="card-text">Eingöngu er um áætlun að ræða miðað við þær forsendur sem slegnar eru inn og gjaldskrá frá 1. janúar 2023.</p>
+								<p className="card-text">Eingöngu er um áætlun að ræða miðað við þær forsendur sem slegnar eru inn og gjaldskrá frá 1. janúar 2024.</p>
 							</div>
 						</div>
 					</div>
