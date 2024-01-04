@@ -19,13 +19,13 @@ class Leikskolagjold extends React.Component{
 		};
 		this.handleChange = this.handleChange.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
-		this.per_hour_cost = 4135;
-		this.per_quarter_cost = 1882;
-		this.primary_hour_cost = 2895;
-		this.primary_quarter_cost = 1318;
-		this.launch_cost = 6778;
-		this.breakfast_cost = 2393;
-		this.refreshment_cost = 2393;
+		this.per_hour_cost = 4453;
+		this.per_quarter_cost = 2300;
+		this.primary_hour_cost = 3117;
+		this.primary_quarter_cost = 1610;
+		this.launch_cost = 7578;
+		this.breakfast_cost = 2675;
+		this.refreshment_cost = 2675;
 	}
 
 	handleChange(event) {
