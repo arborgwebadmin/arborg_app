@@ -3,10 +3,7 @@ import PageHead from '../../components/page-head';
 import styles from '../../styles/Home.module.css';
 import sorphirdaStyle from '../../styles/Sorphirda.module.css';
 import { Typeahead } from 'react-bootstrap-typeahead';
-// import Data from '../../json/hverfi.json';
-// import GetTrashDates from '../../components/trash-dates';
 import { Row, Col } from 'react-bootstrap';
-import TrashList from '../../components/trash-list';
 import temp_JSON from "../../json/thrashdates";
 import { formatDateRange } from '../../helpers/formatDateRange';
 
@@ -20,8 +17,6 @@ export default function Sorphirda() {
     const [isValid, setIsValid] = useState(false)
     const [nextBlue, setNextBlue] = useState([])
     const [nextGrey, setNextGrey] = useState([])
-    const [counterBlue, setCounterBlue] = useState(0)
-    const [counterGrey, setCounterGrey] = useState(0)
     const [prevBlue, setPrevBlue] = useState([])
     const [prevGray, setPrevGray] = useState([])
 
@@ -75,10 +70,32 @@ export default function Sorphirda() {
         }
     }
 
+    const groupDates = (oldDates) => {
+        let groupedDates = [];
+        let currentGroup = [];
+        let lastDate;
+        oldDates.forEach((d, i) => {
+            if(i == 0) {
+                currentGroup.push(d);
+            }
+            else if(d.getTime() - (1000*86400*5) <= lastDate.getTime()) {
+                currentGroup.push(d)
+            } else {
+                groupedDates.push(currentGroup)
+                currentGroup = []
+                currentGroup.push(d)
+            }
+            lastDate = d;
+        })
+        groupedDates.push(currentGroup)
+        return groupedDates
+    }
+
     const handleSubmit = event => {
         event.preventDefault()
-        if(getAddress.length !== 0){            
-            setTrashDates(getTrashDates(getAddress.toString()))
+        if(getAddress.length !== 0){
+
+            setTrashDates(getTrashDates(getAddress.toString()).map(g => groupDates(g)))
             setHome(getAddress)
             setIsValid(false)
             
@@ -87,58 +104,10 @@ export default function Sorphirda() {
     useEffect(() => {
         if(trashDates.length !== 0){
             let tempTrash = trashDates;
-            let tempGray = [];
-            let tempBlue = [];
-            let tempPrevGray, tempPrevBlue = []
-            let countg = 0;
-            let countb = 0;
-            if(tempTrash[0].length) {
-                // start by adding first date
-                tempGray = [trashDates[0][0]];
-                countg = 1
-                tempTrash[0].map( dates => {
-                if(dates.getTime()- (1000*60*60*24*5) >= tempGray[tempGray.length-1].getTime() ){
-                    countg++
-                    tempGray.push(dates)
-                }
-            })
-        
-        }
-        if(tempTrash[1].length){
-            tempBlue = [trashDates[1][0]];
-            countb = 1
-            tempTrash[1].map( dates => {  
-                if(dates.getTime()- (1000*60*60*24*5) >= tempBlue[tempBlue.length-1].getTime()){
-                    countb++
-                    tempBlue.push(dates)
-                }
-            })
-        }
-        if(tempTrash[2].length){
-            tempPrevGray = [tempTrash[2].pop()];
-            tempTrash[2].map( dates => {
-         
-                if(dates.getTime() + (1000*60*60*24*5) >= tempPrevGray[tempPrevGray.length-1].getTime() ){
-                    tempPrevGray.push(dates)
-                }
-            })
-            tempPrevGray.sort((a,b) => a-b)
-        }
-            if(tempTrash[3].length){
-                tempPrevBlue = [tempTrash[3].pop()];
-                tempTrash[3].map( dates => {  
-                    if(dates.getTime() + (1000*60*60*24*5) >= tempPrevBlue[tempPrevBlue.length-1].getTime() ){
-                        tempPrevBlue.push(dates)
-                    }
-                })
-                tempPrevBlue.sort((a,b) => a-b)
-            }
-            setCounterBlue(countb)
-            setCounterGrey(countg)
-            setNextGrey(tempGray)
-            setNextBlue(tempBlue)
-            setPrevBlue(tempPrevBlue)
-            setPrevGray(tempPrevGray)
+            setNextGrey(tempTrash[0][0])
+            setNextBlue(tempTrash[1][0])
+            setPrevBlue(tempTrash[3][tempTrash[3].length-1])
+            setPrevGray(tempTrash[2][tempTrash[2].length-1])
             setIsValid(true)
         }
     }, [trashDates])
@@ -242,10 +211,18 @@ export default function Sorphirda() {
                                 <div className="d-flex justify-content-space-between justify-content-center ">
                                     <div className='d-flex justify-content-center'>
                                         <div className={sorphirdaStyle.trashList}><h6 className={sorphirdaStyle.h6Style}>Grá- og Brúntunnur</h6>
-                                            <TrashList trashDates={trashDates[0]} counter={counterGrey} />      
+                                            <ul>
+                                                {
+                                                    trashDates[0].map((d, i) => <li key={i}>{formatDateRange(d)}</li>)
+                                                }
+                                            </ul>
                                         </div>
                                         <div className={sorphirdaStyle.trashList}><h6 className={sorphirdaStyle.h6Style}>Fjólublá- og Blátunnur</h6>
-                                            <TrashList trashDates={trashDates[1]} counter={counterBlue} />
+                                            <ul>
+                                                {
+                                                    trashDates[1].map((d, i) => <li key={i}>{formatDateRange(d)}</li>)
+                                                }
+                                            </ul>
                                         </div>
                                     </div>
                                 </div>
