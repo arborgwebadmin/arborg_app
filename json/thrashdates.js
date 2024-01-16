@@ -72,7 +72,7 @@ var temp_JSON = {
             // Listi yfir allar dagsetningar þegar blátunnur eru tæmdar fyrir þetta hverfi
             new Date(2023,11,22),new Date(2024,0,17),new Date(2024,0,18),new Date(2024,0,19),new Date(2024,1,14),new Date(2024,1,15),new Date(2024,1,16),new Date(2024,2,13),
             new Date(2024,2,14),new Date(2024,2,15),new Date(2024,3,12),new Date(2024,3,15),new Date(2024,3,16),new Date(2024,4,8),new Date(2024,4,10),
-            new Date(2024,5,5),new Date(2024,5,6),new Date(2024,5,7),new Date(2024,6,3),new Date(2024,6,4),new Date(2024,6,4),new Date(2024,6,31),
+            new Date(2024,5,5),new Date(2024,5,6),new Date(2024,5,7),new Date(2024,6,3),new Date(2024,6,4),new Date(2024,6,5),new Date(2024,6,31),
             new Date(2024,7,1),new Date(2024,7,2),new Date(2024,7,28),new Date(2024,7,29),new Date(2024,7,30),new Date(2024,8,25),new Date(2024,8,26),
             new Date(2024,8,27),new Date(2024,9,23),new Date(2024,9,24),new Date(2024,9,25),new Date(2024,10,20),new Date(2024,10,21),new Date(2024,10,22),
             new Date(2024,11,18),new Date(2024,11,19),new Date(2024,11,20)
