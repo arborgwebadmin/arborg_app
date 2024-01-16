@@ -92,45 +92,46 @@ export default function Sorphirda() {
             let tempPrevGray, tempPrevBlue = []
             let countg = 0;
             let countb = 0;
-            console.log(trashDates)
             if(tempTrash[0].length) {
                 // start by adding first date
                 tempGray = [trashDates[0][0]];
                 countg = 1
                 tempTrash[0].map( dates => {
-                    if(dates.getTime()- (1000*60*60*24) === tempGray[tempGray.length-1].getTime() || dates.getTime()- (1000*60*60*24*3) === tempGray[tempGray.length-1].getTime() ){
-                        countg++
-                        tempGray.push(dates)
-                    }
-                })
-
-            }
-            if(tempTrash[1].length){
-                tempBlue = [trashDates[1][0]];
-                countb = 1
-                tempTrash[1].map( dates => {  
-                    if(dates.getTime()- (1000*60*60*24) === tempBlue[tempBlue.length-1].getTime() || dates.getTime()- (1000*60*60*24*3) === tempBlue[tempBlue.length-1].getTime() ){
-                        countb++
-                        tempBlue.push(dates)
-                    }
-                })
-            }
-            if(tempTrash[2].length){
-                tempPrevGray = [trashDates[2][0]];
-                tempTrash[2].map( dates => {  
-                    if(dates.getTime()- (1000*60*60*24) === tempPrevGray[tempPrevGray.length-1].getTime() || dates.getTime()- (1000*60*60*24*3) === tempPrevGray[tempPrevGray.length-1].getTime() ){
-                        tempPrevGray.push(dates)
-                        console.log("pushing date");
-                    }
-                })
-            }
+                if(dates.getTime()- (1000*60*60*24*5) >= tempGray[tempGray.length-1].getTime() ){
+                    countg++
+                    tempGray.push(dates)
+                }
+            })
+        
+        }
+        if(tempTrash[1].length){
+            tempBlue = [trashDates[1][0]];
+            countb = 1
+            tempTrash[1].map( dates => {  
+                if(dates.getTime()- (1000*60*60*24*5) >= tempBlue[tempBlue.length-1].getTime()){
+                    countb++
+                    tempBlue.push(dates)
+                }
+            })
+        }
+        if(tempTrash[2].length){
+            tempPrevGray = [tempTrash[2].pop()];
+            tempTrash[2].map( dates => {
+         
+                if(dates.getTime() + (1000*60*60*24*5) >= tempPrevGray[tempPrevGray.length-1].getTime() ){
+                    tempPrevGray.push(dates)
+                }
+            })
+            tempPrevGray.sort((a,b) => a-b)
+        }
             if(tempTrash[3].length){
-                tempPrevBlue = [trashDates[3][0]];
+                tempPrevBlue = [tempTrash[3].pop()];
                 tempTrash[3].map( dates => {  
-                    if(dates.getTime()- (1000*60*60*24) === tempPrevBlue[tempPrevBlue.length-1].getTime() || dates.getTime()- (1000*60*60*24*3) === tempPrevBlue[tempPrevBlue.length-1].getTime() ){
+                    if(dates.getTime() + (1000*60*60*24*5) >= tempPrevBlue[tempPrevBlue.length-1].getTime() ){
                         tempPrevBlue.push(dates)
                     }
                 })
+                tempPrevBlue.sort((a,b) => a-b)
             }
             setCounterBlue(countb)
             setCounterGrey(countg)
