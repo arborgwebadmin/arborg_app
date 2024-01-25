@@ -21,6 +21,10 @@
         width: 38rem;
     
     }
+
+    .input{
+        margin-bottom: 16px;
+    }
 }
 
 @media screen and (max-width: 579px) {
@@ -50,6 +54,10 @@
         text-align: center;
         display: flex;
         align-items: center;
+    }
+
+    .input{
+        margin-bottom: 8px;
     }
 
     

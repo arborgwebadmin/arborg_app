@@ -108,7 +108,7 @@ var temp_JSON = {
             // List over dates for when the gray and brown trash bin will be emptied for this neighbourhood
             // Listi yfir allar dagsetningar þegar grátunnur og brúntúnnur eru tæmdar fyrir þetta hverfi
 
-            new Date(2023,11,29),new Date(2024,0,24),new Date(2024,0,24),new Date(2024,0,26),new Date(2024,1,21),new Date(2024,1,22),new Date(2024,1,23),new Date(2024,2,18),
+            new Date(2023,11,29),new Date(2024,0,24),new Date(2024,0,25),new Date(2024,0,26),new Date(2024,1,21),new Date(2024,1,22),new Date(2024,1,23),new Date(2024,2,18),
             new Date(2024,2,19),new Date(2024,2,20),new Date(2024,3,17),new Date(2024,3,18),new Date(2024,3,19),new Date(2024,4,15),new Date(2024,4,16),
             new Date(2024,4,17),new Date(2024,5,12),new Date(2024,5,13),new Date(2024,5,14),new Date(2024,6,10),new Date(2024,6,11),new Date(2024,6,12),
             new Date(2024,7,7),new Date(2024,7,8),new Date(2024,7,9),new Date(2024,8,4),new Date(2024,8,5),new Date(2024,8,6),new Date(2024,9,2),

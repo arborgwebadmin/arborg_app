@@ -6,111 +6,100 @@ import { Typeahead } from 'react-bootstrap-typeahead';
 import { Row, Col } from 'react-bootstrap';
 import temp_JSON from "../../json/thrashdates";
 import { formatDateRange } from '../../helpers/formatDateRange';
+import  Select from 'react-select';
 
 // for the suggested streets to fill in the search field.
-var streets = temp_JSON.hverfi_1.streets.concat(temp_JSON.hverfi_2.streets, temp_JSON.hverfi_3.streets, temp_JSON.hverfi_4.streets);
+var streets = temp_JSON.hverfi_1.streets.concat(temp_JSON.hverfi_2.streets, temp_JSON.hverfi_3.streets, temp_JSON.hverfi_4.streets).sort();
 
 export default function Sorphirda() {
-    const [getAddress, setAddress] = useState([]);
-    const [trashDates, setTrashDates] = useState([]);
-    const [home, setHome] = useState('')
-    const [isValid, setIsValid] = useState(false)
     const [nextBlue, setNextBlue] = useState([])
     const [nextGrey, setNextGrey] = useState([])
+    const [futureBlue, setFutureBlue] = useState([])
+    const [futureGrey, setFutureGrey] = useState([])
     const [prevBlue, setPrevBlue] = useState([])
     const [prevGray, setPrevGray] = useState([])
+    const [selectedStreet, setSelectedStreet] = useState(null)
 
-    const getTrashDates = (addr) =>{
-        var address = addr
-        var current_date, prev_date
-        var trashDates = []
-        var grey_dates = []
-        var blue_dates = []
-        var prev_gray_dates=[]
-        var prev_blue_dates = []
-        current_date = new Date()
-        current_date.setDate(current_date.getDate() -1)
-        prev_date=new Date()
-        prev_date.setDate(prev_date.getDate() - 50)
-        // Loop through the neighbourhoods
-        for(const neighbourhood in temp_JSON){
-            // Loop through streets
-            for(const street in temp_JSON[neighbourhood].streets){
-                // Check if address matches the street
-                if(address === temp_JSON[neighbourhood].streets[street]){
-                    // Loop through all dates for the address
-                    for(const date in temp_JSON[neighbourhood].gray_dates){
-                        // If date is in the future then list it
-                        if(temp_JSON[neighbourhood].gray_dates[date] > current_date){
-                            //Gray and Brown Dates 
-                            grey_dates.push(temp_JSON[neighbourhood].gray_dates[date])
-                        }
-                        else if( temp_JSON[neighbourhood].gray_dates[date] > prev_date) {
-                            prev_gray_dates.push(temp_JSON[neighbourhood].gray_dates[date])
-                        }
-                    }
-                    // Loop through all dates for the address
-                    for(const date in temp_JSON[neighbourhood].blue_dates){
-                        // If date is in the future then list it
-                        if(temp_JSON[neighbourhood].blue_dates[date] > current_date){                  
-                            blue_dates.push(temp_JSON[neighbourhood].blue_dates[date])			
-                        }
-                        else if( temp_JSON[neighbourhood].blue_dates[date] > prev_date)
-                        {
-                            prev_blue_dates.push(temp_JSON[neighbourhood].blue_dates[date])
-                        }
-                    }
-                    if(grey_dates && blue_dates){
-                        trashDates.push(grey_dates, blue_dates, prev_gray_dates, prev_blue_dates)     
-                        return trashDates
-                    }
-                    else return []
-                }
+
+    const groupDates = (dates) => {
+        return dates.reduce((accumulator, currentValue, currentIndex, array) => {
+
+            // if the currentValue is close to the last date in the last list in the accumulator then add currentValue to the last list in accumulator
+            if ( currentIndex && accumulator.at(-1).at(-1).getTime() + (1000*86400*5) >= currentValue.getTime() ) {
+
+                accumulator.at(-1).push(currentValue);
+            } // else add new list with the currentValue to the accumulator 
+            else {
+                accumulator.push([currentValue])
             }
-        }
+            return accumulator;
+        }, []);
     }
 
-    const groupDates = (oldDates) => {
-        let groupedDates = [];
-        let currentGroup = [];
-        let lastDate;
-        oldDates.forEach((d, i) => {
-            if(i == 0) {
-                currentGroup.push(d);
-            }
-            else if(d.getTime() - (1000*86400*5) <= lastDate.getTime()) {
-                currentGroup.push(d)
-            } else {
-                groupedDates.push(currentGroup)
-                currentGroup = []
-                currentGroup.push(d)
-            }
-            lastDate = d;
-        })
-        groupedDates.push(currentGroup)
-        return groupedDates
-    }
-
-    const handleSubmit = event => {
-        event.preventDefault()
-        if(getAddress.length !== 0){
-
-            setTrashDates(getTrashDates(getAddress.toString()).map(g => groupDates(g)))
-            setHome(getAddress)
-            setIsValid(false)
+    const handleChange = (e) => {
+        setSelectedStreet(e);
+        if(e && e.value !== 0) {
+            var address = e.value.toString()
+            var current_date = new Date()
+            current_date.setDate(current_date.getDate() -1)
+            var prev_date=new Date()
+            prev_date.setDate(prev_date.getDate() - 50)
+            var bd = []
+            var gd = []
             
-    }}
+            // Loop through the neighbourhoods
+            for(const neighbourhood in temp_JSON){
+                // if address in streets
+                if(temp_JSON[neighbourhood].streets.includes(address) ){
+                    
+                    bd = temp_JSON[neighbourhood].blue_dates;
+                    gd = temp_JSON[neighbourhood].gray_dates;
 
-    useEffect(() => {
-        if(trashDates.length !== 0){
-            let tempTrash = trashDates;
-            setNextGrey(tempTrash[0][0])
-            setNextBlue(tempTrash[1][0])
-            setPrevBlue(tempTrash[3][tempTrash[3].length-1])
-            setPrevGray(tempTrash[2][tempTrash[2].length-1])
-            setIsValid(true)
-        }
-    }, [trashDates])
+                    // filter the dates to last date;
+                    bd.filter((date) => date > prev_date).sort((a,b) => a > b);
+                    gd.filter((date) => date > prev_date).sort((a,b) => a > b);
+
+                
+
+                    // group the dates for readability.
+                    var sorted_grouped_bd = groupDates(bd);
+                    var sorted_grouped_gd = groupDates(gd);
+                    // the last day of the list in sorted_groupted_list is more or equal to current_date
+                    var current_time_index_bd = sorted_grouped_bd.findIndex((value) => value.at(-1).getTime() >= current_date.getTime())
+                    var current_time_index_gd = sorted_grouped_gd.findIndex((value) => value.at(-1).getTime() >= current_date.getTime())
+
+                    console.log(current_time_index_bd)
+
+                    // get the last pickup dates
+                    var last_pickup_bd = current_time_index_bd != -1 ?sorted_grouped_bd[current_time_index_bd -1] : sorted_grouped_bd.at(-1);
+                    var last_pickup_gd = current_time_index_gd != -1 ? sorted_grouped_gd[current_time_index_gd -1] : sorted_grouped_gd.at(current_time_index_gd);
+                    // get the next pickup dates
+                    var next_pickup_bd = current_time_index_bd != -1 ? sorted_grouped_bd[current_time_index_bd] : null;
+                    var next_pickup_gd = current_time_index_gd != -1 ? sorted_grouped_gd[current_time_index_gd] : null;
+                    // get future pickup dates
+                    var future_pickups_bd = current_time_index_bd != -1 ? sorted_grouped_bd.slice(current_time_index_bd + 1) : null;
+                    var future_pickups_gd = current_time_index_gd != -1 ? sorted_grouped_gd.slice(current_time_index_gd + 1) : null;
+                    
+
+                    var some = Boolean(-1) ? "true" : "false"
+                    console.log(some)
+                    console.log(future_pickups_gd)
+
+                    // set all the states
+                    setNextBlue(next_pickup_bd)
+                    setNextGrey(next_pickup_gd)
+                    setFutureBlue(future_pickups_bd)
+                    setFutureGrey(future_pickups_gd)
+                    setPrevBlue(last_pickup_bd)
+                    setPrevGray(last_pickup_gd)
+
+                }
+            
+            }
+
+        } 
+
+    }
 
     return(
         <main>   
@@ -118,47 +107,29 @@ export default function Sorphirda() {
                 <PageHead>Sorphirðudagatal Árborg</PageHead>
                     <main className={styles.main}>
                         <div className={`container ${sorphirdaStyle.containerWidth}`} >
-                            <form className='grid-container' onSubmit={handleSubmit}>
-                            <Row>
-                                <Col>
-                                    <p style={{paddingTop: '10px', fontWeight: 'bold'}}>Sláðu inn götuheiti:</p> 
-                                </Col>
-                                <Col>
-                                    <div className='d-flex flex-row-reverse' style={{paddingBottom: '10px'}} >
-                                        <input type="submit" onClick={() => setAddress(['Dreifbýli'])} name="blocks" value="Dreifbýli" className="btn btn-primary"></input>
-                                        <input type="submit" onClick={() => setAddress(['Fjölbýli'])}   name="blocks" value="Fjölbýli" className="btn btn-primary" style={{marginRight: '5px'}}></input>
-                                    </div>
-                                </Col>
-                            </Row>
-                                </form>
-                            <form onSubmit={handleSubmit}>
-                                <Typeahead
-                                    id="basic-typeahead-single"
-                                    onChange={setAddress}
-                                    options={streets.sort()}
-                                    selected={getAddress}
-                                    minLength={2}
-                                    />
-                                <div className="d-flex" style={{paddingTop: '10px', paddingBottom: '10px'}}>
-                                    {<div style={{marginRight: "10px"}}>
-                                        <input 
-                                            type="submit" 
-                                            name="street" 
-                                            value="Finna sorphirðudaga" 
-                                            className="btn btn-primary"
-                                            />
-                                    </div>}
-                                </div>
-                                <div>
-                                    <li className={sorphirdaStyle.trashFontSize} style={{fontStyle: 'italic', paddingTop: '0'}}>Smella þarf á „Fjölbýli“ þegar tunnur eru 660l eða stærri sorptunnur. </li>
-                                    <li className={sorphirdaStyle.trashFontSize} style={{fontStyle: 'italic', paddingBottom: '10px'}}>Smella þarf á „Dreifbýli“ þegar viðkomandi býr í dreifbýli. </li>
-                                    <p className={sorphirdaStyle.trashFontSize} style={{fontStyle: 'italic'}}><strong>Fyrirvari: </strong>Líta skal á sorphirðudagatalið sem viðmiðunardagatal.  Veðurfar, veikindi og bilanir geta haft áhrif en almennt ætti ekki að skeika meiru en 1/2 til 1 degi á sorphirðu.</p><br/>
-                                </div>
-                            </form>
-                        {isValid && 
+                            <p style={{paddingTop: '10px', fontWeight: 'bold'}}>Veldu götuheiti:</p> 
+                            <div className='d-flex flex-row justify-content-end' style={{paddingBottom: '10px'}} >
+                                <input className="btn btn-primary mr-1" type="button" onClick={() => handleChange({label: 'Fjölbýli', value: 'Fjölbýli'}) } value="Fjölbýli"/>
+                                <input className="btn btn-primary ml-1" type="button" onClick={() => handleChange({label: 'Dreifbýli', value: 'Dreifbýli'}) } value="Dreifbýli"/>
+                            </div>
+                            <Select
+                                className={sorphirdaStyle.input}
+                                isClearable={true}
+                                isSearchable={true}
+                                options={streets.map((v) => ({value: v, label: v}))}
+                                onChange={(e) => handleChange(e)}
+                                value={selectedStreet}
+                                placeholder="Veldu götuheiti..."
+                            />
+                            <div>
+                                <li className={sorphirdaStyle.trashFontSize} style={{fontStyle: 'italic', paddingTop: '0'}}>Smella þarf á „Fjölbýli“ þegar tunnur eru 660l eða stærri sorptunnur. </li>
+                                <li className={sorphirdaStyle.trashFontSize} style={{fontStyle: 'italic', paddingBottom: '10px'}}>Smella þarf á „Dreifbýli“ þegar viðkomandi býr í dreifbýli. </li>
+                                <p className={sorphirdaStyle.trashFontSize} style={{fontStyle: 'italic'}}><strong>Fyrirvari: </strong>Líta skal á sorphirðudagatalið sem viðmiðunardagatal.  Veðurfar, veikindi og bilanir geta haft áhrif en almennt ætti ekki að skeika meiru en 1/2 til 1 degi á sorphirðu.</p><br/>
+                            </div>
+                        {selectedStreet && 
                             <div id="grid-container">     
                                 <div className="d-flex justify-content-around">
-                                    <h5>{home}</h5>
+                                    <h5>{selectedStreet.label}</h5>
                                 </div>
                                 <div className="d-flex justify-content-around">
                                     <div className="d-flex">
@@ -171,7 +142,7 @@ export default function Sorphirda() {
                                             <br/><p className={sorphirdaStyle.nextTrashEmpty}>Næsta grá- og brúntunnu losun:<br/></p>
                                             <div>
                                             {
-                                                nextGrey.length ?
+                                                nextGrey?.length ?
 
                                                 <h2 className={sorphirdaStyle.h2Trash}>
                                                     {formatDateRange(nextGrey)}
@@ -194,7 +165,7 @@ export default function Sorphirda() {
                                             </div>
                                             <br/><p className={sorphirdaStyle.nextTrashEmpty}>Næsta fjólublá- og blátunnu losun:<br/></p>
                                             <div>
-                                            { nextBlue.length ?
+                                            { nextBlue?.length ?
                                                 <h2 className={sorphirdaStyle.h2Trash}>
                                                     {formatDateRange(nextBlue)}
                                                 </h2>
@@ -212,15 +183,15 @@ export default function Sorphirda() {
                                     <div className='d-flex justify-content-center'>
                                         <div className={sorphirdaStyle.trashList}><h6 className={sorphirdaStyle.h6Style}>Grá- og Brúntunnur</h6>
                                             <ul>
-                                                {
-                                                    trashDates[0].map((d, i) => <li key={i}>{formatDateRange(d)}</li>)
+                                                { futureGrey &&
+                                                    futureGrey.map((d, i) => <li key={i}>{formatDateRange(d)}</li>)
                                                 }
                                             </ul>
                                         </div>
                                         <div className={sorphirdaStyle.trashList}><h6 className={sorphirdaStyle.h6Style}>Fjólublá- og Blátunnur</h6>
                                             <ul>
-                                                {
-                                                    trashDates[1].map((d, i) => <li key={i}>{formatDateRange(d)}</li>)
+                                                { futureBlue &&
+                                                    futureBlue.map((d, i) => <li key={i}>{formatDateRange(d)}</li>)
                                                 }
                                             </ul>
                                         </div>
