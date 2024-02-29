@@ -4,6 +4,7 @@ import FormGroup from '../../components/form-group';
 import PageHead from '../../components/page-head';
 import {currencyFormat, inputFormat, formatedToInt} from '../../components/functions.js';
 import CheckFormGroup from '../../components/check-form-group';
+import { lodagjöldVars as calcMap } from '../../constants/index.js';
 
 const idsMap = {
     SIZE: 'size',
@@ -15,18 +16,6 @@ const idsMap = {
     IDNADUR: 'IDNADUR',
     HESTHUS: 'HESTHUS',
     TEGUND: 'type',
-}
-
-const calcMap = {
-    PER_SQ_METER: 285566,
-    EINBYLI: 0.15,
-    PAR: 0.13,
-    RAD: 0.13,
-    FJOLBYLI: 0.11,
-    VERSLUN: 0.10,
-    IDNADUR: 0.10,
-    HESTHUS: 0.10,
-    VISITOLU_TXT : '1. april 2023'
 }
 
 class Lodagjold extends React.Component {

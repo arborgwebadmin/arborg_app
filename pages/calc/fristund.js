@@ -6,20 +6,13 @@ import {currencyFormat} from '../../components/functions'
 import Form from 'react-bootstrap/Form';
 import NrOfDaysPWeek from '../../components/nr-of-days-p-week'
 import { selectTag } from '../../constants'
+import { fristundirPrice as priceMap } from '../../constants'
 
 
 const idsMap = {
 	KIDS: "kids",
 	DAYS: "days",
 };
-
-const priceMap = {
-	'5 dagar': [19550, 5645],
-	'4 dagar': [15942, 4520],
-	'3 dagar': [12305, 3382],
-	'2 dagar': [8682, 2275],
-	'1 dagur': [5045, 1152],
-}
 
 class Fristund extends React.Component {
 	constructor(props) {
@@ -85,7 +78,7 @@ class Fristund extends React.Component {
 									<b>Samtals: {currencyFormat(this.state.total)}</b>
 								</p>
 								<h6 className="card-subtitle mb-2 text-muted">Fyrirvari: </h6>
-								<p className="card-text">Eingöngu er um áætlun að ræða miðað við þær forsendur sem slegnar eru inn og gjaldskrá frá 1. janúar 2024.</p>
+								<p className="card-text">Eingöngu er um áætlun að ræða miðað við þær forsendur sem slegnar eru inn og gjaldskrá frá {priceMap.PRICE_DATE}</p>
 							</div>
 						</div>
 					</div>

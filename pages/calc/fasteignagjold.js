@@ -4,6 +4,7 @@ import FormGroup from '../../components/form-group';
 import PageHead from '../../components/page-head';
 import {currencyFormat, inputFormat, formatedToInt} from '../../components/functions.js';
 import CheckFormGroup from '../../components/check-form-group';
+import { fasteignagjöldPrice as calcMap } from '../../constants/index.js';
 
 const idsMap = {
 	FASTEIGNAMAT: 'fasteignamat',
@@ -11,20 +12,6 @@ const idsMap = {
 	FASTEIGNAFLOKKUR: 'fasteignaflokkur',
 	SORPTUNNA: 'sorptunna',
 	EIGNALOD: 'eignalod',
-};
-
-const calcMap = {
-	FASTSK_A: 0.002544,
-	FASTSK_B: 0.0132,
-	FASTSK_C: 0.0160,
-	LODALEIGA_A: 0.01,
-	LODALEIGA_B: 0.03,
-	VATNSGJALD: 0.001500,
-	VIDBOTARGJ: 17.8,
-	FRAVEITUGJ: 0.001,
-	SORPGJ_A: 56700,
-	SORPGJ_B: 70990,
-	SORPAFSLATTUR: 0.5,
 };
 
 class Fasteignagjold extends React.Component {
@@ -92,7 +79,7 @@ class Fasteignagjold extends React.Component {
 				<PageHead title="Reiknivél fasteignagjalda"></PageHead>
 						<div className={ styles.main }>
 							<div className="container">
-								<h1>Reiknivél fasteignagjalda 2023</h1>
+								<h1>Reiknivél fasteignagjalda {calcMap.YEAR}</h1>
 								<a href="https://fasteignaskra.is/leit-i-fasteignaskra/" target="_blank" rel="nofollow" className={ styles.secondaryLink }>Smelltu hér til að fletta upp fasteignamati eignar</a>
 							</div>
 							<div className="container">

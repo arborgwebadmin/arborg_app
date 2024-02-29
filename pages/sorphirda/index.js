@@ -2,9 +2,7 @@ import React, { useEffect, useState } from 'react';
 import PageHead from '../../components/page-head';
 import styles from '../../styles/Home.module.css';
 import sorphirdaStyle from '../../styles/Sorphirda.module.css';
-import { Typeahead } from 'react-bootstrap-typeahead';
-import { Row, Col } from 'react-bootstrap';
-import temp_JSON from "../../json/thrashdates";
+import temp_JSON from "../../constants/trashDates";
 import { formatDateRange } from '../../helpers/formatDateRange';
 import  Select from 'react-select';
 
