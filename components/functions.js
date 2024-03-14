@@ -3,6 +3,11 @@ export function currencyFormat( x ) {
     x = parseInt(x, 10);
     return x.toLocaleString("de-DE") + " kr.";
 }
+
+export function percentageFormat( x ) {
+    return x * 100 + "%"
+}
+
 /**
  * Validates that input is number and adds seperator.
  * @param { event } target 

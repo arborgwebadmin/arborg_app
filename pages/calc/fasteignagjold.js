@@ -2,16 +2,17 @@ import React from 'react';
 import styles from '../../styles/Home.module.css';
 import FormGroup from '../../components/form-group';
 import PageHead from '../../components/page-head';
-import {currencyFormat, inputFormat, formatedToInt} from '../../components/functions.js';
+import {currencyFormat, inputFormat, formatedToInt, percentageFormat} from '../../components/functions.js';
 import CheckFormGroup from '../../components/check-form-group';
 import { fasteignagjöldPrice as calcMap } from '../../constants/index.js';
+import { Table } from 'react-bootstrap';
 
 const idsMap = {
 	FASTEIGNAMAT: 'fasteignamat',
 	LODAMAT: 'lodamat',
 	FASTEIGNAFLOKKUR: 'fasteignaflokkur',
-	SORPTUNNA: 'sorptunna',
 	EIGNALOD: 'eignalod',
+	SORP: 'sorp'
 };
 
 class Fasteignagjold extends React.Component {
@@ -21,9 +22,10 @@ class Fasteignagjold extends React.Component {
 			field: {
 				fasteignamat: '',
 				lodamat: '',
+				atvStaerd: '',
 				fasteignaflokkur: 'A',
-				sorptunna: '120',
 				eignalod: false,
+				sorp: 'grunn'
  			},
 			total: 0,
 			tSorp: 0,
@@ -47,16 +49,22 @@ class Fasteignagjold extends React.Component {
 		
 	}
 
+	calcSorp = (kerfi) => {
+		let fastgj = this.state.fasteignaflokkur
+	}
+
 	handleSubmit = (e) => {
 		e.preventDefault();
-		let flokkur = this.state.field.fasteignaflokkur ==='A' ? calcMap.FASTSK_A : this.state.flokkur === 'B' ? calcMap.FASTSK_B : calcMap.FASTSK_C;
+		// let flokkur = this.state.field.fasteignaflokkur ==='A' ? calcMap.FASTSK_A : this.state.flokkur === 'B' ? calcMap.FASTSK_B : calcMap.FASTSK_C;
+		let flokkur = calcMap.FASTSK_A;
 		let houseInt = formatedToInt(this.state.field.fasteignamat);
 		let lodInt = formatedToInt(this.state.field.lodamat);
 		let tFastsk = Math.round(houseInt * flokkur);
 		let tLodaleiga = this.state.field.eignalod? 0 : Math.round(lodInt * calcMap.LODALEIGA_A);
 		let tVatnsgjald = Math.round(houseInt * calcMap.VATNSGJALD);
 		let tFráveitugjald = Math.round(houseInt * calcMap.FRAVEITUGJ);
-		let tSorp = this.state.field.sorptunna === '120'? calcMap.SORPGJ_A : calcMap.SORPGJ_B;
+		let tSorp = calcMap.FASTAGJALD_A + calcMap.SORPGJ_FJ_240 + calcMap.SORPGJ_BL_240 + (this.state.field.sorp === 'tvi' ? calcMap.SORPGJ_TV : calcMap.SORPGJ_BR_140 + (this.state.field.sorp === 'grunn' ? calcMap.SORPGJ_GR_240 : calcMap.SORPGJ_GR_140));
+		// let tSorp = this.state.field.sorptunna === '120'? calcMap.SORPGJ_A : calcMap.SORPGJ_B;
 		let total = tFastsk + tLodaleiga + tVatnsgjald + tFráveitugjald + tSorp;
 		let month = Math.ceil(total/11);
 		this.setState({
@@ -76,7 +84,7 @@ class Fasteignagjold extends React.Component {
     return (
 		<main>	
 			<div className={ styles.container }>
-				<PageHead title="Reiknivél fasteignagjalda"></PageHead>
+				<PageHead title="Reiknivél fasteignagjalda íbúðarhúsnæðis"></PageHead>
 						<div className={ styles.main }>
 							<div className="container">
 								<h1>Reiknivél fasteignagjalda {calcMap.YEAR}</h1>
@@ -94,33 +102,118 @@ class Fasteignagjold extends React.Component {
 										!this.state.field.eignalod &&
 										<FormGroup id={ idsMap.LODAMAT } label="Þar af lóðamat" type="string" value={ this.state.field.lodamat } change={ this.handleChange } required={!this.state.field.eignalod} disabled={this.state.field.eignalod}></FormGroup>
 									}
-									<div className="form-group">
+									{/* <div className="form-group">
 										<label htmlFor={ idsMap.FASTEIGNAFLOKKUR }>Tegund húsnæðis: </label>
 										<CheckFormGroup id={ idsMap.FASTEIGNAFLOKKUR}  label="Íbúðarhúsnæði" type="radio" value='A' change={this.handleChange} checked={ this.state.field.fasteignaflokkur === 'A' }></CheckFormGroup>
 										<CheckFormGroup id={ idsMap.FASTEIGNAFLOKKUR}  label="Opinber bygging" type="radio" value='B' change={this.handleChange} checked={ this.state.field.fasteignaflokkur === 'B' }></CheckFormGroup>
 										<CheckFormGroup id={ idsMap.FASTEIGNAFLOKKUR}  label="Atvinnuhúsnæði" type="radio" value='C' change={this.handleChange} checked={ this.state.field.fasteignaflokkur === 'C' }></CheckFormGroup>
-									</div>
+									</div> */}
+									
 									<div className="form-group">
-										<label htmlFor={ idsMap.SORPTUNNA }>Stærð sorputunnu: </label>
-										<CheckFormGroup id={ idsMap.SORPTUNNA } label="120 lítra" type="radio" value='120' change={ this.handleChange } checked={ this.state.field.sorptunna === '120'}></CheckFormGroup>
-										<CheckFormGroup id={ idsMap.SORPTUNNA } label="240 lítra" type="radio" value='240' change={ this.handleChange } checked={ this.state.field.sorptunna === '240' }></CheckFormGroup>
+										<label htmlFor={ idsMap.SORP }>Sorpkerfi: </label>
+										<CheckFormGroup id={ idsMap.SORP } label="Grunnkerfi" type="radio" value='grunn' change={ this.handleChange } checked={ this.state.field.sorp === 'grunn'} description='240 ltr grá-, blá- og fjólublá tunna. 140 ltr brún tunna.'></CheckFormGroup>
+										<CheckFormGroup id={ idsMap.SORP } label="Sparkerfi" type="radio" value='spar' change={ this.handleChange } checked={ this.state.field.sorp === 'spar' } description='240 blá- og fjólublá tunna. 140 ltr grá- og brún tunna.'></CheckFormGroup>
+										<CheckFormGroup id={ idsMap.SORP } label="Tvískipt sparkerfi" type="radio" value='tvi' change={ this.handleChange } checked={ this.state.field.sorp === 'tvi' } description='140/100 l tvískipt grá/brún tunna. 240 blá- og fjólublá tunna.'></CheckFormGroup>
 									</div>
 									<input type="submit" value="Reikna" className="btn btn-primary"></input>
 								</form>
 									<div className={this.state.total==0? styles.hidden +" card mt-3" : styles.visible + " card mt-3"}>
+									{/* <div className={ styles.visible + " card mt-3"}> */}
 										<div className="card-body">
 											<h5 className="card-title">Heildarkostnaður: {currencyFormat(this.state.total)}</h5>
 											<h6 className="card-subtitile mb-2 text-muted">Mánaðarleg greiðsla frá febrúar-desember: {currencyFormat(this.state.month)}</h6>
-											<p className="card-text">
-												<b>Sundurliðun: </b><br></br>
-												Miðað við þínar forsendur má reikna með að fasteignagjöldin séu eftirfarandi: <br></br>
-												Fasteignaskattur: {currencyFormat(this.state.tFastsk)}<br></br>
-												{ this.state.tLodaleiga !== 0 && <span>Lóðaleiga: {currencyFormat(this.state.tLodaleiga)}<br></br></span>}
-												Fráveitugjald: {currencyFormat(this.state.tFráveitugjald)}<br></br>
-												Vatnsgjald: {currencyFormat(this.state.tVatnsgjald)}<br></br>
-												Sorp- og urðunargjald: {currencyFormat(this.state.tSorp)}<br></br>
-												<b>Samtals: {currencyFormat(this.state.total)}</b>
-											</p>
+											<div className='my-4'>
+												<h4>Sundurliðun:</h4>
+
+											<Table >
+												<thead>
+													<tr>			
+														<th>Liður</th>
+														<th>Stofn</th>
+														<th>Hlf/Upph</th>
+														<th>Álagning</th>
+													</tr>
+												</thead>
+												<tbody>
+													<tr>
+														<td>Fasteingaskattur</td>
+														<td>{this.state.field.fasteignamat}</td>
+														<td>{percentageFormat(calcMap.FASTSK_A)}</td>
+														<td>{currencyFormat(this.state.tFastsk)}</td>
+													</tr>
+													{
+														!this.state.field.eignalod &&
+														<tr>
+															<td>Lóðaleiga</td>
+															<td>{this.state.field.lodamat}</td>
+															<td>{percentageFormat(calcMap.LODALEIGA_A)}</td>
+															<td>{currencyFormat(this.state.tLodaleiga)}</td>
+														</tr>
+													}
+													<tr>
+														<td>Fráveitugjald</td>
+														<td>{this.state.field.fasteignamat}</td>
+														<td>{percentageFormat(calcMap.FRAVEITUGJ)}</td>
+														<td>{currencyFormat(this.state.tFráveitugjald)}</td>
+													</tr>
+													<tr>
+														<td>Vatnsgjald</td>
+														<td>{this.state.field.fasteignamat}</td>
+														<td>{percentageFormat(calcMap.VATNSGJALD)}</td>
+														<td>{currencyFormat(this.state.tVatnsgjald)}</td>
+													</tr>
+													{
+														this.state.field.sorp === 'tvi' ?
+														<tr>
+															<td>Tvískipt 140/100l</td>
+															<td></td>
+															<td>{currencyFormat(calcMap.SORPGJ_TV)}</td>
+															<td>{currencyFormat(calcMap.SORPGJ_TV)}</td>
+														</tr> : 
+														<>
+														<tr>
+															<td>Heimilissorp {this.state.field.sorp == 'grunn' ? '240': '140'}l</td>
+															<td></td>
+															<td>{currencyFormat(this.state.field.sorp === 'grunn' ? calcMap.SORPGJ_GR_240 : calcMap.SORPGJ_GR_140)}</td>
+															<td>{currencyFormat(this.state.field.sorp === 'grunn' ? calcMap.SORPGJ_GR_240 : calcMap.SORPGJ_GR_140)}</td>
+														</tr>
+														<tr>
+															<td>Lífrænt sorp 140l</td>
+															<td></td>
+															<td>{currencyFormat(calcMap.SORPGJ_BR_140)}</td>
+															<td>{currencyFormat(calcMap.SORPGJ_BR_140)}</td>
+														</tr>
+														</>
+													}
+
+													<tr>
+														<td>Pappír 240l</td>
+														<td></td>
+														<td>{currencyFormat(calcMap.SORPGJ_BL_240)}</td>
+														<td>{currencyFormat(calcMap.SORPGJ_BL_240)}</td>
+													</tr>
+													<tr>
+														<td>Plast 240l</td>
+														<td></td>
+														<td>{currencyFormat(calcMap.SORPGJ_FJ_240)}</td>
+														<td>{currencyFormat(calcMap.SORPGJ_FJ_240)}</td>
+													</tr>
+													<tr>
+														<td>Fastagjald</td>
+														<td></td>
+														<td>{currencyFormat(calcMap.FASTAGJALD_A)}</td>
+														<td>{currencyFormat(calcMap.FASTAGJALD_A)}</td>
+													</tr>
+													<tr>
+														<td><b>Samtals</b></td>
+														<td></td>
+														<td></td>
+														<td><b>{currencyFormat(this.state.total)}</b></td>
+													</tr>
+													
+												</tbody>
+											</Table>
+											</div>
 											<h6 className="card-subtitle mb-2 text-muted">Fyrirvari: </h6>
 											<p className="card-text">Eingöngu er um áætlun að ræða miðað við þær forsendur sem slegnar eru inn.</p>
 								</div>
