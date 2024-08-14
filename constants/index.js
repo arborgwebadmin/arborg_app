@@ -52,5 +52,5 @@ export var lodagjöldVars = {
     VERSLUN: 0.10,
     IDNADUR: 0.10,
     HESTHUS: 0.10,
-    VISITOLU_TXT : '1. júlí 2023'
+    VISITOLU_TXT : '1. júlí 2024'
 }
