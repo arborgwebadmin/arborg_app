@@ -87,7 +87,7 @@ class Lodagjold extends React.Component {
                                         <h5 className="card-title">Áætluð gatnagerðargjöld: {currencyFormat(this.state.tGatnagerd)}</h5>
                                         <p className="card-text">
                                             <b>Sundurliðun:</b><br></br>
-                                            Gert ter ráð fyrir að verðmat húsnæðis nemi {currencyFormat(this.state.total)} miðað við núverandi fermetraverð {currencyFormat(calcMap.PER_SQ_METER)}<br></br>
+                                            Gert er ráð fyrir að verðmat húsnæðis nemi {currencyFormat(this.state.total)} miðað við núverandi fermetraverð {currencyFormat(calcMap.PER_SQ_METER)}<br></br>
                                             Af því reiknast {this.state.percentage}% álagning sem nemur {currencyFormat(this.state.tGatnagerd)} 
                                         </p>
                                         <h6 className="card-subtitle mb-2 text-muted">Fyrirvari: </h6>
