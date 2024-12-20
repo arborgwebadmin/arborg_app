@@ -59,13 +59,7 @@ var temp_JSON = {
         gray_dates: [
             // List over dates for when the gray and brown trash bin will be emptied for this neighbourhood
             // Listi yfir allar dagsetningar þegar grátunnur og brúntúnnur eru tæmdar fyrir þetta hverfi
-            new Date(2023,11,8),new Date(2024,0,3),new Date(2024,0,4),new Date(2024,0,5),new Date(2024,0,30),new Date(2024,0,31),new Date(2024,1,1),new Date(2024,1,2),
-            new Date(2024,1,27),new Date(2024,1,28),new Date(2024,1,29),new Date(2024,2,1),new Date(2024,2,21),new Date(2024,2,22),new Date(2024,2,26),
-            new Date(2024,2,27),new Date(2024,3,23),new Date(2024,3,24),new Date(2024,3,26),new Date(2024,4,22),new Date(2024,4,23),new Date(2024,4,24),
-            new Date(2024,5,19),new Date(2024,5,20),new Date(2024,5,21),new Date(2024,6,16),new Date(2024,6,17),new Date(2024,6,18),new Date(2024,6,19),
-            new Date(2024,7,13),new Date(2024,7,14),new Date(2024,7,15),new Date(2024,7,16),new Date(2024,8,10),new Date(2024,8,11),new Date(2024,8,12),
-            new Date(2024,8,13),new Date(2024,9,8),new Date(2024,9,9),new Date(2024,9,10),new Date(2024,9,11),new Date(2024,10,5),new Date(2024,10,6),
-            new Date(2024,10,7),new Date(2024,10,8),new Date(2024,11,3),new Date(2024,11,4),new Date(2024,11,5),new Date(2024,11,6),
+            ,new Date(2024,11,6),
             // 2025
             new Date(2025,0,2),new Date(2025,0,3),new Date(2025,0,6),new Date(2025,0,7),new Date(2025,0,29),new Date(2025,0,30),new Date(2025,0,31),
             new Date(2025,1,26),new Date(2025,1,27),new Date(2025,1,28),new Date(2025,2,26),new Date(2025,2,27),new Date(2025,2,28),new Date(2025,3,23),            
@@ -77,12 +71,7 @@ var temp_JSON = {
         blue_dates: [
             // List over dates for when the blue trash bin will be emptied for this neighbourhood
             // Listi yfir allar dagsetningar þegar blátunnur eru tæmdar fyrir þetta hverfi
-            new Date(2023,11,22),new Date(2024,0,17),new Date(2024,0,18),new Date(2024,0,19),new Date(2024,1,14),new Date(2024,1,15),new Date(2024,1,16),new Date(2024,2,13),
-            new Date(2024,2,14),new Date(2024,2,15),new Date(2024,3,12),new Date(2024,3,15),new Date(2024,3,16),new Date(2024,4,8),new Date(2024,4,10),
-            new Date(2024,5,5),new Date(2024,5,6),new Date(2024,5,7),new Date(2024,6,3),new Date(2024,6,4),new Date(2024,6,5),new Date(2024,6,31),
-            new Date(2024,7,1),new Date(2024,7,2),new Date(2024,7,28),new Date(2024,7,29),new Date(2024,7,30),new Date(2024,8,25),new Date(2024,8,26),
-            new Date(2024,8,27),new Date(2024,9,23),new Date(2024,9,24),new Date(2024,9,25),new Date(2024,10,20),new Date(2024,10,21),new Date(2024,10,22),
-            new Date(2024,11,18),new Date(2024,11,19),new Date(2024,11,20),
+           new Date(2024,11,20),
             //2025
             new Date(2025,0,16),new Date(2025,0,17),new Date(2025,1,12),new Date(2025,1,13),new Date(2025,1,14),new Date(2025,2,12),new Date(2025,2,13),
             new Date(2025,2,14),new Date(2025,3,9),new Date(2025,3,10),new Date(2025,3,11),new Date(2025,4,7),new Date(2025,4,8),new Date(2025,4,9),new Date(2025,5,4),
