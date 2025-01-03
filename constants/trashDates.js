@@ -9,7 +9,7 @@ var temp_JSON = {
         // Gult hverfi, Selfoss/Stokkseyri
         // Listi yfir allar götur í þessu hverfi
         streets: [
-            "Kaðlastaðir Eystri", "Eyrarbraut", "Eyrarlón",
+            "Kaðlastaðir Eystri", "Eyrarbraut", "Eyrarlón", "Hæðarland","Fífuland",
             "Sigtún - Stokkseyri", "Mánabakki", "Lindarflöt",
             "Óseyri - Stokkseyri", "Eyjasel", "Blátindur",
             "Sandfell", "Unhóll", "Sælundur", "Sólheimar",
@@ -104,7 +104,9 @@ var temp_JSON = {
             "Álfastétt", "Gamla Hraun", "Traðarhús", "Ásaberg", "Garðabær - Eyrabakki",
             "Steinsbær", "Brenna", "Sæfell - Eyrarbakki", "Óseyri - Eyrarbakki",
             "Bakarísstígur", "Hreggviður", "Sólvangur", "Einarshöfn", "Grenigrund",
-            "Birkigrund", "Furugrund", "Eyravegur", "Hrauntjörn"
+            "Birkigrund", "Furugrund", "Eyravegur", "Hrauntjörn", "Atlavík", "Aðalvík",
+            "Bergvík", "Boðavík", "Eyrarvík", "Engjavík", "Goðavík", "Hamravík", "Fossvík",
+            "Selfossvegur"
         ],
         gray_dates: [
             // List over dates for when the gray and brown trash bin will be emptied for this neighbourhood
