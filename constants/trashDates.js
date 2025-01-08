@@ -78,7 +78,7 @@ var temp_JSON = {
             new Date(2025,5,5),new Date(2025,5,6),new Date(2025,6,2),new Date(2025,6,3),new Date(2025,6,4),new Date(2025,6,30),new Date(2025,6,31),new Date(2025,7,1),
             new Date(2025,7,27),new Date(2025,7,28),new Date(2025,7,29),new Date(2025,8,24),new Date(2025,8,25),new Date(2025,8,26),new Date(2025,9,22),new Date(2025,9,23),new Date(2025,9,24)
             new Date(2025,10,19),new Date(2025,10,20),new Date(2025,10,21),new Date(2025,11,17),new Date(2025,11,18),new Date(2025,11,19)
-        ]
+        ],
     },
     hverfi_2: {
         // Blátt hverfi, Selfoss/Eyrabakki
