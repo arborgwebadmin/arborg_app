@@ -75,8 +75,8 @@ var temp_JSON = {
             //2025
             new Date(2025,0,16),new Date(2025,0,17),new Date(2025,1,12),new Date(2025,1,13),new Date(2025,1,14),new Date(2025,2,12),new Date(2025,2,13),
             new Date(2025,2,14),new Date(2025,3,9),new Date(2025,3,10),new Date(2025,3,11),new Date(2025,4,7),new Date(2025,4,8),new Date(2025,4,9),new Date(2025,5,4),
-            new Date(2025,5,5),new Date(2025,5,6),new Date(2025,6,2),new Date(2025,6,3),new Date(2025,6,4),new Date(2025,6,30),new Date(2025,6,31,new Date(2025,7,1),new Date(2025,7,27),
-            new Date(2025,7,28),new Date(2025,7,29),new Date(2025,8,24),new Date(2025,8,25),new Date(2025,8,26),new Date(2025,9,22),new Date(2025,9,23),new Date(2025,9,24),
+            new Date(2025,5,5),new Date(2025,5,6),new Date(2025,6,2),new Date(2025,6,3),new Date(2025,6,4),new Date(2025,6,30),new Date(2025,6,31),new Date(2025,7,1),
+            new Date(2025,7,27),new Date(2025,7,28),new Date(2025,7,29),new Date(2025,8,24),new Date(2025,8,25),new Date(2025,8,26),new Date(2025,9,22),new Date(2025,9,23),new Date(2025,9,24)
             new Date(2025,10,19),new Date(2025,10,20),new Date(2025,10,21),new Date(2025,11,17),new Date(2025,11,18),new Date(2025,11,19)
         ]
     },
