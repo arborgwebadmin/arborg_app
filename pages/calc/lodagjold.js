@@ -14,7 +14,7 @@ const idsMap = {
     FJOLBYLI: 'FJOLBYLI',
     VERSLUN: 'VERSLUN',
     IDNADUR: 'IDNADUR',
-    HESTHUS: 'HESTHUS',
+    ATHAFNASVAEDI: 'ATHAFNASVAEDI',
     TEGUND: 'type',
 }
 
@@ -77,7 +77,7 @@ class Lodagjold extends React.Component {
                                         <CheckFormGroup id={ idsMap.TEGUND } label="Fjölbýlishús" type="radio" value={ idsMap.FJOLBYLI } change={ this.handleChange } checked={ this.state.field.type === idsMap.FJOLBYLI }></CheckFormGroup>
                                         <CheckFormGroup id={ idsMap.TEGUND } label="Verslun og þjónusta" type="radio" value={ idsMap.VERSLUN } change={ this.handleChange } checked={ this.state.field.type === idsMap.VERSLUN}></CheckFormGroup>
                                         <CheckFormGroup id={ idsMap.TEGUND } label="Iðnaðarhúsnæði" type="radio" value={ idsMap.IDNADUR } change={ this.handleChange } checked={ this.state.field.type === idsMap.IDNADUR}></CheckFormGroup>
-                                        <CheckFormGroup id={ idsMap.TEGUND } label="Hesthús" type="radio" value={ idsMap.HESTHUS } change={ this.handleChange } checked={ this.state.field.type === idsMap.HESTHUS}></CheckFormGroup>
+                                        <CheckFormGroup id={ idsMap.TEGUND } label="Athafnasvæði" type="radio" value={ idsMap.ATHAFNASVAEDI } change={ this.handleChange } checked={ this.state.field.type === idsMap.ATHAFNASVAEDI}></CheckFormGroup>
                                     </div>
                                     <FormGroup id={ idsMap.SIZE } label="Byggingarmagn lóðar skv. heimilu nýtingarhlutfalli í fermetrum" type="number" value={ this.state.field.size } change={ this.handleChange } required={true}></FormGroup>
                                     <input type="submit" value="Reikna" className="btn btn-primary"></input>
