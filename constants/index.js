@@ -44,13 +44,13 @@ export var fasteignagjöldPrice = {
 }
 
 export var lodagjöldVars = {
-    PER_SQ_METER: 302559,
+    PER_SQ_METER: 313846,
     EINBYLI: 0.15,
     PAR: 0.13,
     RAD: 0.13,
     FJOLBYLI: 0.11,
     VERSLUN: 0.10,
     IDNADUR: 0.10,
-    HESTHUS: 0.10,
-    VISITOLU_TXT : '1. janúar 2025'
+    ATHAFNASVAEDI: 0.10,
+    VISITOLU_TXT : '1. júlí 2025'
 }
