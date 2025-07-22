@@ -49,8 +49,8 @@ export var lodagjöldVars = {
     PAR: 0.13,
     RAD: 0.13,
     FJOLBYLI: 0.11,
-    VERSLUN: 0.10,
-    IDNADUR: 0.10,
-    ATHAFNASVAEDI: 0.10,
+    VERSLUN: 0.05,
+    IDNADUR: 0.05,
+    ATHAFNASVAEDI: 0.05,
     VISITOLU_TXT : '1. júlí 2025'
 }
