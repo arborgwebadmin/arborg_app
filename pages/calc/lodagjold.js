@@ -4,7 +4,13 @@ import FormGroup from '../../components/form-group';
 import PageHead from '../../components/page-head';
 import {currencyFormat, inputFormat, formatedToInt} from '../../components/functions.js';
 import CheckFormGroup from '../../components/check-form-group';
-import { lodagjöldVars as calcMap } from '../../constants/index.js';
+import { lodagjöldVars as baseMap } from '../../constants/index.js';
+import { getLodagjold } from '../../lib/getLodagjold';
+
+export async function getServerSideProps () {
+  const live = await getLodagjold();          // blob
+  return { props: { calcMap: { ...baseMap, ...live } } };
+}
 
 const idsMap = {
     SIZE: 'size',
@@ -21,6 +27,7 @@ const idsMap = {
 class Lodagjold extends React.Component {
     constructor(props) {
         super(props);
+        this.calcMap = props.calcMap;
         this.state = {
             field: {
                 type: idsMap.EINBYLI,
@@ -45,9 +52,9 @@ class Lodagjold extends React.Component {
     handleSubmit = (e) => {
         e.preventDefault();
         let tegund = this.state.field.type;
-        let alagning = calcMap[tegund];
+        let alagning = this.calcMap[this.state.field.type];
         let size = this.state.field.size;
-        let perSqMeter = calcMap.PER_SQ_METER;
+        let perSqMeter = this.calcMap.PER_SQ_METER;
         let total = size*perSqMeter;
         let tgatnagerd = total*alagning;
         let percentage = alagning*100
@@ -87,13 +94,13 @@ class Lodagjold extends React.Component {
                                         <h5 className="card-title">Áætluð gatnagerðargjöld: {currencyFormat(this.state.tGatnagerd)}</h5>
                                         <p className="card-text">
                                             <b>Sundurliðun:</b><br></br>
-                                            Gert er ráð fyrir að verðmat húsnæðis nemi {currencyFormat(this.state.total)} miðað við núverandi fermetraverð {currencyFormat(calcMap.PER_SQ_METER)}<br></br>
+                                            Gert er ráð fyrir að verðmat húsnæðis nemi {currencyFormat(this.state.total)} miðað við núverandi fermetraverð {currencyFormat(this.calcMap.PER_SQ_METER)}<br></br>
                                             Af því reiknast {this.state.percentage}% álagning sem nemur {currencyFormat(this.state.tGatnagerd)} 
                                         </p>
                                         <h6 className="card-subtitle mb-2 text-muted">Fyrirvari: </h6>
                                         <p className="card-text">
                                             Eingöngu er um áætlun að ræða miðað við þær forsendur sem slegnar eru inn.<br></br>
-                                            Fermetraverð miðast við vísitölu frá {calcMap.VISITOLU_TXT}.
+                                            Fermetraverð miðast við vísitölu frá {this.calcMap.VISITOLU_TXT}.
                                         </p>
                                     </div>
                                 </div>

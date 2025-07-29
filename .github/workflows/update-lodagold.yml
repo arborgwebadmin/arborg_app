@@ -2,35 +2,33 @@ name: Monthly lodagjöld update
 
 on:
   schedule:
-    - cron:  '0 0 1 * *'   # 00:00 UTC on the 1st
-  workflow_dispatch:       # ← lets you run it manually
+    - cron:  '0 0 1 * *'
+  workflow_dispatch:
 
 jobs:
   update:
     runs-on: ubuntu-latest
-    permissions:
-      contents: write       # so the bot can commit
     steps:
-      - uses: actions/checkout@v4
-
       - uses: actions/setup-node@v4
-        with:
-          node-version: '22'
+        with: { node-version: '22' }
 
-      - name: Install deps
-        run: npm ci --omit=optional   # or pnpm / bun
-
-      - name: Run updater
-        run: node scripts/update-constants.mjs
-
-      - name: Commit & push if changed
-        run: |
-          git config user.name  "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          if [[ `git status --porcelain` ]]; then
-            git add constants/index.js
-            git commit -m "chore: bump lodagjöld ($(date -u +'%Y-%m-%d'))"
-            git push
-          else
-            echo "No changes – nothing to commit."
-          fi
+      - run: |
+          node - <<'EOF'
+          import { put } from '@vercel/blob';
+          const now   = new Date();
+          const code  = `${now.getFullYear()}M${String(now.getMonth()+1).padStart(2,'0')}`;
+          const res   = await fetch(
+            'https://px.hagstofa.is:443/pxis/api/v1/is/Efnahagur/visitolur/2_byggingarvisitala/byggingarvisitala/VIS13501.px',
+            { method:'POST', headers:{'content-type':'application/json'},
+              body: JSON.stringify({ query:[{ code:'Mánuður',selection:{filter:'item',values:[code]}}],
+                                      response:{format:'json'}}) }
+          ).then(r=>r.json());
+          const data = {
+            PER_SQ_METER: Number(res.data[0].values[0]),
+            VISITOLU_TXT: `1. ${now.toLocaleString('is-IS',{month:'long'})} ${now.getFullYear()}`
+          };
+          await put('lodagjold/latest.json', JSON.stringify(data), { access:'public' });
+          console.log('pushed to blob', data);
+          EOF
+        env:
+          VERCEL_BLOB_READ_WRITE_TOKEN: ${{ secrets.VERCEL_BLOB_READ_WRITE_TOKEN }}
