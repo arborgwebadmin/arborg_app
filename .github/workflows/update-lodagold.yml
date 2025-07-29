@@ -1,0 +1,36 @@
+name: Monthly lodagjöld update
+
+on:
+  schedule:
+    - cron:  '0 0 1 * *'   # 00:00 UTC on the 1st
+  workflow_dispatch:       # ← lets you run it manually
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write       # so the bot can commit
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Install deps
+        run: npm ci --omit=optional   # or pnpm / bun
+
+      - name: Run updater
+        run: node scripts/update-constants.mjs
+
+      - name: Commit & push if changed
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          if [[ `git status --porcelain` ]]; then
+            git add constants/index.js
+            git commit -m "chore: bump lodagjöld ($(date -u +'%Y-%m-%d'))"
+            git push
+          else
+            echo "No changes – nothing to commit."
+          fi

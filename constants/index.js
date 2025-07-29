@@ -52,5 +52,5 @@ export var lodagjöldVars = {
     VERSLUN: 0.05,
     IDNADUR: 0.05,
     ATHAFNASVAEDI: 0.05,
-    VISITOLU_TXT : '1. júlí 2025'
+    VISITOLU_TXT : '1. júlí 2025' // Texti sem fer í disclaimer eftir útreikninga
 }
