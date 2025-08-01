@@ -44,7 +44,7 @@ export var fasteignagjöldPrice = {
 }
 
 export var lodagjöldVars = {
-    PER_SQ_METER: 313846,
+    PER_SQ_METER: 313566,
     EINBYLI: 0.15,
     PAR: 0.13,
     RAD: 0.13,
@@ -52,5 +52,5 @@ export var lodagjöldVars = {
     VERSLUN: 0.05,
     IDNADUR: 0.05,
     ATHAFNASVAEDI: 0.05,
-    VISITOLU_TXT : '1. júlí 2025'
+    VISITOLU_TXT : '1. ágúst 2025'
 }
