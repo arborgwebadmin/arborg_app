@@ -8,7 +8,7 @@ import { lodagjöldVars as baseMap } from '../../constants/index.js';
 import { getLodagjold } from '../../lib/getLodagjold';
 
 export async function getServerSideProps () {
-  const live = await getLodagjold();          // blob
+  const live = await getLodagjold();
   return { props: { calcMap: { ...baseMap, ...live } } };
 }
 
