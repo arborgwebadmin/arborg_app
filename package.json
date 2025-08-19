@@ -2,6 +2,9 @@
   "name": "arborg-app",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": "22.x"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -9,21 +12,24 @@
     "test": "jest"
   },
   "dependencies": {
-    "bootstrap": "^4.6.1",
-    "next": "^12.2.0",
-    "react": "^18.2.0",
-    "react-bootstrap": "^1.6.5",
+    "@vercel/blob": "^1.1.1",
+    "axios": "^1.11.0",
+    "bootstrap": "^5.3.7",
+    "next": "^15.4.2",
+    "react": "^18.3.1",
+    "react-bootstrap": "^2.10.10",
     "react-bootstrap-typeahead": "^6.0.0-rc.3",
-    "react-dom": "^18.2.0",
+    "react-dom": "^18.3.1",
     "react-select": "^5.8.0",
-    "swr": "^0.4.2"
+    "swr": "^2.3.4"
   },
   "devDependencies": {
-    "@testing-library/dom": "^7.29.0",
-    "@testing-library/jest-dom": "^5.11.6",
-    "@testing-library/react": "^11.2.2",
-    "babel-jest": "^26.6.3",
-    "jest": "^26.6.3"
+    "@testing-library/dom": "^10.4.1",
+    "@testing-library/jest-dom": "^6.6.4",
+    "@testing-library/react": "^16.3.0",
+    "babel-jest": "^30.0.5",
+    "eslint-config-next": "^15.4.4",
+    "jest": "^30.0.5"
   },
   "jest": {
     "testPathIgnorePatterns": [

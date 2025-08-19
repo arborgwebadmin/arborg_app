@@ -1,0 +1,34 @@
+name: Monthly lodagjöld update
+
+on:
+  schedule:
+    - cron:  '0 0 1 * *'
+  workflow_dispatch:
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/setup-node@v4
+        with: { node-version: '22' }
+
+      - run: |
+          node - <<'EOF'
+          import { put } from '@vercel/blob';
+          const now   = new Date();
+          const code  = `${now.getFullYear()}M${String(now.getMonth()+1).padStart(2,'0')}`;
+          const res   = await fetch(
+            'https://px.hagstofa.is:443/pxis/api/v1/is/Efnahagur/visitolur/2_byggingarvisitala/byggingarvisitala/VIS13501.px',
+            { method:'POST', headers:{'content-type':'application/json'},
+              body: JSON.stringify({ query:[{ code:'Mánuður',selection:{filter:'item',values:[code]}}],
+                                      response:{format:'json'}}) }
+          ).then(r=>r.json());
+          const data = {
+            PER_SQ_METER: Number(res.data[0].values[0]),
+            VISITOLU_TXT: `1. ${now.toLocaleString('is-IS',{month:'long'})} ${now.getFullYear()}`
+          };
+          await put('lodagjold/latest.json', JSON.stringify(data), { access:'public' });
+          console.log('pushed to blob', data);
+          EOF
+        env:
+          BLOB_READ_WRITE_TOKEN: ${{ secrets.BLOB_READ_WRITE_TOKEN }}
