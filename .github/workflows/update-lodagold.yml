@@ -12,7 +12,6 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-          cache: 'npm'
 
       # Install the SDK just for this job (no need to commit it)
       - run: npm i --no-save @vercel/blob
