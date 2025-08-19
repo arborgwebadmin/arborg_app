@@ -2,7 +2,7 @@ name: Monthly lodagjöld update
 
 on:
   schedule:
-    - cron:  '27 11 19 * *'
+    - cron:  '30 11 19 * *'
   workflow_dispatch:
 
 jobs:
