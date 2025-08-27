@@ -87,8 +87,8 @@ class Fasteignagjold extends React.Component {
 				<PageHead title="Reiknivél fasteignagjalda íbúðarhúsnæðis"></PageHead>
 						<div className={ styles.main }>
 							<div className="container">
-								<h1>Reiknivél fasteignagjalda {calcMap.YEAR}</h1>
-								<a href="https://fasteignaskra.is/leit-i-fasteignaskra/" target="_blank" rel="nofollow" className={ styles.secondaryLink }>Smelltu hér til að fletta upp fasteignamati eignar</a>
+								<h1>Reiknivél fasteignagjalda 2025</h1>  
+								<a href="https://fasteignaskra.is/fasteignir/fasteignamat" target="_blank" rel="nofollow" className={ styles.secondaryLink }>Smelltu hér til að fletta upp fasteignamati eignar</a>
 							</div>
 							<div className="container">
 								<form onSubmit={ this.handleSubmit }>
@@ -228,5 +228,6 @@ class Fasteignagjold extends React.Component {
 
 
 }
+
 
 export default Fasteignagjold;
