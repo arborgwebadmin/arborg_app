@@ -29,18 +29,18 @@ export var fristundirPrice = {
 }
 
 export var fasteignagjöldPrice = {
-	FASTSK_A: 0.003,
+	FASTSK_A: 0.0048,
 	LODALEIGA_A: 0.01,
 	VATNSGJALD: 0.00172,
 	FRAVEITUGJ: 0.0018,
-	SORPGJ_GR_140: 18655,
-	SORPGJ_GR_240: 26148,
-	SORPGJ_BL_240: 8866,
-	SORPGJ_FJ_240: 8866,
-	SORPGJ_TV: 33370,
-	SORPGJ_BR_140: 11440,
-	FASTAGJALD_A: 17808,
-	YEAR: 2024
+	SORPGJ_GR_140: 22476,
+	SORPGJ_GR_240: 33706,
+	SORPGJ_BL_240: 7159,
+	SORPGJ_FJ_240: 7159,
+	SORPGJ_TV: 34739,
+	SORPGJ_BR_140: 13720,
+	FASTAGJALD_A: 16127,
+	YEAR: 2025
 }
 
 export var lodagjöldVars = {
@@ -54,3 +54,4 @@ export var lodagjöldVars = {
     ATHAFNASVAEDI: 0.05,
     VISITOLU_TXT : '1. ágúst 2025'
 }
+
