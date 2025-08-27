@@ -10,22 +10,22 @@ export const selectTag = {
 export var months = ["janúar", "febrúar", "mars", "apríl", "maí", "júní", "júlí", "ágúst", "september", "október", "nóvember", "desember"]
 
 export var leikskoliGjaldskra = {
-	per_hour_cost: 4453,
-	per_quarter_cost: 2300,
-	primary_hour_cost: 3117,
-	primary_quarter_cost: 1610,
-	launch_cost: 7578,
-	breakfast_cost: 2675,
-	refreshment_cost: 2675
+	per_hour_cost: 4145,
+	per_quarter_cost: 2381,
+	primary_hour_cost: 2018,
+	primary_quarter_cost: 2598,
+	launch_cost: 7604,
+	breakfast_cost: 2685,
+	refreshment_cost: 2159
 }
 
 export var fristundirPrice = {
-	'5 dagar': [19550, 5645],
-	'4 dagar': [15942, 4520],
-	'3 dagar': [12305, 3382],
-	'2 dagar': [8682, 2275],
-	'1 dagur': [5045, 1152],
-	PRICE_DATE: '1. janúar 2024' // síðan hvernær gjaldskráin er: texti sem fer í disclaimer eftir útreikninga.
+	'5 dagar': [20234, 5843],
+	'4 dagar': [16500, 4678],
+	'3 dagar': [12736, 3500],
+	'2 dagar': [8986, 2355],
+	'1 dagur': [5222, 1192],
+	PRICE_DATE: '1. janúar 2025' // síðan hvernær gjaldskráin er: texti sem fer í disclaimer eftir útreikninga.
 }
 
 export var fasteignagjöldPrice = {
@@ -54,4 +54,5 @@ export var lodagjöldVars = {
     ATHAFNASVAEDI: 0.05,
     VISITOLU_TXT : '1. ágúst 2025'
 }
+
 
