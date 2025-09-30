@@ -1,19 +1,17 @@
-// pages/api/cron/lodagjold.ts
-import type { NextApiRequest, NextApiResponse } from 'next';
+// api/cron/lodagjold.ts
+import type { VercelRequest, VercelResponse } from '@vercel/node';
 import { put } from '@vercel/blob';
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+export default async function handler(req: VercelRequest, res: VercelResponse) {
   try {
-    // simple bearer auth so you can trigger it safely
     const expected = process.env.CRON_SECRET || '';
     const auth = (req.headers.authorization as string) || '';
     if (expected && auth !== `Bearer ${expected}`) {
       return res.status(401).send('unauthorized');
     }
 
-    // optional testing knobs:
-    const codeOverride = typeof req.query.code === 'string' ? req.query.code : undefined;     // e.g. 2025M08
-    const suffix       = typeof req.query.suffix === 'string' ? req.query.suffix : undefined; // e.g. test -> writes latest-test.json
+    const codeOverride = typeof req.query.code === 'string' ? req.query.code : undefined;
+    const suffix       = typeof req.query.suffix === 'string' ? req.query.suffix : undefined;
 
     const now  = new Date();
     const code = codeOverride || `${now.getFullYear()}M${String(now.getMonth() + 1).padStart(2, '0')}`;
@@ -29,18 +27,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       headers: { 'content-type': 'application/json' },
       body: JSON.stringify(body),
     });
-
-    if (!resp.ok) {
-      return res
-        .status(502)
-        .send(`Hagstofa request failed: ${resp.status} ${resp.statusText}`);
-    }
+    if (!resp.ok) return res.status(502).send(`Hagstofa request failed: ${resp.status} ${resp.statusText}`);
 
     const json  = await resp.json();
     const value = Number(json?.data?.[0]?.values?.[0]);
-    if (!Number.isFinite(value)) {
-      return res.status(500).send('Unexpected response from Hagstofa');
-    }
+    if (!Number.isFinite(value)) return res.status(500).send('Unexpected response from Hagstofa');
 
     const data = {
       PER_SQ_METER: value,
@@ -48,12 +39,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     };
 
     const token = process.env.ARBORG_BLOB_READ_WRITE_TOKEN;
-    if (!token) {
-      return res.status(500).send('Blob token missing (set ARBORG_BLOB_READ_WRITE_TOKEN)');
-    }
+    if (!token) return res.status(500).send('Blob token missing (set ARBORG_BLOB_READ_WRITE_TOKEN)');
 
     const filename = suffix ? `latest-${suffix}.json` : 'latest.json';
-
     const result = await put(`lodagjold/${filename}`, JSON.stringify(data), {
       access: 'public',
       contentType: 'application/json; charset=utf-8',
