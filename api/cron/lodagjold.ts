@@ -6,9 +6,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   try {
     const expected = process.env.CRON_SECRET || '';
     const auth = (req.headers.authorization as string) || '';
-    if (expected && auth !== `Bearer ${expected}`) {
-      return res.status(401).send('unauthorized');
-    }
+    if (expected && auth !== `Bearer ${expected}`) return res.status(401).send('unauthorized');
 
     const codeOverride = typeof req.query.code === 'string' ? req.query.code : undefined;
     const suffix       = typeof req.query.suffix === 'string' ? req.query.suffix : undefined;
