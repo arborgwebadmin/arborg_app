@@ -1,8 +1,5 @@
 {
   "crons": [
-    {
-      "path": "/api/cron/update-constants",
-      "schedule": "0 0 1 * *" 
-    }
+    { "path": "/api/cron/lodagjold", "schedule": "0 0 1 * *" }
   ]
 }
