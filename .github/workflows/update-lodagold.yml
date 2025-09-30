@@ -4,7 +4,6 @@ on:
   schedule:
     - cron: '0 0 1 * *'
   workflow_dispatch:
-
 jobs:
   update:
     runs-on: ubuntu-latest
@@ -13,58 +12,37 @@ jobs:
         with:
           node-version: '22'
 
-      # Install the SDK just for this job (no need to commit it)
       - run: npm i --no-save @vercel/blob
 
-      # Run as ESM and pass the token explicitly
-      - run: |
-          node --input-type=module - <<'EOF'
-          import { put } from '@vercel/blob';
+      - name: Debug token presence
+        run: node -e "console.log('has token?', Boolean(process.env.BLOB_READ_WRITE_TOKEN))"
+        env:
+          BLOB_READ_WRITE_TOKEN: ${{ secrets.BLOB_READ_WRITE_TOKEN }} # or map from your actual secret name
 
-          // --- Fetch value from Hagstofa ---
-          const now  = new Date();
-          const code = `${now.getFullYear()}M${String(now.getMonth()+1).padStart(2,'0')}`;
-
-          const body = {
-            query: [{ code: 'Mánuður', selection: { filter: 'item', values: [code] } }],
-            response: { format: 'json' }
-          };
-
-          const api = 'https://px.hagstofa.is/pxis/api/v1/is/Efnahagur/visitolur/2_byggingarvisitala/byggingarvisitala/VIS13501.px';
-          const resp = await fetch(api, {
-            method: 'POST',
-            headers: { 'content-type': 'application/json' },
-            body: JSON.stringify(body)
-          });
-
-          if (!resp.ok) {
-            throw new Error(`Hagstofa request failed: ${resp.status} ${resp.statusText}`);
-          }
-
-          const json = await resp.json();
-          const value = Number(json?.data?.[0]?.values?.[0]);
-          if (!Number.isFinite(value)) {
-            throw new Error(`Unexpected response shape, got: ${JSON.stringify(json).slice(0, 500)}…`);
-          }
-
-          const data = {
-            PER_SQ_METER: value,
-            VISITOLU_TXT: `1. ${now.toLocaleString('is-IS', { month: 'long' })} ${now.getFullYear()}`
-          };
-
-          // --- Push to Vercel Blob ---
-          const res = await put(
-            'lodagjold/latest.json',
-            JSON.stringify(data),
-            {
-              access: 'public',
-              contentType: 'application/json; charset=utf-8',
-              addRandomSuffix: false,            // ensure it's always /lodagjold/latest.json
-              token: process.env.BLOB_READ_WRITE_TOKEN // use our env name
-            }
-          );
-
-          console.log('pushed to blob', { url: res.url, ...data });
-          EOF
+      - name: Push latest.json to Vercel Blob
         env:
           BLOB_READ_WRITE_TOKEN: ${{ secrets.BLOB_READ_WRITE_TOKEN }}
+        run: |
+          node --input-type=module - <<'EOF'
+          import { put } from '@vercel/blob';
+          const now  = new Date();
+          const code = `${now.getFullYear()}M${String(now.getMonth()+1).padStart(2,'0')}`;
+          const body = { query: [{ code: 'Mánuður', selection: { filter: 'item', values: [code] } }], response: { format: 'json' } };
+          const api = 'https://px.hagstofa.is/pxis/api/v1/is/Efnahagur/visitolur/2_byggingarvisitala/byggingarvisitala/VIS13501.px';
+          const resp = await fetch(api, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(body) });
+          if (!resp.ok) throw new Error(`Hagstofa request failed: ${resp.status} ${resp.statusText}`);
+          const json  = await resp.json();
+          const value = Number(json?.data?.[0]?.values?.[0]);
+          if (!Number.isFinite(value)) throw new Error(`Unexpected response: ${JSON.stringify(json).slice(0,500)}…`);
+          const data = {
+            PER_SQ_METER: value,
+            VISITOLU_TXT: `1. ${now.toLocaleString('is-IS', { month: 'long' })} ${now.getFullYear()}`,
+          };
+          const res = await put('lodagjold/latest.json', JSON.stringify(data), {
+            access: 'public',
+            contentType: 'application/json; charset=utf-8',
+            addRandomSuffix: false,
+            token: process.env.BLOB_READ_WRITE_TOKEN,
+          });
+          console.log('pushed to blob', { url: res.url, ...data });
+          EOF
