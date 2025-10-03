@@ -32,7 +32,7 @@ export var fasteignagjöldPrice = {
 	FASTSK_A: 0.0048,
 	LODALEIGA_A: 0.01,
 	VATNSGJALD: 0.00102,
-	FRAVEITUGJ: 0.0018,
+	FRAVEITUGJ: 0.00102,
 	SORPGJ_GR_140: 22476,
 	SORPGJ_GR_240: 33706,
 	SORPGJ_BL_240: 7159,
@@ -54,6 +54,7 @@ export var lodagjöldVars = {
     ATHAFNASVAEDI: 0.05,
     VISITOLU_TXT : '1. ágúst 2025'
 }
+
 
 
 
