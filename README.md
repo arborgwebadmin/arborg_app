@@ -3,9 +3,9 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 ## Getting Started
 
 
-First install the node packages using node14:
+First install the node packages using version from .nvmrc:
 ```bash
-nvm use 14
+nvm use 
 npm install
 ```
 First, run the development server:
