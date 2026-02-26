@@ -50,55 +50,67 @@ export default function Sorphirda() {
             // Loop through the neighbourhoods
             for(const neighbourhood in temp_JSON){
                 // if address in streets
-                if(temp_JSON[neighbourhood].streets.includes(address) ){
-                    
-                    bd = temp_JSON[neighbourhood].blue_dates;
-                    gd = temp_JSON[neighbourhood].gray_dates;
+if (temp_JSON[neighbourhood].streets.includes(address)) {
+  let bd = temp_JSON[neighbourhood].blue_dates || [];
+  let gd = temp_JSON[neighbourhood].gray_dates || [];
 
-                    // filter the dates to last date;
-              //      bd.filter((date) => date > prev_date).sort((a,b) => a > b);
-                //    gd.filter((date) => date > prev_date).sort((a,b) => a > b);
-                    
-//                    bd = bd.filter((date) => date > prev_date).sort((a,b) => a - b);  // Also fixed sort comparison
-  //                  gd = gd.filter((date) => date > prev_date).sort((a,b) => a - b);
-    
-            // Line 60-61 should be:
-			bd = bd.filter((date) => date > prev_date).sort((a,b) => a.getTime() - b.getTime());
-			gd = gd.filter((date) => date > prev_date).sort((a,b) => a.getTime() - b.getTime());
+  // Normalize comparison dates to midnight (local)
+  const toMidnight = d => {
+    const x = new Date(d);
+    x.setHours(0,0,0,0);
+    return x;
+  };
 
-                    // group the dates for readability.
-                    var sorted_grouped_bd = groupDates(bd);
-                    var sorted_grouped_gd = groupDates(gd);
-                    // the last day of the list in sorted_groupted_list is more or equal to current_date
-                    var current_time_index_bd = sorted_grouped_bd.findIndex((value) => value.at(-1).getTime() >= current_date.getTime())
-                    var current_time_index_gd = sorted_grouped_gd.findIndex((value) => value.at(-1).getTime() >= current_date.getTime())
+  const now = toMidnight(new Date());
+  const yesterday = new Date(now); yesterday.setDate(now.getDate() - 1);
 
-                    console.log(current_time_index_bd)
+  // keep ~last 50 days for context
+  const since = new Date(now); since.setDate(now.getDate() - 50);
 
-                    // get the last pickup dates
-                    var last_pickup_bd = current_time_index_bd != -1 ?sorted_grouped_bd[current_time_index_bd -1] : sorted_grouped_bd.at(-1);
-                    var last_pickup_gd = current_time_index_gd != -1 ? sorted_grouped_gd[current_time_index_gd -1] : sorted_grouped_gd.at(current_time_index_gd);
-                    // get the next pickup dates
-                    var next_pickup_bd = current_time_index_bd != -1 ? sorted_grouped_bd[current_time_index_bd] : null;
-                    var next_pickup_gd = current_time_index_gd != -1 ? sorted_grouped_gd[current_time_index_gd] : null;
-                    // get future pickup dates
-                    var future_pickups_bd = current_time_index_bd != -1 ? sorted_grouped_bd.slice(current_time_index_bd + 1) : null;
-                    var future_pickups_gd = current_time_index_gd != -1 ? sorted_grouped_gd.slice(current_time_index_gd + 1) : null;
-                    
+  // Validate instances and filter/sort ascending by time
+  const sortAsc = (a, b) => a - b; // Date subtraction coerces to ms (safe)
+  bd = bd.filter(d => d instanceof Date && d > since).sort(sortAsc);
+  gd = gd.filter(d => d instanceof Date && d > since).sort(sortAsc);
 
-                    var some = Boolean(-1) ? "true" : "false"
-                    console.log(some)
-                    console.log(future_pickups_gd)
+  // Group dates that are within 5 days of the last date of the current group
+  const groupBy5Days = (dates) => {
+    return dates.reduce((acc, cur, idx) => {
+      if (idx && acc.at(-1).at(-1).getTime() + 5*86400*1000 >= cur.getTime()) {
+        acc.at(-1).push(cur);
+      } else {
+        acc.push([cur]);
+      }
+      return acc;
+    }, []);
+  };
 
-                    // set all the states
-                    setNextBlue(next_pickup_bd)
-                    setNextGrey(next_pickup_gd)
-                    setFutureBlue(future_pickups_bd)
-                    setFutureGrey(future_pickups_gd)
-                    setPrevBlue(last_pickup_bd)
-                    setPrevGray(last_pickup_gd)
+  const groupedBD = groupBy5Days(bd);
+  const groupedGD = groupBy5Days(gd);
 
-                }
+  // First group whose LAST date is >= yesterday (i.e., current or next run)
+  const idxBD = groupedBD.findIndex(g => g.at(-1).getTime() >= yesterday.getTime());
+  const idxGD = groupedGD.findIndex(g => g.at(-1).getTime() >= yesterday.getTime());
+
+  // LAST pickup blocks (use .at so -1 resolves to "last element")
+  const lastBD = idxBD !== -1 ? groupedBD.at(idxBD - 1) : groupedBD.at(-1);
+  const lastGD = idxGD !== -1 ? groupedGD.at(idxGD - 1) : groupedGD.at(-1);
+
+  // NEXT pickup blocks (null if there are no more)
+  const nextBD = idxBD !== -1 ? groupedBD[idxBD] : null;
+  const nextGD = idxGD !== -1 ? groupedGD[idxGD] : null;
+
+  // FUTURE pickup blocks (after NEXT)
+  const futBD  = idxBD !== -1 ? groupedBD.slice(idxBD + 1) : [];
+  const futGD  = idxGD !== -1 ? groupedGD.slice(idxGD + 1) : [];
+
+  // Apply to state
+  setNextBlue(nextBD);
+  setNextGrey(nextGD);
+  setFutureBlue(futBD);
+  setFutureGrey(futGD);
+  setPrevBlue(lastBD);
+  setPrevGray(lastGD);
+}
             
             }
 
