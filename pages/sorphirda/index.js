@@ -72,8 +72,13 @@ if (temp_JSON[neighbourhood].streets.some(s => s.trim() === address.trim())) {
   // Keep dates after "since" (allows both recent history and all future)
   bd = bd.filter(d => d > since).sort(sortAsc);
   gd = gd.filter(d => d > since).sort(sortAsc);
-
-  // Group when within 5 days from the last date of the current group
+//logging starts
+    console.log('[DBG] Address:', address);
+console.log('[DBG] Neighbourhood:', neighbourhood);
+console.log('[DBG] bd count:', bd.length, 'first:', bd[0], 'last:', bd.at(-1));
+console.log('[DBG] gd count:', gd.length, 'first:', gd[0], 'last:', gd.at(-1));
+//logging ends
+    // Group when within 5 days from the last date of the current group
   const groupBy5d = (dates) => {
     return dates.reduce((acc, cur, idx) => {
       if (idx && acc.at(-1).at(-1).getTime() + 5*24*3600*1000 >= cur.getTime()) {
