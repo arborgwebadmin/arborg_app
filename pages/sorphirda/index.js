@@ -51,38 +51,40 @@ export default function Sorphirda() {
             for(const neighbourhood in temp_JSON){
                 // if address in streets
 if (temp_JSON[neighbourhood].streets.some(s => s.trim() === address.trim())) {
-  // Pull dates and ensure arrays exist
-  let bd = (temp_JSON[neighbourhood].blue_dates  || []).filter(d => d instanceof Date);
-  let gd = (temp_JSON[neighbourhood].gray_dates  || []).filter(d => d instanceof Date);
+  // Helpers that work everywhere (avoid Array.prototype.at)
+  const last  = (arr) => (arr && arr.length ? arr[arr.length - 1] : undefined);
+  const atIdx = (arr, i) => (i < 0 ? arr[arr.length + i] : arr[i]);
 
-  // Normalize to midnight (local) to avoid hour/TZ glitches
   const toMidnight = (d) => {
     const x = new Date(d);
     x.setHours(0,0,0,0);
     return x;
   };
 
-  const todayMid = toMidnight(new Date());
-  const yesterday = new Date(todayMid); yesterday.setDate(todayMid.getDate() - 1);
-  const since     = new Date(todayMid); since.setDate(todayMid.getDate() - 50);
+  // Pull arrays and ensure Date instances
+  let bd = (temp_JSON[neighbourhood].blue_dates || []).filter(d => d instanceof Date);
+  let gd = (temp_JSON[neighbourhood].gray_dates || []).filter(d => d instanceof Date);
 
-  // Sort ascending (Date subtraction coerces to milliseconds)
+  // *** DO NOT FILTER BY LAST 50 DAYS ***  (this has been wiping out valid future)
+  // Just sort ascending – Date subtraction coerces to ms
   const sortAsc = (a, b) => a - b;
+  bd = bd.slice().sort(sortAsc);
+  gd = gd.slice().sort(sortAsc);
 
-  // Keep dates after "since" (allows both recent history and all future)
-  bd = bd.filter(d => d > since).sort(sortAsc);
-  gd = gd.filter(d => d > since).sort(sortAsc);
-//logging starts
-    console.log('[DBG] Address:', address);
-console.log('[DBG] Neighbourhood:', neighbourhood);
-console.log('[DBG] bd count:', bd.length, 'first:', bd[0], 'last:', bd.at(-1));
-console.log('[DBG] gd count:', gd.length, 'first:', gd[0], 'last:', gd.at(-1));
-//logging ends
-    // Group when within 5 days from the last date of the current group
+  // Defensive: if still empty, short‑circuit early
+  if (!bd.length && !gd.length) {
+    console.warn('[DBG] No dates found for', address, 'in', neighbourhood);
+    setNextBlue(null); setNextGrey(null);
+    setFutureBlue([]); setFutureGrey([]);
+    setPrevBlue([]);   setPrevGray([]);
+    return;
+  }
+
+  // Group by 5-day windows
   const groupBy5d = (dates) => {
     return dates.reduce((acc, cur, idx) => {
-      if (idx && acc.at(-1).at(-1).getTime() + 5*24*3600*1000 >= cur.getTime()) {
-        acc.at(-1).push(cur);
+      if (idx && last(acc[last(acc).length - 1]).getTime() + 5*24*3600*1000 >= cur.getTime()) {
+        acc[acc.length - 1].push(cur);
       } else {
         acc.push([cur]);
       }
@@ -93,30 +95,52 @@ console.log('[DBG] gd count:', gd.length, 'first:', gd[0], 'last:', gd.at(-1));
   const gBD = groupBy5d(bd);
   const gGD = groupBy5d(gd);
 
-  // First group whose LAST date is >= yesterday (current or next)
-  const idxBD = gBD.findIndex(g => g.at(-1).getTime() >= yesterday.getTime());
-  const idxGD = gGD.findIndex(g => g.at(-1).getTime() >= yesterday.getTime());
+  // Use "yesterday at midnight" for stable compare
+  const todayMid = toMidnight(new Date());
+  const yesterday = new Date(todayMid); yesterday.setDate(todayMid.getDate() - 1);
 
-  // If not found but there ARE future dates (all groups < yesterday),
-  // show nothing as "next" (null) and use the last group as "prev"
-  const lastBD = idxBD !== -1 ? gBD.at(idxBD - 1) : gBD.at(-1);
-  const lastGD = idxGD !== -1 ? gGD.at(idxGD - 1) : gGD.at(-1);
+  // First group whose LAST date is >= yesterday (current/next)
+  const idxBD = gBD.findIndex(g => last(g).getTime() >= yesterday.getTime());
+  const idxGD = gGD.findIndex(g => last(g).getTime() >= yesterday.getTime());
 
+  // Previous groups (use atIdx to handle -1 safely)
+  const lastBD = idxBD !== -1 ? atIdx(gBD, idxBD - 1) : atIdx(gBD, -1);
+  const lastGD = idxGD !== -1 ? atIdx(gGD, idxGD - 1) : atIdx(gGD, -1);
+
+  // Next groups (null if none)
   const nextBD = idxBD !== -1 ? gBD[idxBD] : null;
   const nextGD = idxGD !== -1 ? gGD[idxGD] : null;
 
+  // Future groups (after next)
   const futBD  = idxBD !== -1 ? gBD.slice(idxBD + 1) : [];
   const futGD  = idxGD !== -1 ? gGD.slice(idxGD + 1) : [];
 
-  // Apply to state
+  // Debug: show what the component *thinks* the bounds are
+  console.table({
+    address,
+    today: todayMid.toDateString(),
+    yesterday: yesterday.toDateString(),
+    gd_len: gd.length,
+    gd_first: gd[0]?.toDateString(),
+    gd_last: last(gd)?.toDateString(),
+    idxGD,
+    nextGD_last: last(nextGD || [])?.toDateString(),
+    bd_len: bd.length,
+    bd_first: bd[0]?.toDateString(),
+    bd_last: last(bd)?.toDateString(),
+    idxBD,
+    nextBD_last: last(nextBD || [])?.toDateString(),
+  });
+
+  // set all states
   setNextBlue(nextBD);
   setNextGrey(nextGD);
   setFutureBlue(futBD);
   setFutureGrey(futGD);
-  setPrevBlue(lastBD);
-  setPrevGray(lastGD);
+  setPrevBlue(lastBD || []);  // keep UI happy (formatDateRange accepts arrays)
+  setPrevGray(lastGD || []);
 }
-``
+
             
             }
 
