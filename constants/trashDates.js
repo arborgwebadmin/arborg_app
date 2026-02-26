@@ -51,7 +51,7 @@ var temp_JSON = {
       "Reynivellir", "Vallholt", "Víðivellir", "Birkivellir",
       "Rauðholt", "Hjarðarholt", "Stekkholt", "Réttarholt", "Hrísholt",
       "Merkiland", "Grænumörk", "Þórsmörk", "Heiðmörk", "Laugarbakki",
-      "Fagurgerði", "Grænuvellir", "Hörðuvellir", "Hraunbakki",
+      "Fagurgerði", "Grænuvellir", "Hörðuvellir",
       "Austurvegur", "Strandgata", "Suðurbraut", "Brúaarstræti",
       "Engjavegur", "Tryggvagata", "Árvegur", "Austurhólar", "Hraunhólar",
       "Grænumörk", "Hlaðvellir", "Melhólar","Ásland","Mosland","Lágland","Fífuland"
