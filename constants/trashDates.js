@@ -21,7 +21,7 @@ var temp_JSON = {
             "Hamrahvoll", "Sjólyst", "Strönd", "Íragerði", "Sæbakki",
             "Sævarland", "Írabakki", "Eystra Íragerði", "Ásgarður",
             "Jaðar - Stokkseyri", "Hátindur", "Fagurtún", "Fagurhóll",
-            "Urðarós", "Hvanneyri", "Hraunbakki", "Sævangur", "Lónsbakki",
+            "Urðarós", "Hvanneyri", "Sævangur", "Lónsbakki",
             "Marbakki", "Ránarbakki", "Skerjabakki", "Bakkasel", "Kuðungur",
             "Sæhvoll", "Vestri-Rauðárhólar", "Nesbrú - Stokkseyri",
             "Knarrarvogur", "Kumbarvogur", "Jörfabakki", "Silfurtún",
@@ -52,9 +52,9 @@ var temp_JSON = {
             "Rauðholt", "Hjarðarholt", "Stekkholt", "Réttarholt", "Hrísholt",
             "Merkiland", "Grænumörk", "Þórsmörk", "Heiðmörk", "Laugarbakki",
             "Fagurgerði", "Grænuvellir", "Hörðuvellir", "Hraunbakki",
-            "Austurvegur", "Strandgata", "Suðurbraut", "Brúaarstræti",
+            "Austurvegur", "Strandgata", "Suðurbraut", "Brúarstræti",
             "Engjavegur", "Tryggvagata", "Árvegur", "Austurhólar", "Hraunhólar",
-            "Grænumörk", "Hlaðvellir", "Melhólar"
+            "Hlaðvellir", "Melhólar"
         ],
         gray_dates: [
             // List over dates for when the gray and brown trash bin will be emptied for this neighbourhood
@@ -116,7 +116,7 @@ var temp_JSON = {
             //2026
             new Date(2026,0,21),new Date(2026,0,22),new Date(2026,0,23),new Date(2026,1,18),new Date(2026,1,19),new Date(2026,1,20),new Date(2026,2,16),new Date(2026,2,17),
             new Date(2026,2,18),new Date(2026,3,15),new Date(2026,3,16),new Date(2026,3,17),new Date(2026,4,13),new Date(2026,4,15),new Date(2026,5,10),
-            new Date(2026,5,10),new Date(2026,5,11),new Date(2026,5,12),new Date(2026,6,8),new Date(2026,6,9),new Date(2026,6,10),new Date(2026,7,5),new Date(2026,7,6),new Date(2026,7,7),
+            new Date(2026,5,11),new Date(2026,5,12),new Date(2026,6,8),new Date(2026,6,9),new Date(2026,6,10),new Date(2026,7,5),new Date(2026,7,6),new Date(2026,7,7),
             new Date(2026,8,2),new Date(2026,8,3),new Date(2026,8,4),new Date(2026,8,30),new Date(2026,9,1),new Date(2026,9,2),new Date(2026,9,28),new Date(2026,9,29),new Date(2026,9,30),
             new Date(2026,10,25),new Date(2026,10,26),new Date(2026,10,27),new Date(2026,11,21),new Date(2026,11,22),new Date(2026,11,23)
         ],
@@ -144,8 +144,8 @@ var temp_JSON = {
             //2026
             new Date(2026,0,26),new Date(2026,0,27),new Date(2026,1,23),new Date(2026,1,24),new Date(2026,2,19),new Date(2026,2,20),new Date(2026,3,20),new Date(2026,3,21),
             new Date(2026,4,18),new Date(2026,4,19),new Date(2026,5,15),new Date(2026,5,16),new Date(2026,6,13),new Date(2026,6,14),new Date(2026,7,10),new Date(2026,7,11),
-            new Date(2026,8,7),new Date(2026,8,8),new Date(2026,9,5),new Date(2026,9,6),new Date(2026,10,2),new Date(2026,10,3),new Date(2026,10,30),new Date(2024,11,1),
-            new Date(2026,11,28),new Date(2024,11,29)    
+            new Date(2026,8,7),new Date(2026,8,8),new Date(2026,9,5),new Date(2026,9,6),new Date(2026,10,2),new Date(2026,10,3),new Date(2026,10,30),new Date(2026,11,1),
+            new Date(2026,11,28),new Date(2026,11,29)    
             ],
             blue_dates: [
                 // List over dates for when the blue trash bin will be emptied for this neighbourhood
@@ -155,7 +155,7 @@ var temp_JSON = {
             new Date(2026,0,12),new Date(2026,0,13),new Date(2026,1,9),new Date(2026,1,10),new Date(2026,2,9),new Date(2026,2,10),new Date(2026,3,7),new Date(2026,3,8),new Date(2026,4,7),
             new Date(2026,4,8),new Date(2026,5,1),new Date(2026,5,2),new Date(2026,5,29),new Date(2026,5,30),
             new Date(2026,6,27),new Date(2026,6,28),new Date(2026,7,24),new Date(2026,7,25),new Date(2026,8,21),new Date(2026,8,22),new Date(2026,9,19),new Date(2026,9,20),
-            new Date(2026,10,16),new Date(2026,10,17),new Date(2026,11,14),new Date(2024,11,15)                    
+            new Date(2026,10,16),new Date(2026,10,17),new Date(2026,11,14),new Date(2026,11,15)                    
             ]
     },
     hverfi_4: {
@@ -186,8 +186,8 @@ var temp_JSON = {
             //Kemur nýtt inn 2026
             new Date(2026,0,13),new Date(2026,0,27),new Date(2026,1,10),new Date(2026,1,24),new Date(2026,2,10),new Date(2026,2,24),new Date(2026,3,7),new Date(2026,3,21),new Date(2026,4,5),
             new Date(2026,4,19),new Date(2026,5,2),new Date(2026,5,16),new Date(2026,5,30),new Date(2026,6,14),new Date(2026,6,28),new Date(2026,7,11),new Date(2026,7,25),
-            new Date(2026,8,8),new Date(2026,8,22),new Date(2026,9,6),new Date(2026,9,20),new Date(2026,10,3),new Date(2026,10,17),new Date(2026,11,1),new Date(2026,11,15,
-            new Date(2026,11,29))    
+            new Date(2026,8,8),new Date(2026,8,22),new Date(2026,9,6),new Date(2026,9,20),new Date(2026,10,3),new Date(2026,10,17),new Date(2026,11,1),new Date(2026,11,15),
+            new Date(2026,11,29)    
             ]
     }
 };
