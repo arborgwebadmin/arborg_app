@@ -50,32 +50,33 @@ export default function Sorphirda() {
             // Loop through the neighbourhoods
             for(const neighbourhood in temp_JSON){
                 // if address in streets
-if (temp_JSON[neighbourhood].streets.includes(address)) {
-  let bd = temp_JSON[neighbourhood].blue_dates || [];
-  let gd = temp_JSON[neighbourhood].gray_dates || [];
+if (temp_JSON[neighbourhood].streets.some(s => s.trim() === address.trim())) {
+  // Pull dates and ensure arrays exist
+  let bd = (temp_JSON[neighbourhood].blue_dates  || []).filter(d => d instanceof Date);
+  let gd = (temp_JSON[neighbourhood].gray_dates  || []).filter(d => d instanceof Date);
 
-  // Normalize comparison dates to midnight (local)
-  const toMidnight = d => {
+  // Normalize to midnight (local) to avoid hour/TZ glitches
+  const toMidnight = (d) => {
     const x = new Date(d);
     x.setHours(0,0,0,0);
     return x;
   };
 
-  const now = toMidnight(new Date());
-  const yesterday = new Date(now); yesterday.setDate(now.getDate() - 1);
+  const todayMid = toMidnight(new Date());
+  const yesterday = new Date(todayMid); yesterday.setDate(todayMid.getDate() - 1);
+  const since     = new Date(todayMid); since.setDate(todayMid.getDate() - 50);
 
-  // keep ~last 50 days for context
-  const since = new Date(now); since.setDate(now.getDate() - 50);
+  // Sort ascending (Date subtraction coerces to milliseconds)
+  const sortAsc = (a, b) => a - b;
 
-  // Validate instances and filter/sort ascending by time
-  const sortAsc = (a, b) => a - b; // Date subtraction coerces to ms (safe)
-  bd = bd.filter(d => d instanceof Date && d > since).sort(sortAsc);
-  gd = gd.filter(d => d instanceof Date && d > since).sort(sortAsc);
+  // Keep dates after "since" (allows both recent history and all future)
+  bd = bd.filter(d => d > since).sort(sortAsc);
+  gd = gd.filter(d => d > since).sort(sortAsc);
 
-  // Group dates that are within 5 days of the last date of the current group
-  const groupBy5Days = (dates) => {
+  // Group when within 5 days from the last date of the current group
+  const groupBy5d = (dates) => {
     return dates.reduce((acc, cur, idx) => {
-      if (idx && acc.at(-1).at(-1).getTime() + 5*86400*1000 >= cur.getTime()) {
+      if (idx && acc.at(-1).at(-1).getTime() + 5*24*3600*1000 >= cur.getTime()) {
         acc.at(-1).push(cur);
       } else {
         acc.push([cur]);
@@ -84,24 +85,23 @@ if (temp_JSON[neighbourhood].streets.includes(address)) {
     }, []);
   };
 
-  const groupedBD = groupBy5Days(bd);
-  const groupedGD = groupBy5Days(gd);
+  const gBD = groupBy5d(bd);
+  const gGD = groupBy5d(gd);
 
-  // First group whose LAST date is >= yesterday (i.e., current or next run)
-  const idxBD = groupedBD.findIndex(g => g.at(-1).getTime() >= yesterday.getTime());
-  const idxGD = groupedGD.findIndex(g => g.at(-1).getTime() >= yesterday.getTime());
+  // First group whose LAST date is >= yesterday (current or next)
+  const idxBD = gBD.findIndex(g => g.at(-1).getTime() >= yesterday.getTime());
+  const idxGD = gGD.findIndex(g => g.at(-1).getTime() >= yesterday.getTime());
 
-  // LAST pickup blocks (use .at so -1 resolves to "last element")
-  const lastBD = idxBD !== -1 ? groupedBD.at(idxBD - 1) : groupedBD.at(-1);
-  const lastGD = idxGD !== -1 ? groupedGD.at(idxGD - 1) : groupedGD.at(-1);
+  // If not found but there ARE future dates (all groups < yesterday),
+  // show nothing as "next" (null) and use the last group as "prev"
+  const lastBD = idxBD !== -1 ? gBD.at(idxBD - 1) : gBD.at(-1);
+  const lastGD = idxGD !== -1 ? gGD.at(idxGD - 1) : gGD.at(-1);
 
-  // NEXT pickup blocks (null if there are no more)
-  const nextBD = idxBD !== -1 ? groupedBD[idxBD] : null;
-  const nextGD = idxGD !== -1 ? groupedGD[idxGD] : null;
+  const nextBD = idxBD !== -1 ? gBD[idxBD] : null;
+  const nextGD = idxGD !== -1 ? gGD[idxGD] : null;
 
-  // FUTURE pickup blocks (after NEXT)
-  const futBD  = idxBD !== -1 ? groupedBD.slice(idxBD + 1) : [];
-  const futGD  = idxGD !== -1 ? groupedGD.slice(idxGD + 1) : [];
+  const futBD  = idxBD !== -1 ? gBD.slice(idxBD + 1) : [];
+  const futGD  = idxGD !== -1 ? gGD.slice(idxGD + 1) : [];
 
   // Apply to state
   setNextBlue(nextBD);
@@ -111,6 +111,7 @@ if (temp_JSON[neighbourhood].streets.includes(address)) {
   setPrevBlue(lastBD);
   setPrevGray(lastGD);
 }
+``
             
             }
 
