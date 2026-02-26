@@ -54,9 +54,11 @@ export default function Sorphirda() {
                     gd = temp_JSON[neighbourhood].gray_dates;
 
                     // filter the dates to last date;
-                    bd.filter((date) => date > prev_date).sort((a,b) => a > b);
-                    gd.filter((date) => date > prev_date).sort((a,b) => a > b);
-
+              //      bd.filter((date) => date > prev_date).sort((a,b) => a > b);
+                //    gd.filter((date) => date > prev_date).sort((a,b) => a > b);
+                    
+                    bd = bd.filter((date) => date > prev_date).sort((a,b) => a - b);  // Also fixed sort comparison
+                    gd = gd.filter((date) => date > prev_date).sort((a,b) => a - b);
                 
 
                     // group the dates for readability.
@@ -203,3 +205,4 @@ export default function Sorphirda() {
         </main>
     )      
 }
+
