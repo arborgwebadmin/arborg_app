@@ -54,7 +54,7 @@ var temp_JSON = {
       "Fagurgerði", "Grænuvellir", "Hörðuvellir", "Hraunbakki",
       "Austurvegur", "Strandgata", "Suðurbraut", "Brúaarstræti",
       "Engjavegur", "Tryggvagata", "Árvegur", "Austurhólar", "Hraunhólar",
-      "Grænumörk", "Hlaðvellir", "Melhólar"
+      "Grænumörk", "Hlaðvellir", "Melhólar","Ásland","Mosland","Lágland","Fífuland"
     ],
     gray_dates: [
       new Date(2025,11,6),
@@ -114,7 +114,7 @@ var temp_JSON = {
       "Bakarísstígur", "Hreggviður", "Sólvangur", "Einarshöfn", "Grenigrund",
       "Birkigrund", "Furugrund", "Eyravegur", "Hrauntjörn", "Atlavík", "Aðalvík",
       "Bergvík", "Boðavík", "Eyrarvík", "Engjavík", "Goðavík", "Hamravík", "Fossvík",
-      "Selfossvegur"
+      "Selfossvegur","Fossvík"
     ],
     gray_dates: [
       new Date(2025,11,22), new Date(2025,11,23),
