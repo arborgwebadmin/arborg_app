@@ -14,7 +14,7 @@ var temp_JSON = {
       "Óseyri - Stokkseyri", "Eyjasel", "Blátindur",
       "Sandfell", "Unhóll", "Sælundur", "Sólheimar",
       "Lindarbakki", "Laufás", "Hásteinshús", "Ranakot",
-      "Garðhús", "Traðarhus", "Hausthús", "Garðabær - Stokkseyri",
+      "Garðhús", "Traðarhús", "Hausthús", "Garðabær - Stokkseyri",
       "Nýikastali", "Sætún", "Sunnuhvoll", "Gimli", "Hafnargata",
       "Skálafell", "Pálmarshús", "Hásteinsvegur", "Sólbakki",
       "Sandprýði", "Sanda", "Sandgerði", "Hafsteinn", "Merkisteinn",
