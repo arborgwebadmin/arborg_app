@@ -52,9 +52,9 @@ var temp_JSON = {
       "Rauðholt", "Hjarðarholt", "Stekkholt", "Réttarholt", "Hrísholt",
       "Merkiland", "Grænumörk", "Þórsmörk", "Heiðmörk", "Laugarbakki",
       "Fagurgerði", "Grænuvellir", "Hörðuvellir",
-      "Austurvegur", "Strandgata", "Suðurbraut", "Brúaarstræti",
+      "Austurvegur", "Strandgata", "Suðurbraut", "Brúarstræti",
       "Engjavegur", "Tryggvagata", "Árvegur", "Austurhólar", "Hraunhólar",
-      "Grænumörk", "Hlaðvellir", "Melhólar","Ásland","Mosland","Lágland","Fífuland"
+      "Hlaðvellir", "Melhólar","Ásland","Mosland","Lágland","Fífuland"
     ],
     gray_dates: [
       new Date(2025,11,6),
