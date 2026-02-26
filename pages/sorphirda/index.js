@@ -70,7 +70,10 @@ if (temp_JSON[neighbourhood].streets.some(s => s.trim() === address.trim())) {
   const sortAsc = (a, b) => a - b;
   bd = bd.slice().sort(sortAsc);
   gd = gd.slice().sort(sortAsc);
-
+  console.log('[DBG] Address:', address);
+  console.log('[DBG] Neighbourhood:', neighbourhood);
+  console.log('[DBG] bd count:', bd.length, 'first:', bd[0], 'last:', bd.at(-1));
+  console.log('[DBG] gd count:', gd.length, 'first:', gd[0], 'last:', gd.at(-1));
   // Defensive: if still empty, short‑circuit early
   if (!bd.length && !gd.length) {
     console.warn('[DBG] No dates found for', address, 'in', neighbourhood);
