@@ -4,8 +4,8 @@ export function currencyFormat( x ) {
     return x.toLocaleString("de-DE") + " kr.";
 }
 
-export function percentageFormat( x ) {
-    return x * 100 + "%"
+export function percentageFormat( x, locale = "is-IS" ) {
+    return new Intl.NumberFormat(locale, { style: "percent", minimumFractionDigits: 2 }).format(x);
 }
 
 /**
