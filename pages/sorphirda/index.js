@@ -1,14 +1,5 @@
 //index.js skráin
 
-# Stop dev server completely
-CTRL + C
-
-# Remove Next.js build cache
-rm -rf .next
-
-# Restart dev
-npm run dev
-
 import React, { useEffect, useState } from 'react';
 import PageHead from '../../components/page-head';
 import styles from '../../styles/Home.module.css';
