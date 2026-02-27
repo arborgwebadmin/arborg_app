@@ -21,20 +21,20 @@ export default function Sorphirda() {
     const [selectedStreet, setSelectedStreet] = useState(null)
 
 
-    const groupDates = (dates) => {
-        return dates.reduce((accumulator, currentValue, currentIndex, array) => {
-
-            // if the currentValue is close to the last date in the last list in the accumulator then add currentValue to the last list in accumulator
-            if ( currentIndex && accumulator.at(-1).at(-1).getTime() + (1000*86400*5) >= currentValue.getTime() ) {
-
-                accumulator.at(-1).push(currentValue);
-            } // else add new list with the currentValue to the accumulator 
-            else {
-                accumulator.push([currentValue])
-            }
-            return accumulator;
-        }, []);
+const groupDates = (dates) => {
+  return dates.reduce((acc, cur, idx) => {
+    if (
+      idx &&
+      acc[acc.length - 1][acc[acc.length - 1].length - 1].getTime() + 5 * 24 * 3600 * 1000 >= cur.getTime()
+    ) {
+      acc[acc.length - 1].push(cur);
+    } else {
+      acc.push([cur]);
     }
+    return acc;
+  }, []);
+};
+    
 const handleChange = (e) => {
   setSelectedStreet(e);
 
@@ -191,7 +191,7 @@ const handleChange = (e) => {
                                         </div>
                                         <div className="card text-center" style={{ width: '50%', border: 'none', margin: "5px", marginTop: "15px", backgroundColor: '#f8f9fb'}}>
                                             <div> 
-                                                <img className={sorphirdaStyle.img} src="purple-bin.png" alt="Fjólublátunna" />
+                                                <img className={sorphirdaStyle.img} src="/purple-bin.png" alt="Fjólublátunna" />
                                                 <img className={sorphirdaStyle.img} src="/blue-bin.png" alt="Blátunna" />
                                             </div>
                                             <br/><p className={sorphirdaStyle.nextTrashEmpty}>Næsta fjólublá- og blátunnu losun:<br/></p>
