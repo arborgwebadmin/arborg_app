@@ -5,7 +5,7 @@ export function currencyFormat( x ) {
 }
 
 export function percentageFormat( x, locale = "is-IS" ) {
-    return new Intl.NumberFormat(locale, { style: "percent", minimumFractionDigits: 2 }).format(x);
+    return new Intl.NumberFormat(locale, { style: "percent", minimumFractionDigits: 3 }).format(x);
 }
 /**
  * Validates that input is number and adds seperator.
